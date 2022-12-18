@@ -86,6 +86,15 @@
                                 </p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{ route('truck.index') }}"
+                                class="nav-link {{ request()->is('dashboard/truck*') ? 'active' : '' }}">
+                                <i class="nav-icon fas fa-angles-right"></i>
+                                <p>
+                                    Trucking
+                                </p>
+                            </a>
+                        </li>
                         @if (auth()->user()->role == 'admin')
                             <li class="nav-item">
                                 <a href="{{ route('user.index') }}"
@@ -127,6 +136,9 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!-- AdminLTE App -->
     <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
+
+    @yield('modal')
+
 </body>
 
 </html>
