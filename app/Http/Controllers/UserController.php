@@ -9,18 +9,21 @@ use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
     // Index: show all users
-    public function index() {
+    public function index()
+    {
         $users = User::all()->sortBy('name');
-        return view('user.index', compact('users'));
+        return view('admin.user.index', compact('users'));
     }
 
     // Create: show the form to create new user
-    public function create() {
-        return view('user.create');
+    public function create()
+    {
+        return view('admin.user.create');
     }
 
     // Store: when user submit the form to create new user
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         // Validate the form
         $request->validate([
             'name' => 'required',
@@ -42,17 +45,19 @@ class UserController extends Controller
     }
 
     // Edit: show the form to edit user
-    public function edit($id) {
+    public function edit($id)
+    {
         $user = User::find($id);
-        return view('user.edit', compact('user'));
+        return view('admin.user.edit', compact('user'));
     }
 
     // Update: when user submit the form to edit user
-    public function update(Request $request, $id) {
+    public function update(Request $request, $id)
+    {
         // Validate the form
         $request->validate([
             'name' => 'required',
-            'email' => 'required|email|unique:users,email,'.$id,
+            'email' => 'required|email|unique:users,email,' . $id,
             'password' => 'nullable|min:8',
             'role' => 'required'
         ]);
@@ -72,7 +77,8 @@ class UserController extends Controller
     }
 
     // Delete: when user want to delete user
-    public function destroy($id) {
+    public function destroy($id)
+    {
         $user = User::find($id);
         $user->delete();
 

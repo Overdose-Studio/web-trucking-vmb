@@ -76,24 +76,24 @@
                                 </p>
                             </a>
                         </li>
-                        {{-- <li class="nav-item">
-                            <a href="{{ route('admin.pesanan') }}"
-                                class="nav-link {{ request()->is('admin/pesanan*') ? 'active' : '' }}">
+                        <li class="nav-item">
+                            <a href="{{ route('client.index') }}"
+                                class="nav-link {{ request()->is('dashboard/client*') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-angles-right"></i>
                                 <p>
-                                    List Pesanan
+                                    Client List
                                 </p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('admin.account') }}"
-                                class="nav-link {{ request()->is('admin/account*') ? 'active' : '' }}">
+                            <a href="{{ route('user.index') }}"
+                                class="nav-link {{ request()->is('dashboard/user*') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-user"></i>
                                 <p>
-                                    List Akun
+                                    Account List
                                 </p>
                             </a>
-                        </li> --}}
+                        </li>
 
                     </ul>
                 </nav>

@@ -2,11 +2,11 @@
 
 @section('content')
     <div class="content-wrapper">
-        <section class="content">
+        <section class="content pt-2">
             <div class="card">
                 <div class="card-body">
-                    <div class="panel-heading">User List</div>
-                    <a href="{{ route('user.create') }}" class="btn btn-success">Create User</a>
+                    <h1 class="panel-heading">Account List</h1>
+                    <a href="{{ route('user.create') }}" class="btn btn-success mb-2">Create Account</a>
                     <div class="panel-body">
                         <table class="table table-bordered">
                             <thead>
