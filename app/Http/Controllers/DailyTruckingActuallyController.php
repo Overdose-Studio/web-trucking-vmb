@@ -12,18 +12,19 @@ use Illuminate\Support\Facades\Storage;
 class DailyTruckingActuallyController extends Controller
 {
     // Index: show all daily trucking actually
-    public function index() {
+    public function index()
+    {
         // latest dta
         $dtas = DailyTruckingActually::latest()->get();
         return view('admin.dta.index', compact('dtas'));
     }
 
     // Create: show form create daily trucking actually
-    public function create(Request $request) {
+    public function create(Request $request)
+    {
         $dtps = DailyTruckingPlan::doesntHave('dailyTruckingActually')->orderBy('shipment_id')->get();
         if (isset($request->DTA)) {
-            dd($request->DTA);
-            $selected = DailyTruckingPlan::where('id', $request->DTA)->get();
+            $selected = DailyTruckingPlan::where('id', $request->DTA)->first();
         } else {
             $selected = null;
         }
@@ -31,7 +32,8 @@ class DailyTruckingActuallyController extends Controller
     }
 
     // Store: store daily trucking actually
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         // Validate the form
         $request->validate([
             'daily_trucking_plan_id' => 'required|exists:daily_trucking_plans,id',
@@ -104,15 +106,27 @@ class DailyTruckingActuallyController extends Controller
     }
 
     // Edit: show form edit daily trucking actually
-    public function edit($id) {
+    public function edit(Request $request, $id)
+    {
         // Find daily trucking actually
         $dta = DailyTruckingActually::find($id);
+
         $dtps = DailyTruckingPlan::doesntHave('dailyTruckingActually')->orderBy('shipment_id')->get();
-        return view('admin.dta.edit', compact('dta', 'dtps'));
+        $dtps->push(DailyTruckingPlan::find($dta->daily_trucking_plan_id));
+        $dtps = $dtps->sortBy('shipment_id');
+
+        if (isset($request->DTA)) {
+            $selected = DailyTruckingPlan::where('id', $request->DTA)->first();
+        } else {
+            $selected = null;
+        }
+        // dd($request->DTA);
+        return view('admin.dta.edit', compact('dta', 'dtps', 'selected'));
     }
 
     // Update: update daily trucking actually
-    public function update(Request $request, $id) {
+    public function update(Request $request, $id)
+    {
         // Validate the form
         $request->validate([
             'daily_trucking_plan_id' => 'required|exists:daily_trucking_plans,id',
@@ -228,7 +242,8 @@ class DailyTruckingActuallyController extends Controller
     }
 
     // Delete: delete daily trucking actually
-    public function delete($id) {
+    public function delete($id)
+    {
         // Find daily trucking actually and destinations
         $dta = DailyTruckingActually::find($id);
         $destination1 = Destination::find($dta->destination_1_id);
