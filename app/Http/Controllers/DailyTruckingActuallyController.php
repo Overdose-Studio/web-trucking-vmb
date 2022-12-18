@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\DailyTruckingActually;
 use App\Models\DailyTruckingPlan;
 use App\Models\Destination;
+use App\Models\Shipment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -18,10 +19,14 @@ class DailyTruckingActuallyController extends Controller
     }
 
     // Create: show form create daily trucking actually
-    public function create() {
-        // dtp where doesnt have dta and sort by shipment_id
+    public function create($dailyTruckingPlanID = null) {
         $dtps = DailyTruckingPlan::doesntHave('dailyTruckingActually')->orderBy('shipment_id')->get();
-        return view('admin.dta.create', compact('dtps'));
+        if ($dailyTruckingPlanID != null) {
+            $selected = DailyTruckingPlan::where('id', $dailyTruckingPlanID)->get();
+        } else {
+            $selected = null;
+        }
+        return view('admin.dta.create', compact('dtps', 'selected'));
     }
 
     // Store: store daily trucking actually
@@ -33,6 +38,16 @@ class DailyTruckingActuallyController extends Controller
             'renban' => 'required',
             'container_size' => 'required',
         ]);
+
+        // Update Shipments
+        $dtp = DailyTruckingPlan::find($request->daily_trucking_plan_id);
+        $shipment = Shipment::find($dtp->shipment_id);
+        if ($request->destination_1_detail != '' && $request->destination_2_detail != '' && $request->destination_3_detail != '') {
+            $shipment->status = "delivered";
+        } else {
+            $shipment->status = "on-the-way";
+        }
+        $shipment->save();
 
         // Create new daily trucking actually
         $dta = new DailyTruckingActually;
@@ -110,6 +125,15 @@ class DailyTruckingActuallyController extends Controller
         $destination1 = Destination::find($dta->destination_1_id);
         $destination2 = Destination::find($dta->destination_2_id);
         $destination3 = Destination::find($dta->destination_3_id);
+
+        // Update Shipments
+        $shipment = Shipment::find($dta->dailyTruckingPlan->shipment_id);
+        if ($request->destination_1_detail != '' && $request->destination_2_detail != '' && $request->destination_3_detail != '') {
+            $shipment->status = "delivered";
+        } else {
+            $shipment->status = "on-the-way";
+        }
+        $shipment->save();
 
         // Update daily trucking actually
         $dta->daily_trucking_plan_id = $request->daily_trucking_plan_id;

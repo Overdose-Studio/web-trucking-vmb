@@ -24,9 +24,21 @@ return new class extends Migration
             $table->unsignedBigInteger('client_id');
             $table->unsignedBigInteger('truck_id');
             $table->foreign('shipment_id')->references('id')->on('shipments');
-            $table->foreign('destination_1_id')->references('id')->on('destinations');
-            $table->foreign('destination_2_id')->references('id')->on('destinations');
-            $table->foreign('destination_3_id')->references('id')->on('destinations');
+            $table->foreign('destination_1_id')
+                ->references('id')
+                ->on('destinations')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+            $table->foreign('destination_2_id')
+                ->references('id')
+                ->on('destinations')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+            $table->foreign('destination_3_id')
+                ->references('id')
+                ->on('destinations')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
             $table->foreign('client_id')
                 ->references('id')
                 ->on('clients')

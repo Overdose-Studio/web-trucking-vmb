@@ -27,9 +27,21 @@ return new class extends Migration
                 ->on('daily_trucking_plans')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
-            $table->foreign('destination_1_id')->references('id')->on('destinations');
-            $table->foreign('destination_2_id')->references('id')->on('destinations');
-            $table->foreign('destination_3_id')->references('id')->on('destinations');
+            $table->foreign('destination_1_id')
+                ->references('id')
+                ->on('destinations')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+            $table->foreign('destination_2_id')
+                ->references('id')
+                ->on('destinations')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+            $table->foreign('destination_3_id')
+                ->references('id')
+                ->on('destinations')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
             $table->timestamps();
         });
     }
