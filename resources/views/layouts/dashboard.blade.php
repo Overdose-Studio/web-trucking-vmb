@@ -69,8 +69,9 @@
                         data-accordion="false">
 
                         <li class="nav-item">
-                            <a href="" class="nav-link">
-                                <i class="nav-icon far fa-calendar"></i>
+                            <a href="{{ route('dashboard') }}"
+                                class="nav-link {{ request()->is('dashboard') ? 'active' : '' }}">
+                                <i class="nav-icon far fa-home"></i>
                                 <p>
                                     Dashboard
                                 </p>
@@ -85,15 +86,17 @@
                                 </p>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="{{ route('user.index') }}"
-                                class="nav-link {{ request()->is('dashboard/user*') ? 'active' : '' }}">
-                                <i class="nav-icon fas fa-user"></i>
-                                <p>
-                                    Account List
-                                </p>
-                            </a>
-                        </li>
+                        @if (auth()->user()->role == 'admin')
+                            <li class="nav-item">
+                                <a href="{{ route('user.index') }}"
+                                    class="nav-link {{ request()->is('dashboard/user*') ? 'active' : '' }}">
+                                    <i class="nav-icon fas fa-user"></i>
+                                    <p>
+                                        Account List
+                                    </p>
+                                </a>
+                            </li>
+                        @endif
 
                     </ul>
                 </nav>
@@ -102,8 +105,12 @@
             <!-- /.sidebar -->
         </aside>
 
-
-        @yield('content')
+        <div class="content-wrapper">
+            <section class="content pt-2">
+                <x-alert></x-alert>
+                @yield('content')
+            </section>
+        </div>
 
 
         <!-- /.control-sidebar -->
