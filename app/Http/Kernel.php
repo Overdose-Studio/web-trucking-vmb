@@ -65,8 +65,8 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
 
         // Custom Middleware
-        'access.trucking' => \App\Http\Middleware\Custom\TruckingAccess::class,
-        'access.finance' => \App\Http\Middleware\Custom\FinanceAccess::class,
-        'access.admin' => \App\Http\Middleware\Custom\AdminAccess::class,
+        'trucking' => \App\Http\Middleware\Custom\TruckingAccess::class,
+        'finance' => \App\Http\Middleware\Custom\FinanceAccess::class,
+        'admin' => \App\Http\Middleware\Custom\AdminAccess::class,
     ];
 }
