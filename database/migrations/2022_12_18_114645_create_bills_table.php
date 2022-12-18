@@ -15,6 +15,10 @@ return new class extends Migration
     {
         Schema::create('bills', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('shipment_id');
+            $table->enum('status', ['ungenarated', 'generated', 'revised']);
+            $table->text('note');
+            $table->string('invoice');
             $table->timestamps();
         });
     }

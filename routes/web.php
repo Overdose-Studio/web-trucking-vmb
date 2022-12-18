@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BillController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\DailyTruckingPlanController;
 use App\Http\Controllers\DailyTruckingActuallyController;
@@ -86,6 +87,16 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
         Route::get('edit/{id}', [DailyTruckingActuallyController::class, 'edit'])->name('edit');
         Route::post('edit/{id}', [DailyTruckingActuallyController::class, 'update'])->name('update');
         Route::delete('delete/{id}', [DailyTruckingActuallyController::class, 'delete'])->name('destroy');
+    });
+
+    // Billing: list all billing and edit billing
+    Route::group(['middleware' => 'finance', 'prefix' => 'bill', 'as' => 'bill.'], function () {
+        Route::get('/', [BillController::class, 'index'])->name('index');
+        Route::get('create', [BillController::class, 'create'])->name('create');
+        Route::post('create', [BillController::class, 'store'])->name('store');
+        Route::get('edit/{id}', [BillController::class, 'edit'])->name('edit');
+        Route::post('edit/{id}', [BillController::class, 'update'])->name('update');
+        Route::delete('delete/{id}', [BillController::class, 'delete'])->name('destroy');
     });
 
     // Logout: when user whant to logout

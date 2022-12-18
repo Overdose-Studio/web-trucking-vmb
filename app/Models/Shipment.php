@@ -18,6 +18,10 @@ class Shipment extends Model
         'status',
     ];
 
+    public function bill() {
+        return $this->hasOne(Bill::class);
+    }
+
     public function dailyTruckingPlan() {
         return $this->hasOne(DailyTruckingPlan::class);
     }
