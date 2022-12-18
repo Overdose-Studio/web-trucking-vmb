@@ -8,7 +8,8 @@ use Illuminate\Support\Facades\Auth;
 class AuthController extends Controller
 {
     // Form login: user need to fill the form to login
-    public function formLogin() {
+    public function formLogin()
+    {
         // If user already login, redirect to dashboard
         if (Auth::check()) {
             return redirect()->route('dashboard');
@@ -19,7 +20,8 @@ class AuthController extends Controller
     }
 
     // Login: when user submit the form
-    public function login(Request $request) {
+    public function login(Request $request)
+    {
         // If user already login, redirect to dashboard
         if (Auth::check()) {
             return redirect()->route('dashboard');
@@ -47,12 +49,14 @@ class AuthController extends Controller
     }
 
     // Dashboard: when user want to see the dashboard
-    public function dashboard() {
-        return view('auth.dashboard');
+    public function dashboard()
+    {
+        return view('admin.index');
     }
 
     // Logout: when user want to logout
-    public function logout(Request $request) {
+    public function logout(Request $request)
+    {
         Auth::logout();
 
         $request->session()->invalidate();

@@ -1,16 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Create User</title>
-</head>
-<body>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <div class="panel panel-default">
+@extends('layouts.dashboard')
+
+@section('content')
+    <div class="content-wrapper">
+        <section class="content">
+            <div class="card">
+                <div class="card-body">
                     <div class="panel-heading">Create User</div>
                     <div class="panel-body">
                         <form action="{{ route('user.store') }}" method="POST">
@@ -36,7 +30,8 @@
                             </div>
                             <div class="form-group">
                                 <label for="password_confirmation">Confirm Password</label>
-                                <input type="password" name="password_confirmation" id="password_confirmation" class="form-control">
+                                <input type="password" name="password_confirmation" id="password_confirmation"
+                                    class="form-control">
                             </div>
                             <div class="form-group">
                                 <button type="submit" class="btn btn-primary">Create</button>
@@ -45,7 +40,6 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
     </div>
-</body>
-</html>
+@endsection
