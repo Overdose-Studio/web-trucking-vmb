@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ClientController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -44,5 +45,16 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function(){
         Route::delete('delete/{id}', [UserController::class, 'destroy'])->name('delete');
     });
 
+    // Client: list all clients and edit client
+    Route::group(['middleware' => 'trucking', 'prefix' => 'client', 'as' => 'client.'], function() {
+        Route::get('/', [ClientController::class, 'index'])->name('index');
+        Route::get('create', [ClientController::class, 'create'])->name('create');
+        Route::post('create', [ClientController::class, 'store'])->name('store');
+        Route::get('edit/{id}', [ClientController::class, 'edit'])->name('edit');
+        Route::post('edit/{id}', [ClientController::class, 'update'])->name('update');
+        Route::delete('delete/{id}', [ClientController::class, 'destroy'])->name('delete');
+    });
+
+    // Logout: when user whant to logout
     Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 });
