@@ -19,10 +19,11 @@ class DailyTruckingActuallyController extends Controller
     }
 
     // Create: show form create daily trucking actually
-    public function create($dailyTruckingPlanID = null) {
+    public function create(Request $request) {
         $dtps = DailyTruckingPlan::doesntHave('dailyTruckingActually')->orderBy('shipment_id')->get();
-        if ($dailyTruckingPlanID != null) {
-            $selected = DailyTruckingPlan::where('id', $dailyTruckingPlanID)->get();
+        if (isset($request->DTA)) {
+            dd($request->DTA);
+            $selected = DailyTruckingPlan::where('id', $request->DTA)->get();
         } else {
             $selected = null;
         }
