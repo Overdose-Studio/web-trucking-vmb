@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('trucks', function (Blueprint $table) {
             $table->id();
-            $table->string('plat');
-            $table->string('merk');
+            $table->string('license_plate');
+            $table->string('brand');
             $table->integer('production_year');
             $table->date('last_maintenance');
             $table->unsignedBigInteger('state_id');
