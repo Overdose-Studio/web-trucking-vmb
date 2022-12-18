@@ -41,7 +41,7 @@ class UserController extends Controller
         $user->save();
 
         // Redirect to user index
-        return redirect()->route('user.index');
+        return redirect()->route('user.index')->with('success', 'User created successfully!');
     }
 
     // Edit: show the form to edit user
@@ -73,7 +73,7 @@ class UserController extends Controller
         $user->save();
 
         // Redirect to user index
-        return redirect()->route('user.index');
+        return redirect()->route('user.index')->with('success', 'User updated successfully!');
     }
 
     // Delete: when user want to delete user
@@ -83,6 +83,6 @@ class UserController extends Controller
         $user->delete();
 
         // Redirect to user index
-        return redirect()->route('user.index');
+        return redirect()->route('user.index')->with('success', 'User deleted successfully!');
     }
 }

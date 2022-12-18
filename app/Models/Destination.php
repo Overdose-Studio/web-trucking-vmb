@@ -16,6 +16,11 @@ class Destination extends Model
      */
     protected $fillable = [
         'type',
-        'details'
+        'detail',
+        'image'
     ];
+
+    public function dailyTruckingPlan() {
+        return $this->hasOne(DailyTruckingPlan::class);
+    }
 }

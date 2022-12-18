@@ -19,7 +19,7 @@ class State extends Model
         'evidence',
     ];
 
-    public function trucks() {
+    public function truck() {
         return $this->hasOne(Truck::class);
     }
 }

@@ -35,7 +35,7 @@ class ClientController extends Controller
         $client->save();
 
         // Redirect to client index
-        return redirect()->route('client.index');
+        return redirect()->route('client.index')->with('success', 'Client created successfully!');
     }
 
     // Edit: show the form to edit client
@@ -59,7 +59,7 @@ class ClientController extends Controller
         $client->save();
 
         // Redirect to client index
-        return redirect()->route('client.index');
+        return redirect()->route('client.index')->with('success', 'Client updated successfully!');
     }
 
     // Delete: delete client
@@ -69,6 +69,6 @@ class ClientController extends Controller
         $client->delete();
 
         // Redirect to client index
-        return redirect()->route('client.index');
+        return redirect()->route('client.index')->with('success', 'Client deleted successfully!');
     }
 }

@@ -17,4 +17,8 @@ class Shipment extends Model
     protected $fillable = [
         'status',
     ];
+
+    public function dailyTruckingPlan() {
+        return $this->hasOne(DailyTruckingPlan::class);
+    }
 }

@@ -17,4 +17,8 @@ class Client extends Model
     protected $fillable = [
         'name',
     ];
+
+    public function dailyTruckingPlans() {
+        return $this->hasMany(DailyTruckingPlan::class);
+    }
 }

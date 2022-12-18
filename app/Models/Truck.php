@@ -26,6 +26,10 @@ class Truck extends Model
         return $this->belongsTo(State::class);
     }
 
+    public function dailyTruckingPlans() {
+        return $this->hasMany(DailyTruckingPlan::class);
+    }
+
     public function getLastMaintenanceDetailAttribute() {
         return date('d F Y - H:i:s', strtotime($this->last_maintenance));
     }

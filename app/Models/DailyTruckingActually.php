@@ -20,5 +20,7 @@ class DailyTruckingActually extends Model
         'destination_2_id',
         'destination_3_id',
         'price',
+        'renban',
+        'container_size',
     ];
 }
