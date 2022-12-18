@@ -51,7 +51,7 @@ class TruckController extends Controller
         $truck->save();
 
         // Redirect to truck index
-        return redirect()->route('truck.index');
+        return redirect()->route('truck.index')->with('success', 'Truck created successfully!');
     }
 
     // Edit: show the form to edit truck
@@ -87,7 +87,7 @@ class TruckController extends Controller
         $state->type = $request->state_type;
         if ($request->hasFile('state_evidence')) {
             if ($state->evidence) {
-                Storage::delete($state->evidence);
+                Storage::delete(str_replace('storage', 'public', $state->evidence));
             }
             $path = $request->file('state_evidence')->store('evidences', 'public');
             $state->evidence = 'storage/' . $path;
@@ -95,7 +95,7 @@ class TruckController extends Controller
         $state->save();
 
         // Redirect to truck index
-        return redirect()->route('truck.index');
+        return redirect()->route('truck.index')->with('success', 'Truck updated successfully!');
     }
 
     // Delete: when user want to delete truck
@@ -109,11 +109,11 @@ class TruckController extends Controller
 
         // Delete state
         if ($state->evidence) {
-            Storage::delete($state->evidence);
+            Storage::delete(str_replace('storage', 'public', $state->evidence));
         }
         $state->delete();
 
         // Redirect to truck index
-        return redirect()->route('truck.index');
+        return redirect()->route('truck.index')->with('success', 'Truck deleted successfully!');
     }
 }

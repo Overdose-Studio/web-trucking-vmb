@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\DailyTruckingPlanController;
 use App\Http\Controllers\TruckController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -64,6 +65,16 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function(){
         Route::get('edit/{id}', [TruckController::class, 'edit'])->name('edit');
         Route::post('edit/{id}', [TruckController::class, 'update'])->name('update');
         Route::delete('delete/{id}', [TruckController::class, 'delete'])->name('destroy');
+    });
+
+    // Daily Trucking Plan (DTP): list all DTP and edit DTP
+    Route::group(['middleware' => 'trucking', 'prefix' => 'daily-trucking-plan', 'as' => 'dtp.'], function() {
+        Route::get('/', [DailyTruckingPlanController::class, 'index'])->name('index');
+        Route::get('create', [DailyTruckingPlanController::class, 'create'])->name('create');
+        Route::post('create', [DailyTruckingPlanController::class, 'store'])->name('store');
+        Route::get('edit/{id}', [DailyTruckingPlanController::class, 'edit'])->name('edit');
+        Route::post('edit/{id}', [DailyTruckingPlanController::class, 'update'])->name('update');
+        Route::delete('delete/{id}', [DailyTruckingPlanController::class, 'delete'])->name('destroy');
     });
 
     // Logout: when user whant to logout

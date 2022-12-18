@@ -27,8 +27,16 @@ return new class extends Migration
             $table->foreign('destination_1_id')->references('id')->on('destinations');
             $table->foreign('destination_2_id')->references('id')->on('destinations');
             $table->foreign('destination_3_id')->references('id')->on('destinations');
-            $table->foreign('client_id')->references('id')->on('clients');
-            $table->foreign('truck_id')->references('id')->on('trucks');
+            $table->foreign('client_id')
+                ->references('id')
+                ->on('clients')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+            $table->foreign('truck_id')
+                ->references('id')
+                ->on('trucks')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
             $table->timestamps();
         });
     }

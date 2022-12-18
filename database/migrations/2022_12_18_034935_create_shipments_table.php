@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('shipments', function (Blueprint $table) {
             $table->id();
-            $table->enum('status', ['pending', 'on the way', 'delivered']);
+            $table->enum('status', ['pending', 'on-the-way', 'delivered']);
             $table->timestamps();
         });
     }

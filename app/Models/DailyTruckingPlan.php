@@ -24,4 +24,28 @@ class DailyTruckingPlan extends Model
         'client_id',
         'truck_id',
     ];
+
+    public function shipment() {
+        return $this->belongsTo(Shipment::class);
+    }
+
+    public function destination1() {
+        return $this->belongsTo(Destination::class, 'destination_1_id');
+    }
+
+    public function destination2() {
+        return $this->belongsTo(Destination::class, 'destination_2_id');
+    }
+
+    public function destination3() {
+        return $this->belongsTo(Destination::class, 'destination_3_id');
+    }
+
+    public function client() {
+        return $this->belongsTo(Client::class);
+    }
+
+    public function truck() {
+        return $this->belongsTo(Truck::class);
+    }
 }

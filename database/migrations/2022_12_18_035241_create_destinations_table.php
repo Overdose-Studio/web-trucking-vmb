@@ -16,7 +16,8 @@ return new class extends Migration
         Schema::create('destinations', function (Blueprint $table) {
             $table->id();
             $table->enum('type', [1, 2, 3]);
-            $table->string('details');
+            $table->string('detail');
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }
