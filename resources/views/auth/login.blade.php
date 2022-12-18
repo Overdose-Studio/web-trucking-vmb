@@ -39,7 +39,7 @@
                         {{ session('error') }}
                     </div>
                 @endif
-                <form action="" method="POST">
+                <form action="{{ route('login.submit') }}" method="POST">
                     @csrf
                     <div class="input-group mb-3">
                         <input type="email" class="form-control" name="email" id="email"

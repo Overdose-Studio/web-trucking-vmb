@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,14 +14,26 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Guest routes
 Route::get('/', function () {
     return view('client.index');
 })->name('landing');
 
-Route::get('/about', function () {
+Route::get('about', function () {
     return view('client.about');
 })->name('about');
 
-Route::get('/login', function () {
-    return view('auth.login');
-})->name('login');
+// Login: when user whant to login
+Route::group(['prefix' => 'login', 'as' => 'login.'], function(){
+    Route::get('/', [AuthController::class, 'formLogin'])->name('form');
+    Route::post('/', [AuthController::class, 'login'])->name('submit');
+});
+
+// Auth routes
+Route::middleware(['auth'])->group(function(){
+    Route::get('dashboard', function () {
+        return view('auth.dashboard');
+    })->name('dashboard');
+
+    Route::post('logout', [AuthController::class, 'logout'])->name('logout');
+});
