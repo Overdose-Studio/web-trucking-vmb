@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\DailyTruckingPlanController;
+use App\Http\Controllers\DailyTruckingActuallyController;
 use App\Http\Controllers\TruckController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -75,6 +76,16 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function(){
         Route::get('edit/{id}', [DailyTruckingPlanController::class, 'edit'])->name('edit');
         Route::post('edit/{id}', [DailyTruckingPlanController::class, 'update'])->name('update');
         Route::delete('delete/{id}', [DailyTruckingPlanController::class, 'delete'])->name('destroy');
+    });
+
+    // Daily Trucking Actually (DTA): list all DTA and edit DTA
+    Route::group(['middleware' => 'trucking', 'prefix' => 'daily-trucking-actually', 'as' => 'dta.'], function() {
+        Route::get('/', [DailyTruckingActuallyController::class, 'index'])->name('index');
+        Route::get('create', [DailyTruckingActuallyController::class, 'create'])->name('create');
+        Route::post('create', [DailyTruckingActuallyController::class, 'store'])->name('store');
+        Route::get('edit/{id}', [DailyTruckingActuallyController::class, 'edit'])->name('edit');
+        Route::post('edit/{id}', [DailyTruckingActuallyController::class, 'update'])->name('update');
+        Route::delete('delete/{id}', [DailyTruckingActuallyController::class, 'delete'])->name('destroy');
     });
 
     // Logout: when user whant to logout

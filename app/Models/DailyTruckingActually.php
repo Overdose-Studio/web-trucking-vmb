@@ -23,4 +23,20 @@ class DailyTruckingActually extends Model
         'renban',
         'container_size',
     ];
+
+    public function dailyTruckingPlan() {
+        return $this->belongsTo(DailyTruckingPlan::class);
+    }
+
+    public function destination1() {
+        return $this->belongsTo(Destination::class, 'destination_1_id');
+    }
+
+    public function destination2() {
+        return $this->belongsTo(Destination::class, 'destination_2_id');
+    }
+
+    public function destination3() {
+        return $this->belongsTo(Destination::class, 'destination_3_id');
+    }
 }
