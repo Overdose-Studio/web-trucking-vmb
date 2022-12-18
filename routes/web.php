@@ -20,3 +20,7 @@ Route::get('/', function () {
 Route::get('/about', function () {
     return view('client.about');
 })->name('about');
+
+Route::get('/login', function () {
+    return view('auth.login');
+})->name('login');
