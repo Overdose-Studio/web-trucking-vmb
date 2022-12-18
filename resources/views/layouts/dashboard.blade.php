@@ -95,6 +95,24 @@
                                 </p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{ route('dtp.index') }}"
+                                class="nav-link {{ request()->is('dashboard/dtp*') ? 'active' : '' }}">
+                                <i class="nav-icon fas fa-angles-right"></i>
+                                <p>
+                                    DTP
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('dta.index') }}"
+                                class="nav-link {{ request()->is('dashboard/dta*') ? 'active' : '' }}">
+                                <i class="nav-icon fas fa-angles-right"></i>
+                                <p>
+                                    DTA
+                                </p>
+                            </a>
+                        </li>
                         @if (auth()->user()->role == 'admin')
                             <li class="nav-item">
                                 <a href="{{ route('user.index') }}"

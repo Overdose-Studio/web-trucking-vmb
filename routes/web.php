@@ -29,17 +29,17 @@ Route::get('about', function () {
 })->name('about');
 
 // Login: when user whant to login
-Route::group(['prefix' => 'login', 'as' => 'login.'], function(){
+Route::group(['prefix' => 'login', 'as' => 'login.'], function () {
     Route::get('/', [AuthController::class, 'formLogin'])->name('form');
     Route::post('/', [AuthController::class, 'login'])->name('submit');
 });
 
 // Auth routes
-Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function(){
+Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
     Route::get('/', [AuthController::class, 'dashboard'])->name('dashboard');
 
     // User: list all users and edit user
-    Route::group(['middleware' => 'admin', 'prefix' => 'user', 'as' => 'user.'], function() {
+    Route::group(['middleware' => 'admin', 'prefix' => 'user', 'as' => 'user.'], function () {
         Route::get('/', [UserController::class, 'index'])->name('index');
         Route::get('create', [UserController::class, 'create'])->name('create');
         Route::post('create', [UserController::class, 'store'])->name('store');
@@ -49,7 +49,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function(){
     });
 
     // Client: list all clients and edit client
-    Route::group(['middleware' => 'trucking', 'prefix' => 'client', 'as' => 'client.'], function() {
+    Route::group(['middleware' => 'trucking', 'prefix' => 'client', 'as' => 'client.'], function () {
         Route::get('/', [ClientController::class, 'index'])->name('index');
         Route::get('create', [ClientController::class, 'create'])->name('create');
         Route::post('create', [ClientController::class, 'store'])->name('store');
@@ -59,7 +59,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function(){
     });
 
     // Truck: list all trucks and edit truck
-    Route::group(['middleware' => 'trucking', 'prefix' => 'truck', 'as' => 'truck.'], function() {
+    Route::group(['middleware' => 'trucking', 'prefix' => 'truck', 'as' => 'truck.'], function () {
         Route::get('/', [TruckController::class, 'index'])->name('index');
         Route::get('create', [TruckController::class, 'create'])->name('create');
         Route::post('create', [TruckController::class, 'store'])->name('store');
@@ -69,7 +69,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function(){
     });
 
     // Daily Trucking Plan (DTP): list all DTP and edit DTP
-    Route::group(['middleware' => 'trucking', 'prefix' => 'daily-trucking-plan', 'as' => 'dtp.'], function() {
+    Route::group(['middleware' => 'trucking', 'prefix' => 'dtp', 'as' => 'dtp.'], function () {
         Route::get('/', [DailyTruckingPlanController::class, 'index'])->name('index');
         Route::get('create', [DailyTruckingPlanController::class, 'create'])->name('create');
         Route::post('create', [DailyTruckingPlanController::class, 'store'])->name('store');
@@ -79,7 +79,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function(){
     });
 
     // Daily Trucking Actually (DTA): list all DTA and edit DTA
-    Route::group(['middleware' => 'trucking', 'prefix' => 'daily-trucking-actually', 'as' => 'dta.'], function() {
+    Route::group(['middleware' => 'trucking', 'prefix' => 'dta', 'as' => 'dta.'], function () {
         Route::get('/', [DailyTruckingActuallyController::class, 'index'])->name('index');
         Route::get('create', [DailyTruckingActuallyController::class, 'create'])->name('create');
         Route::post('create', [DailyTruckingActuallyController::class, 'store'])->name('store');
