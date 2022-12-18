@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('states', function (Blueprint $table) {
             $table->id();
-            $table->enum('state', ['good', 'bad']);
-            $table->string('evidence');
+            $table->enum('type', ['good', 'bad']);
+            $table->string('evidence')->nullable();
             $table->timestamps();
         });
     }

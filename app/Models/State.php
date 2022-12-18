@@ -15,7 +15,11 @@ class State extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'state',
+        'type',
         'evidence',
     ];
+
+    public function trucks() {
+        return $this->hasOne(Truck::class);
+    }
 }

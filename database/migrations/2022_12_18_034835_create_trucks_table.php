@@ -20,7 +20,11 @@ return new class extends Migration
             $table->integer('production_year');
             $table->date('last_maintenance');
             $table->unsignedBigInteger('state_id');
-            $table->foreign('state_id')->references('id')->on('states');
+            $table->foreign('state_id')
+                ->references('id')
+                ->on('states')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
             $table->timestamps();
         });
     }

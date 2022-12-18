@@ -21,4 +21,12 @@ class Truck extends Model
         'last_maintenance',
         'state_id',
     ];
+
+    public function state() {
+        return $this->belongsTo(State::class);
+    }
+
+    public function getLastMaintenanceDetailAttribute() {
+        return date('d F Y - H:i:s', strtotime($this->last_maintenance));
+    }
 }

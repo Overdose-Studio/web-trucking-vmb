@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\TruckController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -53,6 +54,16 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function(){
         Route::get('edit/{id}', [ClientController::class, 'edit'])->name('edit');
         Route::post('edit/{id}', [ClientController::class, 'update'])->name('update');
         Route::delete('delete/{id}', [ClientController::class, 'destroy'])->name('delete');
+    });
+
+    // Truck: list all trucks and edit truck
+    Route::group(['middleware' => 'trucking', 'prefix' => 'truck', 'as' => 'truck.'], function() {
+        Route::get('/', [TruckController::class, 'index'])->name('index');
+        Route::get('create', [TruckController::class, 'create'])->name('create');
+        Route::post('create', [TruckController::class, 'store'])->name('store');
+        Route::get('edit/{id}', [TruckController::class, 'edit'])->name('edit');
+        Route::post('edit/{id}', [TruckController::class, 'update'])->name('update');
+        Route::delete('delete/{id}', [TruckController::class, 'delete'])->name('destroy');
     });
 
     // Logout: when user whant to logout
