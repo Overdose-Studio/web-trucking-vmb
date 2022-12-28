@@ -42,7 +42,10 @@
                     <div class="dropdown-menu dropdown-menu-right">
                         {{-- <span class="dropdown-item dropdown-header">15 Notifications</span> --}}
                         {{-- <div class="dropdown-divider"></div> --}}
-                        <a href="{{ route('logout') }}" class="dropdown-item dropdown-footer">Logout</a>
+                        <form action="{{ route('logout') }}" method="post">
+                            @csrf
+                            <button type="submit" class="dropdown-item dropdown-footer">Logout</button>
+                        </form>
                     </div>
                 </li>
                 <li class="nav-item">
@@ -71,7 +74,7 @@
                         <li class="nav-item">
                             <a href="{{ route('dashboard') }}"
                                 class="nav-link {{ request()->is('dashboard') ? 'active' : '' }}">
-                                <i class="nav-icon far fa-home"></i>
+                                <i class="nav-icon fas fa-house"></i>
                                 <p>
                                     Dashboard
                                 </p>
@@ -80,7 +83,7 @@
                         <li class="nav-item">
                             <a href="{{ route('client.index') }}"
                                 class="nav-link {{ request()->is('dashboard/client*') ? 'active' : '' }}">
-                                <i class="nav-icon fas fa-angles-right"></i>
+                                <i class="nav-icon fas fa-person"></i>
                                 <p>
                                     Client List
                                 </p>
@@ -89,7 +92,7 @@
                         <li class="nav-item">
                             <a href="{{ route('truck.index') }}"
                                 class="nav-link {{ request()->is('dashboard/truck*') ? 'active' : '' }}">
-                                <i class="nav-icon fas fa-angles-right"></i>
+                                <i class="nav-icon fas fa-truck"></i>
                                 <p>
                                     Trucking
                                 </p>
@@ -113,6 +116,17 @@
                                 </p>
                             </a>
                         </li>
+                        @if (auth()->user()->role == 'admin' || auth()->user()->role == 'finance')
+                            <li class="nav-item">
+                                <a href="{{ route('bill.index') }}"
+                                    class="nav-link {{ request()->is('dashboard/bill*') ? 'active' : '' }}">
+                                    <i class="nav-icon fas fa-coins"></i>
+                                    <p>
+                                        Finance
+                                    </p>
+                                </a>
+                            </li>
+                        @endif
                         @if (auth()->user()->role == 'admin')
                             <li class="nav-item">
                                 <a href="{{ route('user.index') }}"
