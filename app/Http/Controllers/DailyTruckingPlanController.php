@@ -16,7 +16,7 @@ class DailyTruckingPlanController extends Controller
     // Index: show all daily trucking plans
     public function index()
     {
-        $shipments = Shipment::all()->sortBy('id');
+        $shipments = Shipment::latest()->get();
         return view('admin.dtp.index', compact('shipments'));
     }
 
@@ -39,7 +39,7 @@ class DailyTruckingPlanController extends Controller
 
         // If bill already created, cannot create new truck
         if ($shipment->bill_id) {
-            return redirect()->route('admin.dtp.show', $shipment->id)->with('error', 'Bill already created, cannot create add new truck');
+            return redirect()->route('dtp.show', $shipment->id)->with('error', 'Bill already created, cannot create add new truck');
         } else {
             return view('admin.dtp.create', compact('shipment', 'trucks'));
         }
@@ -65,7 +65,7 @@ class DailyTruckingPlanController extends Controller
         // Get shipment from database
         $shipment = Shipment::findOrFail($shipment);
         if ($shipment->bill_id) {
-            return redirect()->route('admin.dtp.show', $shipment->id)->with('error', 'Bill already created, cannot create add new truck');
+            return redirect()->route('dtp.show', $shipment->id)->with('error', 'Bill already created, cannot create add new truck');
         }
 
         // Create new daily trucking plan
@@ -163,7 +163,7 @@ class DailyTruckingPlanController extends Controller
 
         // Check if bill is already created
         if ($shipment->bill_id) {
-            return redirect()->route('admin.dtp.show', $shipment->id)->with('error', 'Bill already created, cannot create add new truck');
+            return redirect()->route('dtp.show', $shipment->id)->with('error', 'Bill already created, cannot update truck on DTP ' . $shipment->client->name);
         } else {
             return view('admin.dtp.edit', compact('dtp', 'shipment', 'trucks'));
         }
@@ -189,7 +189,7 @@ class DailyTruckingPlanController extends Controller
         // Get shipment from database
         $shipment = Shipment::findOrFail($shipment);
         if ($shipment->bill_id) {
-            return redirect()->route('admin.dtp.show', $shipment->id)->with('error', 'Bill already created, cannot create add new truck');
+            return redirect()->route('dtp.show', $shipment->id)->with('error', 'Bill already created, cannot update truck on DTP ' . $shipment->client->name);
         }
 
         // Find daily trucking plan
@@ -297,7 +297,7 @@ class DailyTruckingPlanController extends Controller
 
         // Check if bill already created
         if ($shipment->bill_id) {
-            return redirect()->route('admin.dtp.show', $shipment->id)->with('error', 'Bill already created, cannot create add new truck');
+            return redirect()->route('dtp.show', $shipment->id)->with('error', 'Bill already created, cannot delete truck on DTP '. $shipment->client->name);
         }
 
         // Delete daily trucking actually destination 1

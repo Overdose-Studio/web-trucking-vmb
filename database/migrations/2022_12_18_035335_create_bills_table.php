@@ -15,12 +15,12 @@ return new class extends Migration
     {
         Schema::create('bills', function (Blueprint $table) {
             $table->id();
-            $table->integer('number');
+            $table->string('number');
             $table->string('name');
             $table->string('address');
             $table->string('person_in_charge');
-            $table->enum('status', ['ungenarated', 'generated', 'revised']);
-            $table->text('note');
+            $table->enum('status', ['generated', 'revised']);
+            $table->text('note')->nullable();
             $table->string('invoice');
             $table->softDeletes();
             $table->timestamps();

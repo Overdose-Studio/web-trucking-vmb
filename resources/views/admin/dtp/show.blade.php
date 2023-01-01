@@ -21,7 +21,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($dtps as $dtp)
+                        @forelse ($dtps as $dtp)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 @if ($dtp->truck_id)
@@ -34,7 +34,7 @@
                                 <td>{{ $dtp->destination2 }}</td>
                                 <td>{{ $dtp->destination3 }}</td>
                                 <td>{{ $dtp->size }}</td>
-                                <td>Rp {{ number_format($dta->price, 0, ',', '.') }}</td>
+                                <td>Rp {{ number_format($dtp->price, 0, ',', '.') }}</td>
                                 <td>
                                     <a href="{{ route('dtp.edit', [$shipment->id, $dtp->id]) }}" class="btn btn-warning">Edit</a>
                                     <form action="{{ route('dtp.destroy', [$shipment->id, $dtp->id]) }}" method="POST">
@@ -45,7 +45,11 @@
                                     </form>
                                 </td>
                             </tr>
-                        @endforeach
+                        @empty
+                            <tr>
+                                <td colspan="9" class="text-center">No data available</td>
+                            </tr>
+                        @endforelse
                     </tbody>
                 </table>
             </div>

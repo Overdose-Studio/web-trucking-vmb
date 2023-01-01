@@ -15,7 +15,7 @@ class DailyTruckingActuallyController extends Controller
     // Index: show all daily trucking actually
     public function index()
     {
-        $shipments = Shipment::all()->sortBy('id');
+        $shipments = Shipment::latest()->get();
         return view('admin.dta.index', compact('shipments'));
     }
 
@@ -40,7 +40,7 @@ class DailyTruckingActuallyController extends Controller
 
         // Check if shipment has been billed
         if ($shipment->bill_id) {
-            return redirect()->route('admin.dta.show', $shipment->id)->with('error', 'You can\'t edit this daily trucking actually because this shipment has been billed.');
+            return redirect()->route('dta.show', $shipment->id)->with('error', 'You can\'t edit this daily trucking actually because this shipment has been billed.');
         } else {
             return view('admin.dta.edit', compact('dta', 'shipment', 'selected', 'trucks'));
         }
@@ -66,7 +66,7 @@ class DailyTruckingActuallyController extends Controller
         // Get shipment from database
         $shipment = Shipment::findOrFail($shipment);
         if ($shipment->bill_id) {
-            return redirect()->route('admin.dtp.show', $shipment->id)->with('error', 'Bill already created, cannot create add new truck');
+            return redirect()->route('dtp.show', $shipment->id)->with('error', 'Bill already created, cannot edit daily trucking actually.');
         }
 
         // Find daily trucking actually

@@ -16,7 +16,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($shipments as $shipment)
+                        @forelse ($shipments as $shipment)
                             <tr>
                                 <td>{{ $shipment->id }}</td>
                                 <td>{{ $shipment->date }}</td>
@@ -35,7 +35,11 @@
                                     @endif
                                 </td>
                             </tr>
-                        @endforeach
+                        @empty
+                            <tr>
+                                <td colspan="5" class="text-center">No data available</td>
+                            </tr>
+                        @endforelse
                     </tbody>
                 </table>
             </div>

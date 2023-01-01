@@ -20,7 +20,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($dtas as $dta)
+                        @forelse ($dtas as $dta)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 @if ($dta->truck_id)
@@ -38,7 +38,11 @@
                                     <a href="{{ route('dta.edit', [$shipment->id, $dta->id]) }}" class="btn btn-warning">Edit</a>
                                 </td>
                             </tr>
-                        @endforeach
+                        @empty
+                            <tr>
+                                <td colspan="9" class="text-center">No data available</td>
+                            </tr>
+                        @endforelse
                     </tbody>
                 </table>
             </div>

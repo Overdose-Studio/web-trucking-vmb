@@ -19,7 +19,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($trucks as $truck)
+                        @forelse ($trucks as $truck)
                             <tr>
                                 <td>{{ $truck->license_plate }}</td>
                                 <td>{{ $truck->brand }}</td>
@@ -51,7 +51,11 @@
                                     </form>
                                 </td>
                             </tr>
-                        @endforeach
+                        @empty
+                            <tr>
+                                <td colspan="7" class="text-center">No data available</td>
+                            </tr>
+                        @endforelse
                     </tbody>
                 </table>
             </div>
