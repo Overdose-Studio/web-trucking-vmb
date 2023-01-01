@@ -15,14 +15,24 @@ class Shipment extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'status',
+        'order_type',
+        'client_id',
+        'bill_id',
     ];
 
     public function bill() {
-        return $this->hasOne(Bill::class);
+        return $this->belongsTo(Bill::class);
+    }
+
+    public function client() {
+        return $this->belongsTo(Client::class);
     }
 
     public function dailyTruckingPlan() {
-        return $this->hasOne(DailyTruckingPlan::class);
+        return $this->hasMany(DailyTruckingPlan::class);
+    }
+
+    public function dailyTruckingActually() {
+        return $this->hasMany(DailyTruckingActually::class);
     }
 }

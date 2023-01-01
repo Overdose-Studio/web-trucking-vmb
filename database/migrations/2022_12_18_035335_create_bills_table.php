@@ -13,9 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('shipments', function (Blueprint $table) {
+        Schema::create('bills', function (Blueprint $table) {
             $table->id();
-            $table->enum('status', ['pending', 'on-the-way', 'delivered']);
+            $table->integer('number');
+            $table->string('name');
+            $table->string('address');
+            $table->string('person_in_charge');
+            $table->enum('status', ['ungenarated', 'generated', 'revised']);
+            $table->text('note');
+            $table->string('invoice');
             $table->timestamps();
         });
     }
@@ -27,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('shipments');
+        Schema::dropIfExists('bills');
     }
 };

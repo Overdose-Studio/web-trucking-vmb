@@ -18,7 +18,7 @@ class Client extends Model
         'name',
     ];
 
-    public function dailyTruckingPlans() {
-        return $this->hasMany(DailyTruckingPlan::class);
+    public function shipments() {
+        return $this->hasMany(Shipment::class);
     }
 }
