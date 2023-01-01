@@ -79,6 +79,8 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
         Route::get('edit/{id}', [DailyTruckingPlanController::class, 'edit'])->name('edit');
         Route::post('edit/{id}', [DailyTruckingPlanController::class, 'update'])->name('update');
         Route::delete('delete/{id}', [DailyTruckingPlanController::class, 'delete'])->name('destroy');
+
+        Route::get('create_shipment', [DailyTruckingPlanController::class, 'create_shipment'])->name('create_shipment');
     });
 
     // Daily Trucking Actually (DTA): list all DTA and edit DTA

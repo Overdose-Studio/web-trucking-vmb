@@ -3,8 +3,8 @@
 @section('content')
     <div class="card">
         <div class="card-body">
-            <h1 class="panel-heading">Daily Trucking Plan List by Shipment</h1>
-            <a href="{{ route('dtp.create') }}" class="btn btn-success mb-2">Create Shipment</a>
+            <h1 class="panel-heading">Daily Trucking Plan List</h1>
+            <a href="{{ route('dtp.create_shipment') }}" class="btn btn-success mb-2">Create Shipment</a>
             <div class="panel-body">
                 <table class="table table-bordered">
                     <thead>

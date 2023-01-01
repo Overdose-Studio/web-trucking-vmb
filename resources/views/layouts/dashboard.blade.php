@@ -98,31 +98,6 @@
                                 </p>
                             </a>
                         </li>
-                        <li class="nav-item menu-is-opening {{ request()->is('dashboard/dtp*') ? 'menu-open' : '' }}">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-chart-pie"></i>
-                                <p>
-                                    DTP
-                                    <i class="right fas fa-angle-left"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview" style="display: block;">
-                                <li class="nav-item">
-                                    <a href="{{ route('dtp.index') }}"
-                                        class="nav-link {{ request()->is('dashboard/dtp') ? 'active' : '' }}">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Shipment</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('dtp.truck') }}"
-                                        class="nav-link {{ request()->is('dashboard/dtp/truck*') ? 'active' : '' }}">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Truck</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
                         <li class="nav-item">
                             <a href="{{ route('dtp.index') }}"
                                 class="nav-link {{ request()->is('dashboard/dtp*') ? 'active' : '' }}">
