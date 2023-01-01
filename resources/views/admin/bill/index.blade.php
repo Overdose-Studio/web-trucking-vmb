@@ -20,15 +20,31 @@
                         </tr>
                     </thead>
                     <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>$shipment->status</td>
+                            <td>$shipment->dailyTruckingPlan->client->name</td>
+                            <td><span class="badge badge-success" style="font-size: 1rem">H-7</span></td>
+                            <td>$shipment->dailyTruckingPlan->destination1->detail
+                            </td>
+                            <td>$shipment->dailyTruckingPlan->destination2->detail
+                            </td>
+                            <td>$shipment->dailyTruckingPlan->destination3->detail
+                            </td>
+                            <td>$shipment->dailyTruckingPlan->price</td>
+                            <td>
+                                <a href="{{ route('bill.create', 1) }}" class="btn btn-primary">Create Invoice</a>
+                            </td>
+                        </tr>
                         @foreach ($shipments as $shipment)
                             <tr>
                                 <td>{{ $shipment->id }}</td>
                                 <td>{{ $shipment->status }}</td>
                                 <td>{{ $shipment->dailyTruckingPlan->client->name }}</td>
                                 @if ($loop->index == 0)
-                                <td><span class="badge badge-success" style="font-size: 1rem">H-7</span></td>
+                                    <td><span class="badge badge-success" style="font-size: 1rem">H-7</span></td>
                                 @else
-                                <td><span class="badge badge-danger" style="font-size: 1rem">H-2</span></td>
+                                    <td><span class="badge badge-danger" style="font-size: 1rem">H-2</span></td>
                                 @endif
                                 <td>{{ $shipment->dailyTruckingPlan->destination1->detail }}
                                 </td>
@@ -38,7 +54,8 @@
                                 </td>
                                 <td>{{ $shipment->dailyTruckingPlan->price }}</td>
                                 <td>
-                                    <a href="{{ route('bill.create', $shipment->id) }}" class="btn btn-primary">Create Invoice</a>
+                                    <a href="{{ route('bill.create', $shipment->id) }}" class="btn btn-primary">Create
+                                        Invoice</a>
                                 </td>
                             </tr>
                         @endforeach

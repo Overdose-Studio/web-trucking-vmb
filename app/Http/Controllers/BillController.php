@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\InvoiceExport;
 use App\Models\Bill;
 use App\Models\Shipment;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class BillController extends Controller
 {
@@ -18,7 +20,8 @@ class BillController extends Controller
     // Create: show form create bill
     public function create(Shipment $shipment)
     {
-        return view('export.invoice');
+        // return view('export.invoice');
+        return Excel::download(new InvoiceExport(1), '-' . time() . '.xlsx');
         // return view('admin.bill.create', compact('shipment'));
     }
 }
