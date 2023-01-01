@@ -13,8 +13,9 @@ class BillController extends Controller
     // Index: show all bills
     public function index()
     {
-        $shipments = Shipment::latest()->get();
-        return view('admin.bill.index', compact('shipments'));
+        $bills = Bill::latest()->get();
+        $shipments = Shipment::where('bill_id', null)->get()->sortBy('id');
+        return view('admin.bill.index', compact('bills', 'shipments'));
     }
 
     // Create: show form create bill

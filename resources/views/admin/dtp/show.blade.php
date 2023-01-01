@@ -34,7 +34,7 @@
                                 <td>{{ $dtp->destination2 }}</td>
                                 <td>{{ $dtp->destination3 }}</td>
                                 <td>{{ $dtp->size }}</td>
-                                <td>{{ $dtp->price }}</td>
+                                <td>Rp {{ number_format($dta->price, 0, ',', '.') }}</td>
                                 <td>
                                     <a href="{{ route('dtp.edit', [$shipment->id, $dtp->id]) }}" class="btn btn-warning">Edit</a>
                                     <form action="{{ route('dtp.destroy', [$shipment->id, $dtp->id]) }}" method="POST">

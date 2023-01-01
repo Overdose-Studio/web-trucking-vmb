@@ -33,7 +33,7 @@
                                 <td>{{ $dta->destination2 }}</td>
                                 <td>{{ $dta->destination3 }}</td>
                                 <td>{{ $dta->size }}</td>
-                                <td>{{ $dta->price }}</td>
+                                <td>Rp {{ number_format($dta->price, 0, ',', '.') }}</td>
                                 <td>
                                     <a href="{{ route('dta.edit', [$shipment->id, $dta->id]) }}" class="btn btn-warning">Edit</a>
                                 </td>
