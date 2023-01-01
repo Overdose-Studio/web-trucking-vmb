@@ -10,9 +10,9 @@
                     <thead>
                         <tr>
                             <th>Shipment ID</th>
+                            <th>Date</th>
                             <th>Order Type</th>
                             <th>Client Name</th>
-                            <th>Bill</th>
                             <th>Action</th>
                         </tr>
                     </thead>

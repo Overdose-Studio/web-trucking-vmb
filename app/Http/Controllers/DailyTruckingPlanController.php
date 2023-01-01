@@ -31,11 +31,6 @@ class DailyTruckingPlanController extends Controller
         return view('admin.dtp.show', compact('dtps'));
     }
 
-    public function create_shipment()
-    {
-        return view('admin.dtp.create_shipment');
-    }
-
     // Create: show the form to create new daily trucking plan
     public function create()
     {

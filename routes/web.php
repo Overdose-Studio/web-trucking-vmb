@@ -5,6 +5,7 @@ use App\Http\Controllers\BillController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\DailyTruckingPlanController;
 use App\Http\Controllers\DailyTruckingActuallyController;
+use App\Http\Controllers\ShipmentController;
 use App\Http\Controllers\TruckController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -80,7 +81,9 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
         Route::post('edit/{id}', [DailyTruckingPlanController::class, 'update'])->name('update');
         Route::delete('delete/{id}', [DailyTruckingPlanController::class, 'delete'])->name('destroy');
 
-        Route::get('create_shipment', [DailyTruckingPlanController::class, 'create_shipment'])->name('create_shipment');
+        // Shipment: parent of DTP and DTA
+        Route::get('create_shipment', [ShipmentController::class, 'create'])->name('create_shipment');
+        Route::post('create_shipment', [ShipmentController::class, 'store'])->name('store_shipment');
     });
 
     // Daily Trucking Actually (DTA): list all DTA and edit DTA
