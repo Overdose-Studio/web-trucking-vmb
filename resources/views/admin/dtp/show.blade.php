@@ -3,36 +3,41 @@
 @section('content')
     <div class="card">
         <div class="card-body">
-            <h1 class="panel-heading">DTP List for Andi</h1>
-            <a href="{{ route('dtp.create') }}" class="btn btn-success mb-2">Create</a>
+            <h1 class="panel-heading">Truck list for {{ $shipment->client->name }} | {{ $shipment->date }}</h1>
+            <a href="{{ route('dtp.create', $shipment->id) }}" class="btn btn-success mb-2">Add Truck</a>
             <div class="panel-body">
                 <table class="table table-bordered">
                     <thead>
                         <tr>
-                            <th>Shipment ID</th>
-                            <th>Shipment Status</th>
+                            <th>No.</th>
+                            <th>Truck</th>
+                            <th>Driver Name</th>
                             <th>Destination 1</th>
                             <th>Destination 2</th>
                             <th>Destination 3</th>
-                            <th>Truck</th>
+                            <th>Size</th>
+                            <th>Price</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($dtps as $dtp)
                             <tr>
-                                <td>{{ $dtp->shipment->id }}</td>
-                                <td>{{ $dtp->shipment->status }}</td>
-                                <td>{{ $dtp->destination_1_id != null ? $dtp->destination1->detail : '' }} </br>
-                                    {{ $dtp->destination_1_id != null ? $dtp->destination1->image : '' }}</td>
-                                <td>{{ $dtp->destination_2_id != null ? $dtp->destination2->detail : '' }} </br>
-                                    {{ $dtp->destination_2_id != null ? $dtp->destination2->image : '' }}</td>
-                                <td>{{ $dtp->destination_3_id != null ? $dtp->destination3->detail : '' }} </br>
-                                    {{ $dtp->destination_3_id != null ? $dtp->destination3->image : '' }}</td>
-                                <td>{{ $dtp->truck->license_plate }}</td>
+                                <td>{{ $loop->iteration }}</td>
+                                @if ($dtp->truck_id)
+                                    <td>{{ $dtp->truck->license_plate }} | {{ $dtp->truck->brand }}</td>
+                                @else
+                                    <td>Vendor Truck</td>
+                                @endif
+                                <td>{{ $dtp->driver_name }}</td>
+                                <td>{{ $dtp->destination1 }}</td>
+                                <td>{{ $dtp->destination2 }}</td>
+                                <td>{{ $dtp->destination3 }}</td>
+                                <td>{{ $dtp->size }}</td>
+                                <td>{{ $dtp->price }}</td>
                                 <td>
-                                    <a href="{{ route('dtp.edit', $dtp->id) }}" class="btn btn-primary">Edit</a>
-                                    <form action="{{ route('dtp.destroy', $dtp->id) }}" method="POST">
+                                    <a href="{{ route('dtp.edit', [$shipment->id, $dtp->id]) }}" class="btn btn-warning">Edit</a>
+                                    <form action="{{ route('dtp.destroy', [$shipment->id, $dtp->id]) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-danger"

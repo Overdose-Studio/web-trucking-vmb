@@ -38,6 +38,9 @@ class ShipmentController extends Controller
     {
         $shipment = Shipment::findOrFail($id);
         $clients = Client::orderBy('name')->get();
+        if ($shipment->bill_id) {
+            return redirect()->route('admin.dtp.show', $shipment->id)->with('error', 'Bill already created, cannot create add new truck');
+        }
         return view('admin.dtp.edit_shipment', compact('shipment', 'clients'));
     }
 
@@ -50,8 +53,13 @@ class ShipmentController extends Controller
             'client_id' => 'required|exists:clients,id',
         ]);
 
-        // Update shipment to database
+        // Get shipment from database
         $shipment = Shipment::findOrFail($id);
+        if ($shipment->bill_id) {
+            return redirect()->route('admin.dtp.show', $shipment->id)->with('error', 'Bill already created, cannot create add new truck');
+        }
+
+        // Update shipment to database
         $shipment->order_type = $request->order_type;
         $shipment->client_id = $request->client_id;
         $shipment->save();
@@ -62,7 +70,13 @@ class ShipmentController extends Controller
     // Delete: delete shipment from database
     public function delete($id)
     {
+        // Get shipment from database
         $shipment = Shipment::findOrFail($id);
+        if ($shipment->bill_id) {
+            return redirect()->route('admin.dtp.show', $shipment->id)->with('error', 'Bill already created, cannot create add new truck');
+        }
+
+        // Delete shipment from database
         $shipment->delete();
 
         return redirect()->route('dtp.index')->with('success', 'Shipment deleted successfully.');

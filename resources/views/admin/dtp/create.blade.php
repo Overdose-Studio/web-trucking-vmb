@@ -3,10 +3,14 @@
 @section('content')
     <div class="card">
         <div class="card-body">
-            <h1 class="panel-heading">Create Daily Trucking Plan</h1>
+            <h1 class="panel-heading">Add Truck</h1>
             <div class="panel-body">
-                <form action="{{ route('dtp.store') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('dtp.store', $shipment->id) }}" method="POST" enctype="multipart/form-data">
                     {{ csrf_field() }}
+                    <div class="form-group">
+                        <label for="driver_name">Driver Name</label>
+                        <input type="text" class="form-control" name="driver_name" placeholder="Driver Name">
+                    </div>
                     <div class="form-group">
                         <label>Destination 1</label>
                         <input type="text" class="form-control" name="destination_1_detail" placeholder="Destination 1">
@@ -26,29 +30,19 @@
                             placeholder="Destination 3 Image">
                     </div>
                     <div class="form-group">
+                        <label for="size">Size</label>
+                        <input type="decimal" class="form-control" name="size" placeholder="Size">
+                    </div>
+                    <div class="form-group">
                         <label for="price">Price</label>
                         <input type="number" class="form-control" name="price" placeholder="Price">
                     </div>
                     <div class="form-group">
-                        <label for="order_type">Order Type</label>
-                        <select name="order_type" class="form-control">
-                            <option value="export">Export</option>
-                            <option value="import">Import</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="client_id">Client</label>
-                        <select name="client_id" class="form-control">
-                            @foreach ($clients as $client)
-                                <option value="{{ $client->id }}">{{ $client->name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="form-group">
                         <label for="truck_id">Truck</label>
                         <select name="truck_id" class="form-control">
+                            <option value="">Vendor Truck</option>
                             @foreach ($trucks as $truck)
-                                <option value="{{ $truck->id }}">{{ $truck->license_plate }}</option>
+                                <option value="{{ $truck->id }}">{{ $truck->license_plate }} | {{ $truck->brand }}</option>
                             @endforeach
                         </select>
                     </div>

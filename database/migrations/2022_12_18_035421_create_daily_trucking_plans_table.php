@@ -20,7 +20,7 @@ return new class extends Migration
             $table->unsignedBigInteger('destination_2_id')->nullable();
             $table->unsignedBigInteger('destination_3_id')->nullable();
             $table->string('driver_name');
-            $table->integer('size');
+            $table->double('size');
             $table->integer('price');
             $table->boolean('is_vendor_truck')->default(false);
             $table->unsignedBigInteger('truck_id')->nullable();

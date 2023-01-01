@@ -16,17 +16,23 @@ return new class extends Migration
         Schema::create('daily_trucking_actuallies', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('shipment_id');
+            $table->unsignedBigInteger('daily_trucking_plan_id');
             $table->unsignedBigInteger('destination_1_id')->nullable();
             $table->unsignedBigInteger('destination_2_id')->nullable();
             $table->unsignedBigInteger('destination_3_id')->nullable();
             $table->string('driver_name');
-            $table->integer('size');
+            $table->double('size');
             $table->integer('price');
             $table->boolean('is_vendor_truck')->default(false);
             $table->unsignedBigInteger('truck_id')->nullable();
             $table->foreign('shipment_id')
                 ->references('id')
                 ->on('shipments')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+            $table->foreign('daily_trucking_plan_id')
+                ->references('id')
+                ->on('daily_trucking_plans')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
             $table->foreign('destination_1_id')

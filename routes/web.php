@@ -73,13 +73,6 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
     // Daily Trucking Plan (DTP): list all DTP and edit DTP
     Route::group(['middleware' => 'trucking', 'prefix' => 'dtp', 'as' => 'dtp.'], function () {
         Route::get('/', [DailyTruckingPlanController::class, 'index'])->name('index');
-        Route::get('/show', [DailyTruckingPlanController::class, 'show'])->name('show');
-        Route::get('/truck', [DailyTruckingPlanController::class, 'truck'])->name('truck');
-        Route::get('create', [DailyTruckingPlanController::class, 'create'])->name('create');
-        Route::post('create', [DailyTruckingPlanController::class, 'store'])->name('store');
-        Route::get('edit/{id}', [DailyTruckingPlanController::class, 'edit'])->name('edit');
-        Route::post('edit/{id}', [DailyTruckingPlanController::class, 'update'])->name('update');
-        Route::delete('delete/{id}', [DailyTruckingPlanController::class, 'delete'])->name('destroy');
 
         // Shipment: parent of DTP and DTA
         Route::get('create-shipment', [ShipmentController::class, 'create'])->name('create_shipment');
@@ -87,6 +80,14 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
         Route::get('edit-shipment/{id}', [ShipmentController::class, 'edit'])->name('edit_shipment');
         Route::post('edit-shipment/{id}', [ShipmentController::class, 'update'])->name('update_shipment');
         Route::delete('delete-shipment/{id}', [ShipmentController::class, 'delete'])->name('destroy_shipment');
+
+        // DTP: child of Shipment
+        Route::get('{shipment}/show', [DailyTruckingPlanController::class, 'show'])->name('show');
+        Route::get('{shipment}/add-truck', [DailyTruckingPlanController::class, 'create'])->name('create');
+        Route::post('{shipment}/add-truck', [DailyTruckingPlanController::class, 'store'])->name('store');
+        Route::get('{shipment}/edit-truck/{id}', [DailyTruckingPlanController::class, 'edit'])->name('edit');
+        Route::post('{shipment}/edit-truck/{id}', [DailyTruckingPlanController::class, 'update'])->name('update');
+        Route::delete('{shipment}/delete-truck/{id}', [DailyTruckingPlanController::class, 'delete'])->name('destroy');
     });
 
     // Daily Trucking Actually (DTA): list all DTA and edit DTA

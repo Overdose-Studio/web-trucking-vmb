@@ -30,6 +30,10 @@ class DailyTruckingPlan extends Model
         return $this->belongsTo(Shipment::class);
     }
 
+    public function dailyTruckingActually() {
+        return $this->hasOne(DailyTruckingActually::class);
+    }
+
     public function destination1() {
         return $this->belongsTo(Destination::class, 'destination_1_id');
     }
