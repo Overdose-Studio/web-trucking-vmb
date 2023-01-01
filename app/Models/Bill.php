@@ -15,13 +15,16 @@ class Bill extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'shipment_id',
+        'number',
+        'name',
+        'address',
+        'person_in_charge',
         'status',
         'note',
         'invoice',
     ];
 
-    public function shipment() {
-        return $this->belongsTo(Shipment::class);
+    public function shipments() {
+        return $this->hasMany(Shipment::class);
     }
 }

@@ -15,16 +15,18 @@ return new class extends Migration
     {
         Schema::create('daily_trucking_actuallies', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('daily_trucking_plan_id');
+            $table->unsignedBigInteger('shipment_id');
             $table->unsignedBigInteger('destination_1_id')->nullable();
             $table->unsignedBigInteger('destination_2_id')->nullable();
             $table->unsignedBigInteger('destination_3_id')->nullable();
+            $table->string('driver_name');
+            $table->integer('size');
             $table->integer('price');
-            $table->string('renban');
-            $table->double('container_size');
-            $table->foreign('daily_trucking_plan_id')
+            $table->boolean('is_vendor_truck')->default(false);
+            $table->unsignedBigInteger('truck_id')->nullable();
+            $table->foreign('shipment_id')
                 ->references('id')
-                ->on('daily_trucking_plans')
+                ->on('shipments')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
             $table->foreign('destination_1_id')
@@ -40,6 +42,11 @@ return new class extends Migration
             $table->foreign('destination_3_id')
                 ->references('id')
                 ->on('destinations')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+            $table->foreign('truck_id')
+                ->references('id')
+                ->on('trucks')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
             $table->timestamps();

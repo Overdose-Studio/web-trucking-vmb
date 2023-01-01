@@ -15,17 +15,19 @@ class DailyTruckingActually extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'daily_trucking_plan_id',
+        'shipment_id',
         'destination_1_id',
         'destination_2_id',
         'destination_3_id',
+        'driver_name',
+        'size',
         'price',
-        'renban',
-        'container_size',
+        'is_vendor_truck',
+        'truck_id',
     ];
 
-    public function dailyTruckingPlan() {
-        return $this->belongsTo(DailyTruckingPlan::class);
+    public function shipment() {
+        return $this->belongsTo(Shipment::class);
     }
 
     public function destination1() {
@@ -38,5 +40,9 @@ class DailyTruckingActually extends Model
 
     public function destination3() {
         return $this->belongsTo(Destination::class, 'destination_3_id');
+    }
+
+    public function truck() {
+        return $this->belongsTo(Truck::class);
     }
 }
