@@ -13,13 +13,27 @@ use Illuminate\Support\Facades\Storage;
 class DailyTruckingPlanController extends Controller
 {
     // Index: show all daily trucking plans
-    public function index() {
+    public function index()
+    {
         $dtps = DailyTruckingPlan::all()->sortBy('date');
         return view('admin.dtp.index', compact('dtps'));
     }
 
+    public function truck()
+    {
+        $dtps = DailyTruckingPlan::all()->sortBy('date');
+        return view('admin.dtp.truck', compact('dtps'));
+    }
+
+    public function show()
+    {
+        $dtps = DailyTruckingPlan::all()->sortBy('date');
+        return view('admin.dtp.show', compact('dtps'));
+    }
+
     // Create: show the form to create new daily trucking plan
-    public function create() {
+    public function create()
+    {
         $clients = Client::all();
         $trucks = Truck::whereHas('state', function ($query) {
             $query->where('type', 'good');
@@ -28,7 +42,8 @@ class DailyTruckingPlanController extends Controller
     }
 
     // Store: store new daily trucking plan to database
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         // Validate the form
         $request->validate([
             'price' => 'required|numeric',
@@ -101,7 +116,8 @@ class DailyTruckingPlanController extends Controller
     }
 
     // Edit: show the form to edit daily trucking plan
-    public function edit($id) {
+    public function edit($id)
+    {
         $dtp = DailyTruckingPlan::find($id);
         $clients = Client::all();
         $trucks = Truck::whereHas('state', function ($query) {
@@ -111,7 +127,8 @@ class DailyTruckingPlanController extends Controller
     }
 
     // Update: update daily trucking plan to database
-    public function update(Request $request, $id) {
+    public function update(Request $request, $id)
+    {
         // Validate the form
         $request->validate([
             'price' => 'required|numeric',
@@ -224,7 +241,8 @@ class DailyTruckingPlanController extends Controller
     }
 
     // Delete: delete daily trucking plan from database
-    public function delete($id) {
+    public function delete($id)
+    {
         // Find daily trucking plan, shipment, and destinations
         $dtp = DailyTruckingPlan::find($id);
         $shipment = Shipment::find($dtp->shipment_id);

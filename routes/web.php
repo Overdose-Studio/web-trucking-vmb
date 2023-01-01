@@ -72,6 +72,8 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
     // Daily Trucking Plan (DTP): list all DTP and edit DTP
     Route::group(['middleware' => 'trucking', 'prefix' => 'dtp', 'as' => 'dtp.'], function () {
         Route::get('/', [DailyTruckingPlanController::class, 'index'])->name('index');
+        Route::get('/show', [DailyTruckingPlanController::class, 'show'])->name('show');
+        Route::get('/truck', [DailyTruckingPlanController::class, 'truck'])->name('truck');
         Route::get('create', [DailyTruckingPlanController::class, 'create'])->name('create');
         Route::post('create', [DailyTruckingPlanController::class, 'store'])->name('store');
         Route::get('edit/{id}', [DailyTruckingPlanController::class, 'edit'])->name('edit');
