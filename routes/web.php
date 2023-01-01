@@ -93,11 +93,9 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
     // Daily Trucking Actually (DTA): list all DTA and edit DTA
     Route::group(['middleware' => 'trucking', 'prefix' => 'dta', 'as' => 'dta.'], function () {
         Route::get('/', [DailyTruckingActuallyController::class, 'index'])->name('index');
-        Route::get('create', [DailyTruckingActuallyController::class, 'create'])->name('create');
-        Route::post('create', [DailyTruckingActuallyController::class, 'store'])->name('store');
-        Route::get('edit/{id}', [DailyTruckingActuallyController::class, 'edit'])->name('edit');
-        Route::post('edit/{id}', [DailyTruckingActuallyController::class, 'update'])->name('update');
-        Route::delete('delete/{id}', [DailyTruckingActuallyController::class, 'delete'])->name('destroy');
+        Route::get('{shipment}/show', [DailyTruckingActuallyController::class, 'show'])->name('show');
+        Route::get('{shipment}/edit/{id}', [DailyTruckingActuallyController::class, 'edit'])->name('edit');
+        Route::post('{shipment}/edit/{id}', [DailyTruckingActuallyController::class, 'update'])->name('update');
     });
 
     // Billing: list all billing and edit billing

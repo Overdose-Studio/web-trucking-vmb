@@ -28,6 +28,7 @@ return new class extends Migration
                 ->on('bills')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

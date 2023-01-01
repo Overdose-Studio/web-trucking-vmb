@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->enum('type', ['good', 'bad']);
             $table->string('evidence')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

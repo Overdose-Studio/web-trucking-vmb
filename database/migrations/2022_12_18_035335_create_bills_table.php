@@ -22,6 +22,7 @@ return new class extends Migration
             $table->enum('status', ['ungenarated', 'generated', 'revised']);
             $table->text('note');
             $table->string('invoice');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

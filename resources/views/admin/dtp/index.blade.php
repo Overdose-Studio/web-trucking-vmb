@@ -25,13 +25,15 @@
                                 <td>{{ $shipment->client->name }}</td>
                                 <td>
                                     <a href="{{ route('dtp.show', $shipment->id) }}" class="btn btn-primary">Show</a>
-                                    <a href="{{ route('dtp.edit_shipment', $shipment->id) }}" class="btn btn-warning">Edit</a>
-                                    <form action="{{ route('dtp.destroy_shipment', $shipment->id) }}" method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger"
-                                            onclick="return confirm('Are you sure?')">Delete</button>
-                                    </form>
+                                    @if(!$shipment->bill_id)
+                                        <a href="{{ route('dtp.edit_shipment', $shipment->id) }}" class="btn btn-warning">Edit</a>
+                                        <form action="{{ route('dtp.destroy_shipment', $shipment->id) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger"
+                                                onclick="return confirm('Are you sure?')">Delete</button>
+                                        </form>
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach

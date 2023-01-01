@@ -49,6 +49,7 @@ return new class extends Migration
                 ->on('trucks')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

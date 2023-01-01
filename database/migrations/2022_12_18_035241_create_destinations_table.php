@@ -18,6 +18,7 @@ return new class extends Migration
             $table->enum('type', [1, 2, 3]);
             $table->string('detail');
             $table->string('image')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }
