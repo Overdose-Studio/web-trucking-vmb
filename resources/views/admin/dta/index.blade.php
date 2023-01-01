@@ -4,7 +4,7 @@
     <div class="card">
         <div class="card-body">
             <h1 class="panel-heading">Daily Trucking Actually List</h1>
-            <a href="{{ route('dta.create') }}" class="btn btn-success mb-2">Create</a>
+            {{-- <a href="{{ route('dta.create') }}" class="btn btn-success mb-2">Create</a> --}}
             <div class="panel-body">
                 <table class="table table-bordered">
                     <thead>

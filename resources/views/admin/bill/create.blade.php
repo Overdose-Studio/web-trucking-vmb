@@ -41,16 +41,20 @@
                                                                         <table class="invoice-items" cellpadding="0"
                                                                             cellspacing="0">
                                                                             <tbody>
-                                                                                <div class="d-flex flex-row" class="display:flex !important; flex-direction:row">
+                                                                                <div class="d-flex flex-row"
+                                                                                    class="display:flex !important; flex-direction:row">
                                                                                     <div>
-                                                                                        <p><strong>Nomor Tagihan:</strong></p>
+                                                                                        <p><strong>Nomor
+                                                                                                Tagihan:</strong></p>
                                                                                         <p>114 KR/VM/TGH/XII/2022</p>
                                                                                         <p>ORDER NO : 185, 186 KR</p>
                                                                                     </div>
                                                                                     <br>
                                                                                     <div>
                                                                                         <p>PT.TMMIN</p>
-                                                                                        <p>Jl. Laksamana Yos Sudarso, Sunter I Logistik Planning Division</p>
+                                                                                        <p>Jl. Laksamana Yos Sudarso,
+                                                                                            Sunter I Logistik Planning
+                                                                                            Division</p>
                                                                                         <p>Attn : Pak Iwan</p>
                                                                                     </div>
                                                                                 </div>
@@ -61,22 +65,30 @@
                                                                                 </tr>
                                                                                 <hr>
                                                                                 <tr>
-                                                                                    <td>CAKUNG/MARUNDA EMPTY-KRW-CAKUNG/MARUNDA EMPTY</td>
-                                                                                    <td class="alignright">40" = 2x3.043.620 = 6.048.240</td>
+                                                                                    <td>CAKUNG/MARUNDA
+                                                                                        EMPTY-KRW-CAKUNG/MARUNDA EMPTY
+                                                                                    </td>
+                                                                                    <td class="alignright">40" =
+                                                                                        2x3.043.620 = 6.048.240</td>
                                                                                 </tr>
                                                                                 <tr>
-                                                                                    <td>CIKARANG EMPTY-CY TMMIN KARAWANG-PORT</td>
-                                                                                    <td class="alignright">40" = 1x3.043.620 = 3.043.620</td>
+                                                                                    <td>CIKARANG EMPTY-CY TMMIN
+                                                                                        KARAWANG-PORT</td>
+                                                                                    <td class="alignright">40" =
+                                                                                        1x3.043.620 = 3.043.620</td>
                                                                                 </tr>
                                                                                 <tr>
-                                                                                    <td>CAKUNG/MARUNDA EMPTY-KRW-PORT</td>
-                                                                                    <td class="alignright">40" = 2x3.043.620 = 6.048.240</td>
+                                                                                    <td>CAKUNG/MARUNDA EMPTY-KRW-PORT
+                                                                                    </td>
+                                                                                    <td class="alignright">40" =
+                                                                                        2x3.043.620 = 6.048.240</td>
                                                                                 </tr>
                                                                                 <tr class="total">
                                                                                     <td class="alignright"
                                                                                         width="80%">
                                                                                         Total</td>
-                                                                                    <td class="alignright">15.218.100</td>
+                                                                                    <td class="alignright">15.218.100
+                                                                                    </td>
                                                                                 </tr>
                                                                             </tbody>
                                                                         </table>
