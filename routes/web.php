@@ -82,8 +82,11 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
         Route::delete('delete/{id}', [DailyTruckingPlanController::class, 'delete'])->name('destroy');
 
         // Shipment: parent of DTP and DTA
-        Route::get('create_shipment', [ShipmentController::class, 'create'])->name('create_shipment');
-        Route::post('create_shipment', [ShipmentController::class, 'store'])->name('store_shipment');
+        Route::get('create-shipment', [ShipmentController::class, 'create'])->name('create_shipment');
+        Route::post('create-shipment', [ShipmentController::class, 'store'])->name('store_shipment');
+        Route::get('edit-shipment/{id}', [ShipmentController::class, 'edit'])->name('edit_shipment');
+        Route::post('edit-shipment/{id}', [ShipmentController::class, 'update'])->name('update_shipment');
+        Route::delete('delete-shipment/{id}', [ShipmentController::class, 'delete'])->name('destroy_shipment');
     });
 
     // Daily Trucking Actually (DTA): list all DTA and edit DTA

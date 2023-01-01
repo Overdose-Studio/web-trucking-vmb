@@ -17,38 +17,24 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>10</td>
-                            <td>Import</td>
-                            <td>Andi</td>
-                            <td>1000000</td>
-                            <td>
-                                <a href="{{ route('dtp.show') }}" class="btn btn-primary">Show</a>
-                                <a href="" class="btn btn-warning">Edit</a>
-                                <form action="" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger"
-                                        onclick="return confirm('Are you sure?')">Delete</button>
-                                </form>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>12</td>
-                            <td>Export</td>
-                            <td>Budi</td>
-                            <td>3000000</td>
-                            <td>
-                                <a href="{{ route('dtp.show') }}" class="btn btn-primary">Show</a>
-                                <a href="" class="btn btn-warning">Edit</a>
-                                <form action="" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger"
-                                        onclick="return confirm('Are you sure?')">Delete</button>
-                                </form>
-                            </td>
-                        </tr>
+                        @foreach ($shipments as $shipment)
+                            <tr>
+                                <td>{{ $shipment->id }}</td>
+                                <td>{{ $shipment->date }}</td>
+                                <td>{{ ucfirst($shipment->order_type) }}</td>
+                                <td>{{ $shipment->client->name }}</td>
+                                <td>
+                                    <a href="{{ route('dtp.show', $shipment->id) }}" class="btn btn-primary">Show</a>
+                                    <a href="{{ route('dtp.edit_shipment', $shipment->id) }}" class="btn btn-warning">Edit</a>
+                                    <form action="{{ route('dtp.destroy_shipment', $shipment->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger"
+                                            onclick="return confirm('Are you sure?')">Delete</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>

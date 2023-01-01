@@ -15,8 +15,8 @@ class DailyTruckingPlanController extends Controller
     // Index: show all daily trucking plans
     public function index()
     {
-        $dtps = DailyTruckingPlan::all()->sortBy('date');
-        return view('admin.dtp.index', compact('dtps'));
+        $shipments = Shipment::all()->sortBy('id');
+        return view('admin.dtp.index', compact('shipments'));
     }
 
     public function truck()

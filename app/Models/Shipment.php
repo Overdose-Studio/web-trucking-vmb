@@ -28,6 +28,10 @@ class Shipment extends Model
         return $this->belongsTo(Client::class);
     }
 
+    public function getDateAttribute() {
+        return $this->created_at->format('l, d F Y');
+    }
+
     public function dailyTruckingPlan() {
         return $this->hasMany(DailyTruckingPlan::class);
     }
