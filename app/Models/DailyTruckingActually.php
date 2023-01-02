@@ -48,6 +48,10 @@ class DailyTruckingActually extends Model
         return $this->belongsTo(Destination::class, 'destination_3_id');
     }
 
+    public function getDiffAttribute() {
+        return $this->dailyTruckingPlan->price - $this->price;
+    }
+
     public function truck() {
         return $this->belongsTo(Truck::class);
     }

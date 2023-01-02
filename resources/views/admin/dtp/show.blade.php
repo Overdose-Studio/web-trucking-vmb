@@ -37,7 +37,7 @@
                                 <td>Rp {{ number_format($dtp->price, 0, ',', '.') }}</td>
                                 <td>
                                     <a href="{{ route('dtp.edit', [$shipment->id, $dtp->id]) }}" class="btn btn-warning">Edit</a>
-                                    <form action="{{ route('dtp.destroy', [$shipment->id, $dtp->id]) }}" method="POST">
+                                    <form action="{{ route('dtp.destroy', [$shipment->id, $dtp->id]) }}" method="POST" class="d-inline">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-danger"
