@@ -4,7 +4,7 @@
     <div class="card">
         <div class="card-body">
             <h1 class="panel-heading">Client List</h1>
-            <a href="{{ route('client.create') }}" class="btn btn-primary mb-2">Add New Client</a>
+            <a href="{{ route('client.create') }}" class="btn btn-success mb-2">Add New Client</a>
             <div class="panel-body">
                 <table class="table table-bordered">
                     <thead>

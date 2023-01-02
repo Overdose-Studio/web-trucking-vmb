@@ -4,7 +4,7 @@
     <div class="card">
         <div class="card-body">
             <h1 class="panel-heading">Truck List</h1>
-            <a href="{{ route('truck.create') }}" class="btn btn-success mb-2">Create Truck</a>
+            <a href="{{ route('truck.create') }}" class="btn btn-success mb-2">Add New Truck</a>
             <div class="panel-body">
                 <table class="table table-bordered">
                     <thead>
