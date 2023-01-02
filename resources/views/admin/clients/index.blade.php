@@ -9,6 +9,7 @@
                 <table class="table table-bordered">
                     <thead>
                         <tr>
+                            <th>No.</th>
                             <th>Name</th>
                             <th>Actions</th>
                         </tr>
@@ -16,6 +17,7 @@
                     <tbody>
                         @foreach ($clients as $client)
                             <tr>
+                                <td>{{ $loop->iteration }}</td>
                                 <td>{{ $client->name }}</td>
                                 <td class="d-flex" style="gap: 4px">
                                     <a href="{{ route('client.edit', $client->id) }}" class="btn btn-primary">Edit</a>

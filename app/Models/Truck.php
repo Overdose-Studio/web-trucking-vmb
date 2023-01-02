@@ -35,7 +35,7 @@ class Truck extends Model
         return $this->hasMany(DailyTruckingActually::class);
     }
 
-    public function getLastMaintenanceDetailAttribute() {
-        return date('d F Y - H:i:s', strtotime($this->last_maintenance));
+    public function getLastMaintenanceDateAttribute() {
+        return date('l, d F Y', strtotime($this->last_maintenance));
     }
 }

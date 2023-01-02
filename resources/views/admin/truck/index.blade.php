@@ -9,6 +9,7 @@
                 <table class="table table-bordered">
                     <thead>
                         <tr>
+                            <th>No.</th>
                             <th>License Plate</th>
                             <th>Brand</th>
                             <th>Production Year</th>
@@ -21,24 +22,29 @@
                     <tbody>
                         @forelse ($trucks as $truck)
                             <tr>
+                                <td>{{ $loop->iteration }}</td>
                                 <td>{{ $truck->license_plate }}</td>
                                 <td>{{ $truck->brand }}</td>
                                 <td>{{ $truck->production_year }}</td>
-                                <td>{{ $truck->last_maintenance }}</td>
+                                <td>{{ $truck->last_maintenance_date }}</td>
                                 <td>
                                     @if ($truck->state->type == 'good')
-                                        <span class="badge badge-success">{{ $truck->state->type }}</span>
+                                        <span class="badge badge-success">{{ ucfirst($truck->state->type) }}</span>
                                     @else
-                                        <span class="badge badge-danger">{{ $truck->state->type }}</span>
+                                        <span class="badge badge-danger">{{ ucfirst($truck->state->type) }}</span>
                                     @endif
                                 </td>
                                 <td>
-                                    <a href="#" onclick="show('{{ $loop->index }}')">
-                                        <img id="show-{{ $loop->index }}" src="{{ asset($truck->state->evidence) }}"
-                                            class="d-none">
-                                        Click to Show
-                                    </a>
-                                    <img alt="">
+                                    @if ($truck->state->type == 'good')
+                                        No Evidence, Truck is Good
+                                    @else
+                                        <a href="#" onclick="show('{{ $loop->index }}')">
+                                            <img id="show-{{ $loop->index }}" src="{{ asset($truck->state->evidence) }}"
+                                                class="d-none">
+                                            Click to Show
+                                        </a>
+                                        <img alt="">
+                                    @endif
                                 </td>
                                 <td>
                                     <a href="{{ route('truck.edit', $truck->id) }}" class="btn btn-primary">Edit</a>
