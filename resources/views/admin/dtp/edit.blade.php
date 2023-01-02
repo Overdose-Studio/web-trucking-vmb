@@ -4,8 +4,10 @@
     <a href="{{ route('dtp.show', $shipment->id) }}" class="btn btn-primary mb-2"><i class="fa fa-arrow-left"></i> Back to DTP
         List</a>
     <div class="card">
-        <div class="card-body">
+        <div class="card-header">
             <h1 class="panel-heading">Update Truck</h1>
+        </div>
+        <div class="card-body">
             <div class="panel-body">
                 <form action="{{ route('dtp.update', [$shipment->id, $dtp->id]) }}" method="POST"
                     enctype="multipart/form-data">
@@ -24,8 +26,6 @@
                         <label>Destination 1</label>
                         <input type="text" class="form-control" name="destination_1_detail" placeholder="Destination 1"
                             value="{{ $dtp->destination_1_id != null ? $dtp->destination1->detail : '' }}">
-                        <input type="file" class="form-control" name="destination_1_image"
-                            placeholder="Destination 1 Image">
                         <span class="text-danger">{{ $errors->first('destination_1_detail') }}</span>
                     </div>
                     <div
@@ -34,8 +34,6 @@
                         <label>Destination 2</label>
                         <input type="text" class="form-control" name="destination_2_detail" placeholder="Destination 2"
                             value="{{ $dtp->destination_2_id != null ? $dtp->destination2->detail : '' }}">
-                        <input type="file" class="form-control" name="destination_2_image"
-                            placeholder="Destination 2 Image">
                         <span class="text-danger">{{ $errors->first('destination_2_detail') }}</span>
                     </div>
                     <div
@@ -44,8 +42,6 @@
                         <label>Destination 3</label>
                         <input type="text" class="form-control" name="destination_3_detail" placeholder="Destination 3"
                             value="{{ $dtp->destination_3_id != null ? $dtp->destination3->detail : '' }}">
-                        <input type="file" class="form-control" name="destination_3_image"
-                            placeholder="Destination 3 Image">
                         <span class="text-danger">{{ $errors->first('destination_3_detail') }}</span>
                     </div>
                     <div class="form-group
@@ -65,8 +61,6 @@
                                 40"
                             </label>
                         </div>
-                        <input type="decimal" class="form-control" name="size" placeholder="Size"
-                            value="{{ $dtp->size }}">
                         <span class="text-danger">{{ $errors->first('size') }}</span>
                     </div>
                     <div class="form-group

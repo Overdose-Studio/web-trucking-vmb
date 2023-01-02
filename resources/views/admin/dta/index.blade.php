@@ -30,24 +30,17 @@
                                 <td>Rp {{ number_format($shipment->diff, 0, ',', '.') }}</td>
                                 <td>
                                     <a href="{{ route('dta.show', $shipment->id) }}" class="btn btn-primary">Show</a>
-                                    <<<<<<< HEAD @if (!$shipment->bill_id)
+                                    @if (!$shipment->bill_id)
                                         <a href="{{ route('dta.edit_shipment', $shipment->id) }}"
                                             class="btn btn-warning">Edit</a>
                                         <form action="{{ route('dtp.destroy_shipment', $shipment->id) }}" method="POST"
                                             class="d-inline">
-                                            =======
-                                            @if (!$shipment->bill_id)
-                                                <a href="{{ route('dtp.edit_shipment', $shipment->id) }}"
-                                                    class="btn btn-warning">Edit</a>
-                                                <form action="{{ route('dtp.destroy_shipment', $shipment->id) }}"
-                                                    method="POST" class="d-inline">
-                                                    >>>>>>> 7386958c2c6648e46e698bc2806e30b0fd690c30
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger"
-                                                        onclick="return confirm('Are you sure?')">Delete</button>
-                                                </form>
-                                            @endif
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger"
+                                                onclick="return confirm('Are you sure?')">Delete</button>
+                                        </form>
+                                    @endif
                                 </td>
                             </tr>
                         @empty
