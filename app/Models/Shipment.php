@@ -29,6 +29,10 @@ class Shipment extends Model
         return $this->belongsTo(Client::class);
     }
 
+    public function getDiffAttribute() {
+        return $this->dailyTruckingPlan->sum('price') - $this->dailyTruckingActually->sum('price');
+    }
+
     public function getDateAttribute() {
         return $this->created_at->format('l, d F Y');
     }

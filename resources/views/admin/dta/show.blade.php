@@ -19,7 +19,9 @@
                             <th>Destination 2</th>
                             <th>Destination 3</th>
                             <th>Size</th>
-                            <th>Price</th>
+                            <th>(DTP) Price</th>
+                            <th>(DTA) Price</th>
+                            <th>DTP - DTA</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -37,7 +39,9 @@
                                 <td>{{ $dta->destination2->detail }}</td>
                                 <td>{{ $dta->destination3->detail }}</td>
                                 <td>{{ $dta->size }}</td>
+                                <td>Rp {{ number_format($dta->dailyTruckingPlan->price, 0, ',', '.') }}</td>
                                 <td>Rp {{ number_format($dta->price, 0, ',', '.') }}</td>
+                                <td>Rp {{ number_format($dta->diff, 0, ',', '.') }}</td>
                                 <td>
                                     <a href="{{ route('dta.edit', [$shipment->id, $dta->id]) }}"
                                         class="btn btn-warning">Edit</a>

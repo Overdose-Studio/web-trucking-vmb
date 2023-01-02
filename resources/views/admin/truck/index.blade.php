@@ -4,11 +4,12 @@
     <div class="card">
         <div class="card-body">
             <h1 class="panel-heading">Truck List</h1>
-            <a href="{{ route('truck.create') }}" class="btn btn-success mb-2">Create Truck</a>
+            <a href="{{ route('truck.create') }}" class="btn btn-success mb-2">Add New Truck</a>
             <div class="panel-body">
                 <table class="table table-bordered">
                     <thead>
                         <tr>
+                            <th>No.</th>
                             <th>License Plate</th>
                             <th>Brand</th>
                             <th>Production Year</th>
@@ -21,15 +22,16 @@
                     <tbody>
                         @forelse ($trucks as $truck)
                             <tr>
+                                <td>{{ $loop->iteration }}</td>
                                 <td>{{ $truck->license_plate }}</td>
                                 <td>{{ $truck->brand }}</td>
                                 <td>{{ $truck->production_year }}</td>
-                                <td>{{ $truck->last_maintenance }}</td>
+                                <td>{{ $truck->last_maintenance_date }}</td>
                                 <td>
                                     @if ($truck->state->type == 'good')
-                                        <span class="badge badge-success">{{ $truck->state->type }}</span>
+                                        <span class="badge badge-success">{{ ucfirst($truck->state->type) }}</span>
                                     @else
-                                        <span class="badge badge-danger">{{ $truck->state->type }}</span>
+                                        <span class="badge badge-danger">{{ ucfirst($truck->state->type) }}</span>
                                     @endif
                                 </td>
                                 <td>

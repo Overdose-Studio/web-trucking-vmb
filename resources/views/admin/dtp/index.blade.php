@@ -15,6 +15,7 @@
                             <th>Date</th>
                             <th>Order Type</th>
                             <th>Client Name</th>
+                            <th>Total Price</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -25,12 +26,14 @@
                                 <td>{{ $shipment->date }}</td>
                                 <td>{{ ucfirst($shipment->order_type) }}</td>
                                 <td>{{ $shipment->client->name }}</td>
+                                <td>Rp {{ number_format($shipment->dailyTruckingPlan->sum('price'), 0, ',', '.') }}</td>
                                 <td>
                                     <a href="{{ route('dtp.show', $shipment->id) }}" class="btn btn-primary">Show</a>
                                     @if (!$shipment->bill_id)
                                         <a href="{{ route('dtp.edit_shipment', $shipment->id) }}"
                                             class="btn btn-warning">Edit</a>
-                                        <form action="{{ route('dtp.destroy_shipment', $shipment->id) }}" method="POST">
+                                        <form action="{{ route('dtp.destroy_shipment', $shipment->id) }}" method="POST"
+                                            class="d-inline">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-danger"

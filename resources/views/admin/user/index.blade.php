@@ -9,6 +9,7 @@
                 <table class="table table-bordered">
                     <thead>
                         <tr>
+                            <th>No.</th>
                             <th>Name</th>
                             <th>Email</th>
                             <th>Created At</th>
@@ -18,9 +19,10 @@
                     <tbody>
                         @foreach ($users as $user)
                             <tr>
+                                <td>{{ $loop->iteration }}</td>
                                 <td>{{ $user->name }}</td>
                                 <td>{{ $user->email }}</td>
-                                <td>{{ $user->created_at }}</td>
+                                <td>{{ $user->created_at->format('l, d F Y - H:i:s') }}</td>
                                 <td class="d-flex" style="gap: 4px">
                                     <a href="{{ route('user.edit', $user->id) }}" class="btn btn-primary">Edit</a>
                                     <form action="{{ route('user.delete', $user->id) }}" method="POST">

@@ -15,7 +15,9 @@
                             <th>Client</th>
                             <th>Deadline</th>
                             <th>Order Type</th>
-                            <th>Price</th>
+                            <th>(DTP) Price</th>
+                            <th>(DTA) Price</th>
+                            <th>DTP - DTA</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -32,7 +34,9 @@
                                     </span>
                                 </td>
                                 <td>{{ ucfirst($shipment->order_type) }}</td>
+                                <td>Rp {{ number_format($shipment->dailyTruckingPlan->sum('price'), 0, ',', '.') }}</td>
                                 <td>Rp {{ number_format($shipment->dailyTruckingActually->sum('price'), 0, ',', '.') }}</td>
+                                <td>Rp {{ number_format($shipment->diff, 0, ',', '.') }}</td>
                                 <td>
                                     <a href="{{ route('dta.show', $shipment->id) }}" class="btn btn-primary">DTA</a>
                                     <a href="{{ route('dtp.show', $shipment->id) }}" class="btn btn-warning">DTP</a>
@@ -53,7 +57,7 @@
         <div class="card">
             <div class="card-body">
                 <h1 class="panel-heading">Bill: {{ $bill->number }}</h1>
-                <a href="#" class="btn btn-success mb-2 mr-1">Download Invoice</a>
+                <a href="{{ route('bill.download', $bill->id) }}" class="btn btn-success mb-2 mr-1">Download Invoice</a>
                 <a href="{{ route('bill.edit', $bill->id) }}" class="btn btn-warning mb-2 mr-1">Edit</a>
                 <form action="{{ route('bill.destroy', $bill->id) }}" method="POST" class="d-inline">
                     @csrf
@@ -69,7 +73,9 @@
                                 <th>Date</th>
                                 <th>Client</th>
                                 <th>Order Type</th>
-                                <th>Price</th>
+                                <th>(DTP) Price</th>
+                                <th>(DTA) Price</th>
+                                <th>DTP - DTA</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -81,7 +87,9 @@
                                     <td>{{ $shipment->date }}</td>
                                     <td>{{ $shipment->client->name }}</td>
                                     <td>{{ ucfirst($shipment->order_type) }}</td>
+                                    <td>Rp {{ number_format($shipment->dailyTruckingPlan->sum('price'), 0, ',', '.') }}</td>
                                     <td>Rp {{ number_format($shipment->dailyTruckingActually->sum('price'), 0, ',', '.') }}</td>
+                                    <td>Rp {{ number_format($shipment->diff, 0, ',', '.') }}</td>
                                     <td>
                                         <a href="{{ route('dta.show', $shipment->id) }}" class="btn btn-primary">DTA</a>
                                         <a href="{{ route('dtp.show', $shipment->id) }}" class="btn btn-warning">DTP</a>
