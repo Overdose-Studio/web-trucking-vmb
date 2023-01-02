@@ -45,7 +45,7 @@
                     Logistik Planning Division</td>
             </tr>
             <tr class="row2">
-                <td class="column0 style3 s style3" colspan="3">114 KR/VMB/TGH/XII/2022</td>
+                <td class="column0 style3 s style3" colspan="3">{{ $bill->number }}</td>
             </tr>
             <tr class="row3">
                 <td class="column0">&nbsp;</td>

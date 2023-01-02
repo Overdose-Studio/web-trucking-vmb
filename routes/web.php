@@ -106,6 +106,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
         Route::get('edit/{id}', [BillController::class, 'edit'])->name('edit');
         Route::post('edit/{id}', [BillController::class, 'update'])->name('update');
         Route::delete('delete/{id}', [BillController::class, 'delete'])->name('destroy');
+        Route::get('download/{id}', [BillController::class, 'export'])->name('download');
     });
 
     // Logout: when user whant to logout

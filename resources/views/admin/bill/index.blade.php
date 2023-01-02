@@ -57,7 +57,7 @@
         <div class="card">
             <div class="card-body">
                 <h1 class="panel-heading">Bill: {{ $bill->number }}</h1>
-                <a href="#" class="btn btn-success mb-2 mr-1">Download Invoice</a>
+                <a href="{{ route('bill.download', $bill->id) }}" class="btn btn-success mb-2 mr-1">Download Invoice</a>
                 <a href="{{ route('bill.edit', $bill->id) }}" class="btn btn-warning mb-2 mr-1">Edit</a>
                 <form action="{{ route('bill.destroy', $bill->id) }}" method="POST" class="d-inline">
                     @csrf

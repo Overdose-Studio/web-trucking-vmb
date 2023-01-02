@@ -29,11 +29,6 @@ class BillController extends Controller
 
         // Return view
         return view('admin.bill.create');
-
-        // TRASH (for testing only)
-        // return view('export.invoice');
-        // return view('admin.bill.create', compact('shipment'));
-        // return Excel::download(new InvoiceExport(1), '-' . time() . '.xlsx');
     }
 
     // Store: store bill to database
@@ -134,5 +129,18 @@ class BillController extends Controller
 
         // Redirect to bill index
         return redirect()->route('bill.index')->with('success', 'Bill deleted successfully.');
+    }
+
+    // Export: export bill to excel
+    public function export($id)
+    {
+        // Get bill from database
+        $bill = Bill::findOrFail($id);
+
+        // Get all shipments
+        $shipments = Shipment::where('bill_id', $bill->id)->get()->sortBy('id');
+
+        // Export bill to excel
+        return Excel::download(new InvoiceExport($bill, $shipments), 'invoice-' . $bill->number . '.xlsx');
     }
 }
