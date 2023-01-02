@@ -1,9 +1,13 @@
 @extends('layouts.dashboard')
 
 @section('content')
+    <a href="{{ route('dtp.index') }}" class="btn btn-primary mb-2"><i class="fa fa-arrow-left"></i> Back to DTP List</a>
     <div class="card">
+        <div class="card-header">
+            <h5 class="mb-0 mt-1">Truck list for {{ $shipment->client->name }}</h5>
+            <h1>{{ $shipment->date }}</h1>
+        </div>
         <div class="card-body">
-            <h1 class="panel-heading">Truck list for {{ $shipment->client->name }} | {{ $shipment->date }}</h1>
             <a href="{{ route('dtp.create', $shipment->id) }}" class="btn btn-success mb-2">Add Truck</a>
             <div class="panel-body">
                 <table class="table table-bordered">
@@ -30,13 +34,14 @@
                                     <td>Vendor Truck</td>
                                 @endif
                                 <td>{{ $dtp->driver_name }}</td>
-                                <td>{{ $dtp->destination1 }}</td>
-                                <td>{{ $dtp->destination2 }}</td>
-                                <td>{{ $dtp->destination3 }}</td>
+                                <td>{{ $dtp->destination1->detail }}</td>
+                                <td>{{ $dtp->destination2->detail }}</td>
+                                <td>{{ $dtp->destination3->detail }}</td>
                                 <td>{{ $dtp->size }}</td>
                                 <td>Rp {{ number_format($dtp->price, 0, ',', '.') }}</td>
                                 <td>
-                                    <a href="{{ route('dtp.edit', [$shipment->id, $dtp->id]) }}" class="btn btn-warning">Edit</a>
+                                    <a href="{{ route('dtp.edit', [$shipment->id, $dtp->id]) }}"
+                                        class="btn btn-warning">Edit</a>
                                     <form action="{{ route('dtp.destroy', [$shipment->id, $dtp->id]) }}" method="POST">
                                         @csrf
                                         @method('DELETE')

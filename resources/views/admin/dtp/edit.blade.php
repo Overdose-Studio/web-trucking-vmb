@@ -1,11 +1,14 @@
 @extends('layouts.dashboard')
 
 @section('content')
+    <a href="{{ route('dtp.show', $shipment->id) }}" class="btn btn-primary mb-2"><i class="fa fa-arrow-left"></i> Back to DTP
+        List</a>
     <div class="card">
         <div class="card-body">
             <h1 class="panel-heading">Update Truck</h1>
             <div class="panel-body">
-                <form action="{{ route('dtp.update', [$shipment->id, $dtp->id]) }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('dtp.update', [$shipment->id, $dtp->id]) }}" method="POST"
+                    enctype="multipart/form-data">
                     {{ csrf_field() }}
                     <div
                         class="form-group
@@ -48,6 +51,20 @@
                     <div class="form-group
                                 {{ $errors->has('size') ? 'has-error' : '' }}">
                         <label>Size</label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="size" id="size1" value="20"
+                                {{ old('size') == 20 || $dtp->size == 20 ? 'checked' : '' }}>
+                            <label class="form-check-label" for="size1">
+                                20"
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="size" id="size2" value="40"
+                                {{ old('size') == 40 || $dtp->size == 40 ? 'checked' : '' }}>
+                            <label class="form-check-label" for="size2">
+                                40"
+                            </label>
+                        </div>
                         <input type="decimal" class="form-control" name="size" placeholder="Size"
                             value="{{ $dtp->size }}">
                         <span class="text-danger">{{ $errors->first('size') }}</span>

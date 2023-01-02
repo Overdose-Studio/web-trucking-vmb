@@ -101,7 +101,7 @@
                         <li class="nav-item">
                             <a href="{{ route('dtp.index') }}"
                                 class="nav-link {{ request()->is('dashboard/dtp*') ? 'active' : '' }}">
-                                <i class="nav-icon fas fa-angles-right"></i>
+                                <i class="nav-icon fas fa-p"></i>
                                 <p>
                                     DTP
                                 </p>
@@ -110,7 +110,7 @@
                         <li class="nav-item">
                             <a href="{{ route('dta.index') }}"
                                 class="nav-link {{ request()->is('dashboard/dta*') ? 'active' : '' }}">
-                                <i class="nav-icon fas fa-angles-right"></i>
+                                <i class="nav-icon fas fa-a"></i>
                                 <p>
                                     DTA
                                 </p>

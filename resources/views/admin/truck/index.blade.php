@@ -33,12 +33,16 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <a href="#" onclick="show('{{ $loop->index }}')">
-                                        <img id="show-{{ $loop->index }}" src="{{ asset($truck->state->evidence) }}"
-                                            class="d-none">
-                                        Click to Show
-                                    </a>
-                                    <img alt="">
+                                    @if ($truck->state->evidence == null)
+                                        <span class="badge">No evidence</span>
+                                    @else
+                                        <a href="#" onclick="show('{{ $loop->index }}')">
+                                            <img id="show-{{ $loop->index }}" src="{{ asset($truck->state->evidence) }}"
+                                                class="d-none">
+                                            Click to Show
+                                        </a>
+                                        <img alt="">
+                                    @endif
                                 </td>
                                 <td>
                                     <a href="{{ route('truck.edit', $truck->id) }}" class="btn btn-primary">Edit</a>
