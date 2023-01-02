@@ -14,20 +14,14 @@
                     <div class="form-group">
                         <label>Destination 1</label>
                         <input type="text" class="form-control" name="destination_1_detail" placeholder="Destination 1">
-                        <input type="file" class="form-control" name="destination_1_image"
-                            placeholder="Destination 1 Image">
                     </div>
                     <div class="form-group">
                         <label>Destination 2</label>
                         <input type="text" class="form-control" name="destination_2_detail" placeholder="Destination 2">
-                        <input type="file" class="form-control" name="destination_2_image"
-                            placeholder="Destination 2 Image">
                     </div>
                     <div class="form-group">
                         <label>Destination 3</label>
                         <input type="text" class="form-control" name="destination_3_detail" placeholder="Destination 3">
-                        <input type="file" class="form-control" name="destination_3_image"
-                            placeholder="Destination 3 Image">
                     </div>
                     <div class="form-group">
                         <label for="size">Size</label>
