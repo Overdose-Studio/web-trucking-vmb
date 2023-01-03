@@ -9,84 +9,68 @@
 </head>
 
 <body>
-    <table>
-        <tbody>
-            {{-- HEADER --}}
-            <tr>
-                <td colspan="3">Nomor Tagihan :</td>
-                <td colspan="2">{{ $bill->name }}</td>
-            </tr>
-            <tr>
-                <td colspan="3"></td>
-                <td colspan="2" rowspan="3">{{ $bill->address }}</td>
-            </tr>
-            <tr>
-                <td colspan="3">{{ $bill->number }}</td>
-            </tr>
-            <tr>
-                <td colspan="3"></td>
-            </tr>
-            <tr>
-                <td colspan="3">ORDER NO : </td>
-                <td colspan="2">{{ $bill->person_in_charge }}</td>
-            </tr>
-            <tr>
-                <td style="font-weight: bold">NO</td>
-                <td style="font-weight: bold" colspan="3" width="50">URAIAN</td>
-                <td style="font-weight: bold">JUMLAH</td>
-            </tr>
-            <tr></tr>
-            <tr>
-                <td></td>
-                <td>Trucking Cost {{ $bill->name }}</td>
-            </tr>
-            <tr></tr>
+    <table style="border-collapse: collapse">
+        {{-- HEADER --}}
+        <tr>
+            <td style="font-weight: bold" colspan="3">Nomor Tagihan :</td>
+            <td colspan="2" style="text-align: right">{{ $bill->name }}</td>
+        </tr>
+        <tr>
+            <td colspan="3"></td>
+            <td colspan="2" rowspan="3" style="text-align: right">{{ $bill->address }}</td>
+        </tr>
+        <tr>
+            <td colspan="3">{{ $bill->number }}</td>
+        </tr>
+        <tr>
+            <td colspan="3"></td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold" colspan="3">ORDER NO : </td>
+            <td colspan="2" style="text-align: right">{{ $bill->person_in_charge }}</td>
+        </tr>
+        <tr style="border: 1px solid">
+            <td style="text-align: center; font-weight: bold; border-right: 1px solid">NO</td>
+            <td style="text-align: center; font-weight: bold;" colspan="3">URAIAN</td>
+            <td style="text-align: center; font-weight: bold; border-left: 1px solid">JUMLAH</td>
+        </tr>
+        <tr style="border-left: 1px solid; border-right: 1px solid"></tr>
+        <tr style="border-left: 1px solid; border-right: 1px solid">
+            <td></td>
+            <td>Trucking Cost {{ $bill->name }}</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr style="border-left: 1px solid; border-right: 1px solid"></tr>
 
-            {{-- CONTENT --}}
-            @foreach ($shipments as $shipment)
-                <tr>
-                    <td></td>
-                    <td>Tanggal : {{ $shipment->date }}</td>
-                </tr>
-                {{-- Loop shipment data --}}
-                @foreach ($shipment as $dta)
-                    <tr>
-                        <td>DTA -> {{ $dta }}</td>
-                        <td>{{ $loop->iteration }}</td>
-                    </tr>
-                    {{-- <tr>
-                        <td>{{ $shipment->id }}</td>
-                        <td rowspan="2">{{ $loop->iteration }}</td>
-                        <td colspan="3">
-                            {{ $dta->destination_1 != null ? $dta->destination_1->detail : 'null' }}/{{ $dta->destination_2 != null ? $dta->destination_2->detail : 'null' }}/{{ $dta->destination_3 != null ? $dta->destination_3->detail : 'null' }}
-                        </td>
-                        <td>{{ $dta->price }}</td>
-                    <tr>
-                        <td>{{ $shipment }}</td>
-                        <td rowspan="2">{{ $loop->iteration }}</td>
-                        <td colspan="3">
-                            {{ $dta != null ? $dta->destination_1->detail : 'null' }}/{{ $dta != null ? $dta->destination_2->detail : 'null' }}/{{ $dta != null ? $dta->destination_3->detail : 'null' }}
-                        </td>
-                        <td>{{ $dta->price }}</td>
-                    </tr>
-                    <tr>
-                        <td colspan="3">Keterangan : {{ $dta->description }}</td>
-                    </tr> --}}
-                @endforeach
-                {{-- @foreach ($shipment as $dta)
-                        <tr>
-                        <td rowspan="2">{{ $loop->iteration }}</td>
-                        <td>Tanggal : {{ $dta->created_at }}</td>
-                </tr>
-                <tr>
+        {{-- CONTENT --}}
+        @php
+            $counter = 1;
+        @endphp
+        @foreach ($shipments as $shipment)
+            <tr style="border-left: 1px solid; border-right: 1px solid">
+                <td></td>
+                <td>Tanggal : {{ $shipment->date }}</td>
+            </tr>
+            @foreach ($shipment->dailyTruckingActually as $dta)
+                <tr style="border-left: 1px solid; border-right: 1px solid">
+                    <td>{{ $counter }}</td>
                     <td colspan="3">
-                        {{ $dta->destination_1 != null ? $dta->destination_1->detail : 'null' }}/{{ $dta->destination_2 != null ? $dta->destination_2->detail : 'null' }}/{{ $dta->destination_3 != null ? $dta->destination_3->detail : 'null' }}
+                        {{ $dta->destination1 != null ? $dta->destination1->detail : 'null' }}/{{ $dta->destination2 != null ? $dta->destination2->detail : 'null' }}/{{ $dta->destination3 != null ? $dta->destination3->detail : 'null' }}
                     </td>
                     <td>{{ $dta->price }}</td>
-            @endforeach --}}
-                {{-- <tr></tr> --}}
+                </tr>
+                <tr style="border-left: 1px solid; border-right: 1px solid">
+                    <td></td>
+                    <td>{{ $dta->size }}"</td>
+                </tr>
+                @php
+                    $counter = $counter + 1;
+                @endphp
             @endforeach
-        </tbody>
+            <tr style="border-left: 1px solid; border-right: 1px solid"></tr>
+        @endforeach
+        <tr style="border-left: 1px solid; border-right: 1px solid; border-bottom: 1px solid"></tr>
     </table>
 </body>
 
