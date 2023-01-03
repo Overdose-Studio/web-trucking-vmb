@@ -141,6 +141,6 @@ class BillController extends Controller
         $shipments = Shipment::where('bill_id', $bill->id)->get()->sortBy('id');
 
         // Export bill to excel
-        return Excel::download(new InvoiceExport($bill, $shipments), 'invoice-' . $bill->number . '.xlsx');
+        return Excel::download(new InvoiceExport($bill, $shipments), 'invoice.xlsx');
     }
 }

@@ -1,9 +1,12 @@
 @extends('layouts.dashboard')
 
 @section('content')
+    <a href="{{ route('client.index') }}" class="btn btn-primary mb-2"><i class="fa fa-arrow-left"></i> Back to Client List</a>
     <div class="card">
-        <div class="card-body">
+        <div class="card-header">
             <h1 class="panel-heading">Edit Client</h1>
+        </div>
+        <div class="card-body">
             <div
                 class="panel-body
                                     @if ($errors->any()) has-error @endif

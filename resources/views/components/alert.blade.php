@@ -1,6 +1,6 @@
 {{-- success --}}
 @if (session('success'))
-    <div class="alert alert-success p-2">
+    <div class="alert alert-success p-2 mb-2">
         <p class="m-0">
             {{ session('success') }}
         </p>
@@ -8,7 +8,7 @@
 @endif
 {{-- error --}}
 @if ($errors->any() || session('error'))
-    <div class="alert alert-danger p-2">
+    <div class="alert alert-danger p-2 mb-2">
         <ul class="m-0">
             @foreach ($errors->all() as $error)
                 <li>{{ $error }}</li>

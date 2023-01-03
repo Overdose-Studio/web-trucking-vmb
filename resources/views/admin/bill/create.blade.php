@@ -1,9 +1,12 @@
 @extends('layouts.dashboard')
 
 @section('content')
+    <a href="{{ route('bill.index') }}" class="btn btn-primary mb-2"><i class="fa fa-arrow-left"></i> Back to Finance</a>
     <div class="card">
-        <div class="card-body">
+        <div class="card-header">
             <h1 class="panel-heading">Create Invoice</h1>
+        </div>
+        <div class="card-body">
             <div class="panel-body">
                 <form action="{{ route('bill.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf

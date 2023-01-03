@@ -175,4 +175,10 @@ class DailyTruckingActuallyController extends Controller
         }
         return view('admin.dta.edit_shipment', compact('shipment', 'clients'));
     }
+
+    // Download: download client file
+    public function downloadClientFile($file)
+    {
+        return response()->download($file);
+    }
 }

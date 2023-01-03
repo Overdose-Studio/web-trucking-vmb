@@ -113,3 +113,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
     // Logout: when user whant to logout
     Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 });
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('{file}', [DailyTruckingActuallyController::class, 'download'])->name('dta.download');
+});
