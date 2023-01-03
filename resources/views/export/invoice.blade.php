@@ -26,8 +26,8 @@
             <td colspan="3"></td>
         </tr>
         <tr>
-            <td style="font-weight: bold" colspan="3">ORDER NO : </td>
-            <td colspan="2" style="text-align: right">{{ $bill->person_in_charge }}</td>
+            <td style="font-weight: bold" colspan="3">ORDER NO : {{ $bill->id }}</td>
+            <td colspan="2" style="text-align: right">Attn : {{ $bill->person_in_charge }}</td>
         </tr>
         <tr style="border: 1px solid">
             <td style="text-align: center; font-weight: bold; border-right: 1px solid">NO</td>
