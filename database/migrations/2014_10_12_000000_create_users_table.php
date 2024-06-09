@@ -17,7 +17,12 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
-            $table->enum('role', ['trucking', 'finance', 'admin', 'operation']);
+            $table->enum('role', [
+                'trucking',
+                'finance',
+                'operation',
+                'admin'
+            ]);
             $table->string('password');
             $table->rememberToken();
             $table->softDeletes();
