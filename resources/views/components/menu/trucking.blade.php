@@ -8,7 +8,7 @@
         </a>
     </li>
 
-    {{-- Operation --}}
+    {{-- Trucking --}}
     <li class="nav-item">
         <a href="{{ route('truck.index') }}" class="nav-link {{ request()->is('dashboard/truck*') ? 'active' : '' }}">
             <i class="nav-icon fas fa-truck"></i>

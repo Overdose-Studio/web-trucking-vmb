@@ -70,6 +70,10 @@
                             <x-menu.trucking/>
                             @break
 
+                        @case('finance')
+                            <x-menu.finance/>
+                            @break
+
                         @default
 
                     @endswitch
