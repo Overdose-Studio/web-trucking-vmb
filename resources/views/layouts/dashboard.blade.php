@@ -62,6 +62,10 @@
                             <x-menu.admin/>
                             @break
 
+                        @case('operation')
+                            <x-menu.operation/>
+                            @break
+
                         @default
 
                     @endswitch

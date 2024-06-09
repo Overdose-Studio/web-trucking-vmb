@@ -44,7 +44,7 @@
             <li class="nav-item">
                 <a href="{{ route('dashboard') }}" class="nav-link">
                     &nbsp;&nbsp;&nbsp;&nbsp;
-                    <i class="nav-icon fas fa-plus"></i>
+                    <i class="nav-icon fas fa-boxes"></i>
                     <p>Shipment</p>
                 </a>
             </li>
