@@ -68,13 +68,16 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
 
         // Shipment: list all shipments and edit shipment
         Route::group(['prefix' => 'shipment', 'as' => 'shipment.'], function () {
-            Route::get('create-shipment', [ShipmentController::class, 'create'])->name('create');
-            Route::post('create-shipment', [ShipmentController::class, 'store'])->name('store');
-            Route::get('edit-shipment/{id}', [ShipmentController::class, 'edit'])->name('edit');
-            Route::post('edit-shipment/{id}', [ShipmentController::class, 'update'])->name('update');
-            Route::delete('delete-shipment/{id}', [ShipmentController::class, 'delete'])->name('destroy');
+            Route::get('/', [ShipmentController::class, 'index'])->name('index');
+            Route::get('create', [ShipmentController::class, 'create'])->name('create');
+            Route::post('create', [ShipmentController::class, 'store'])->name('store');
+            Route::get('edit/{id}', [ShipmentController::class, 'edit'])->name('edit');
+            Route::post('edit/{id}', [ShipmentController::class, 'update'])->name('update');
+            Route::delete('delete/{id}', [ShipmentController::class, 'delete'])->name('destroy');
         });
     });
+
+    //-----------------------------------------------------------------------------------
 
     // Truck: list all trucks and edit truck
     Route::group(['middleware' => 'trucking', 'prefix' => 'truck', 'as' => 'truck.'], function () {

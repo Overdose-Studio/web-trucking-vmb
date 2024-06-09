@@ -10,7 +10,7 @@
 
     {{-- Admin --}}
     <li class="nav-item {{ request()->is('dashboard/user*') ? 'menu-is-opening menu-open' : '' }}">
-        <a href="{{ route('dashboard') }}" class="nav-link">
+        <a href="#" class="nav-link">
             <i class="nav-icon fas fa-user-shield"></i>
             <p>Admin</p>
             <i class="right fas fa-angle-left"></i>
@@ -27,8 +27,8 @@
     </li>
 
     {{-- Operations --}}
-    <li class="nav-item {{ request()->is('dashboard/client*') ? 'menu-is-opening menu-open' : '' }}">
-        <a href="{{ route('dashboard') }}" class="nav-link">
+    <li class="nav-item {{ request()->is('dashboard/client*') || request()->is('dashboard/shipment*') ? 'menu-is-opening menu-open' : '' }}">
+        <a href="#" class="nav-link">
             <i class="nav-icon fas fa-cogs"></i>
             <p>Operation</p>
             <i class="right fas fa-angle-left"></i>
@@ -42,7 +42,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ route('dashboard') }}" class="nav-link">
+                <a href="{{ route('shipment.index') }}" class="nav-link {{ request()->is('dashboard/shipment*') ? 'active' : '' }}">
                     &nbsp;&nbsp;&nbsp;&nbsp;
                     <i class="nav-icon fas fa-boxes"></i>
                     <p>Shipment</p>

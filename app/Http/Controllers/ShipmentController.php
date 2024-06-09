@@ -8,6 +8,13 @@ use App\Models\Shipment;
 
 class ShipmentController extends Controller
 {
+    // Index: show all daily trucking plans
+    public function index()
+    {
+        $shipments = Shipment::latest()->get();
+        return view('admin.shipment.index', compact('shipments'));
+    }
+
     // Create: show form create shipment
     public function create()
     {
