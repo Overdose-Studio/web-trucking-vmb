@@ -58,6 +58,7 @@
         $(document).ready(function() {
             $('#user-table').DataTable({
                 responsive: true,
+                autoWidth: false,
                 order: [
                     [0, 'asc']
                 ],
