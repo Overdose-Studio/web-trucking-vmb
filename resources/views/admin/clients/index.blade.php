@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="card">
-        <div class="card-body">
+        <div class="card-header">
             <div class="d-flex justify-content-between align-items-center">
                 <div class="d-flex align-items-center">
                     <i class="fas fa-person fa-2x"></i>&nbsp;&nbsp;&nbsp;
@@ -15,6 +15,8 @@
                     </a>
                 </div>
             </div>
+        </div>
+        <div class="card-body">
             <div class="panel-body">
                 <table class="table table-bordered" id="client-table">
                     <thead>
