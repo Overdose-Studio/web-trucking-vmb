@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="card">
-        <div class="card-body">
+        <div class="card-header">
             <div class="d-flex justify-content-between align-items-center">
                 <div class="d-flex align-items-center">
                     <i class="fas fa-users fa-2x"></i>&nbsp;&nbsp;&nbsp;
@@ -15,6 +15,8 @@
                     </a>
                 </div>
             </div>
+        </div>
+        <div class="card-body">
             <div class="panel-body">
                 <table class="table table-bordered" id="user-table">
                     <thead>
@@ -36,12 +38,17 @@
                                 <td>{{ $user->email }}</td>
                                 <td>{{ $user->created_at->format('l, d F Y - H:i:s') }}</td>
                                 <td class="d-flex" style="gap: 4px">
-                                    <a href="{{ route('user.edit', $user->id) }}" class="btn btn-primary">Edit</a>
+                                    <a href="{{ route('user.edit', $user->id) }}" class="btn btn-primary">
+                                        <i class="fas fa-edit"></i>&nbsp;
+                                        Edit
+                                    </a>
                                     <form action="{{ route('user.delete', $user->id) }}" method="POST">
                                         {{ csrf_field() }}
                                         {{ method_field('DELETE') }}
-                                        <button type="submit" class="btn btn-danger"
-                                            onclick="return confirm('Are you sure?')">Delete</button>
+                                        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">
+                                            <i class="fas fa-trash"></i>&nbsp;
+                                            Delete
+                                        </button>
                                     </form>
                                 </td>
                             </tr>

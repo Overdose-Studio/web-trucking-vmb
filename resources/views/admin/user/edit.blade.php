@@ -2,8 +2,13 @@
 
 @section('content')
     <div class="card">
+        <div class="card-header">
+            <div class="d-flex align-items-center">
+                <i class="fas fa-edit fa-2x"></i>&nbsp;&nbsp;&nbsp;
+                <h1 class="panel-heading">Edit User</h1>
+            </div>
+        </div>
         <div class="card-body">
-            <h1 class="panel-heading">Edit User</h1>
             <div class="panel-body">
                 <form action="{{ route('user.update', $user->id) }}" method="POST">
                     {{ csrf_field() }}
@@ -86,8 +91,11 @@
                             </span>
                         @endif
                     </div>
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-primary">Save</button>
+                    <div class="form-group d-flex justify-content-end">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i>&nbsp;
+                            Save User
+                        </button>
                     </div>
                 </form>
             </div>

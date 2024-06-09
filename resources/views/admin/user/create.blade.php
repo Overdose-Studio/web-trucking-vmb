@@ -2,8 +2,13 @@
 
 @section('content')
     <div class="card">
+        <div class="card-header">
+            <div class="d-flex align-items-center">
+                <i class="fas fa-plus fa-2x"></i>&nbsp;&nbsp;&nbsp;
+                <h1 class="panel-heading">Create User</h1>
+            </div>
+        </div>
         <div class="card-body">
-            <h1 class="panel-heading">Create User</h1>
             <div class="panel-body">
                 <form action="{{ route('user.store') }}" method="POST">
                     {{ csrf_field() }}
@@ -32,8 +37,11 @@
                         <label for="password_confirmation">Confirm Password</label>
                         <input type="password" name="password_confirmation" id="password_confirmation" class="form-control">
                     </div>
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-primary">Create</button>
+                    <div class="form-group d-flex justify-content-end">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-plus"></i>&nbsp;
+                            Create User
+                        </button>
                     </div>
                 </form>
             </div>
