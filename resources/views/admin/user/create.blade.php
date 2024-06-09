@@ -14,6 +14,8 @@
                     <div class="form-group">
                         <label for="role">Role</label>
                         <select name="role" id="role" class="form-control">
+                            <option value="admin">Admin</option>
+                            <option value="operation">Operation</option>
                             <option value="trucking">Trucking</option>
                             <option value="finance">Finance</option>
                         </select>
