@@ -66,6 +66,10 @@
                             <x-menu.operation/>
                             @break
 
+                        @case('trucking')
+                            <x-menu.trucking/>
+                            @break
+
                         @default
 
                     @endswitch
