@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class TruckingAccess
+class OperationAccess
 {
     /**
      * Handle an incoming request.
@@ -17,7 +17,7 @@ class TruckingAccess
      */
     public function handle(Request $request, Closure $next)
     {
-        if (in_array(Auth::user()->role, ['admin', 'trucking'])) {
+        if (in_array(Auth::user()->role, ['admin', 'operation'])) {
             return $next($request);
         } else {
             return redirect()->route('landing');
