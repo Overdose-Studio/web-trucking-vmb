@@ -3,7 +3,10 @@
 @section('content')
     <div class="card">
         <div class="card-header">
-            <h1 class="panel-heading">Edit Client</h1>
+            <div class="d-flex align-items-center">
+                <i class="fas fa-edit fa-2x"></i>&nbsp;&nbsp;&nbsp;
+                <h1 class="panel-heading">Edit Client</h1>
+            </div>
         </div>
         <div class="card-body">
             <div

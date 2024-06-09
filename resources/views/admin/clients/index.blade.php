@@ -34,12 +34,17 @@
                                 <td>{{ $client->name }}</td>
                                 <td>{{ $client->created_at->format('l, d F Y - H:i:s') }}</td>
                                 <td class="d-flex" style="gap: 4px">
-                                    <a href="{{ route('client.edit', $client->id) }}" class="btn btn-primary">Edit</a>
+                                    <a href="{{ route('client.edit', $client->id) }}" class="btn btn-primary">
+                                        <i class="fas fa-edit"></i>&nbsp;
+                                        Edit
+                                    </a>
                                     <form action="{{ route('client.delete', $client->id) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-danger"
-                                            onclick="return confirm('Are you sure?')">Delete</button>
+                                        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">
+                                            <i class="fas fa-trash"></i>&nbsp;
+                                            Delete
+                                        </button>
                                     </form>
                                 </td>
                             </tr>
