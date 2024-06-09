@@ -17,7 +17,7 @@ class TruckingAccess
      */
     public function handle(Request $request, Closure $next)
     {
-        if (in_array(Auth::user()->role, ['admin', 'trucking', 'finance'])) {
+        if (in_array(Auth::user()->role, ['admin', 'trucking'])) {
             return $next($request);
         } else {
             return redirect()->route('landing');
