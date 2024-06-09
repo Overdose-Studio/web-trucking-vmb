@@ -3,14 +3,25 @@
 @section('content')
     <div class="card">
         <div class="card-body">
-            <h1 class="panel-heading">Client List</h1>
-            <a href="{{ route('client.create') }}" class="btn btn-success mb-2">Add New Client</a>
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="d-flex align-items-center">
+                    <i class="fas fa-person fa-2x"></i>&nbsp;&nbsp;&nbsp;
+                    <h1 class="panel-heading">Client</h1>
+                </div>
+                <div>
+                    <a href="{{ route('client.create') }}" class="btn btn-success mb-2">
+                        <i class="fas fa-plus"></i>&nbsp;
+                        Add New Client
+                    </a>
+                </div>
+            </div>
             <div class="panel-body">
-                <table class="table table-bordered">
+                <table class="table table-bordered" id="client-table">
                     <thead>
                         <tr>
                             <th>No.</th>
                             <th>Name</th>
+                            <th>Created At</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -19,6 +30,7 @@
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $client->name }}</td>
+                                <td>{{ $client->created_at->format('l, d F Y - H:i:s') }}</td>
                                 <td class="d-flex" style="gap: 4px">
                                     <a href="{{ route('client.edit', $client->id) }}" class="btn btn-primary">Edit</a>
                                     <form action="{{ route('client.delete', $client->id) }}" method="POST">
@@ -35,4 +47,22 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('script')
+    <script>
+        $(document).ready(function() {
+            $('#client-table').DataTable({
+                responsive: true,
+                autoWidth: false,
+                order: [
+                    [0, 'asc']
+                ],
+                columnDefs: [{
+                    orderable: false,
+                    targets: 3
+                }]
+            });
+        });
+    </script>
 @endsection

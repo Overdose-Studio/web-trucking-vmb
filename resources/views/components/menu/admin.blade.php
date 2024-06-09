@@ -27,7 +27,7 @@
     </li>
 
     {{-- Operations --}}
-    <li class="nav-item">
+    <li class="nav-item {{ request()->is('dashboard/client*') ? 'menu-is-opening menu-open' : '' }}">
         <a href="{{ route('dashboard') }}" class="nav-link">
             <i class="nav-icon fas fa-cogs"></i>
             <p>Operation</p>
