@@ -9,7 +9,7 @@
     </li>
 
     {{-- Admin --}}
-    <li class="nav-item">
+    <li class="nav-item {{ request()->is('dashboard/user*') ? 'menu-is-opening menu-open' : '' }}">
         <a href="{{ route('dashboard') }}" class="nav-link">
             <i class="nav-icon fas fa-user-shield"></i>
             <p>Admin</p>
@@ -19,7 +19,7 @@
             <li class="nav-item">
                 <a href="{{ route('user.index') }}" class="nav-link {{ request()->is('dashboard/user*') ? 'active' : '' }}">
                     &nbsp;&nbsp;&nbsp;&nbsp;
-                    <i class="nav-icon fas fa-edit"></i>
+                    <i class="nav-icon fas fa-users"></i>
                     <p>User Account</p>
                 </a>
             </li>
