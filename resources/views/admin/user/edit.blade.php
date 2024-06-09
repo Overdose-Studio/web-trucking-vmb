@@ -28,16 +28,14 @@
                             ">
                         <label for="role">Role</label>
                         <select name="role" id="role" class="form-control">
-                            <option value="trucking" {{ $user->role == 'trucking' ? 'selected' : '' }}>Trucking
-                            </option>
-                            <option value="finance" {{ $user->role == 'finance' ? 'selected' : '' }}>Finance
-                            </option>
+                            <option value="admin" {{ $user->role == 'admin' ? 'selected' : '' }}>Admin</option>
+                            <option value="operation" {{ $user->role == 'operation' ? 'selected' : '' }}>Operation</option>
+                            <option value="trucking" {{ $user->role == 'trucking' ? 'selected' : '' }}>Trucking</option>
+                            <option value="finance" {{ $user->role == 'finance' ? 'selected' : '' }}>Finance</option>
                         </select>
                         @if ($errors->has('role'))
                             <span
-                                class="help-block
-                                        @if ($errors->has('role')) has-error @endif
-                                    ">
+                                class="help-block @if ($errors->has('role')) has-error @endif">
                                 {{ $errors->first('role') }}
                             </span>
                         @endif

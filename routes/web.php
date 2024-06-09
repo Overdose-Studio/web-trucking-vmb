@@ -38,17 +38,22 @@ Route::group(['prefix' => 'login', 'as' => 'login.'], function () {
 
 // Auth routes
 Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
+    // General: dashboard
     Route::get('/', [AuthController::class, 'dashboard'])->name('dashboard');
 
-    // User: list all users and edit user
-    Route::group(['middleware' => 'admin', 'prefix' => 'user', 'as' => 'user.'], function () {
-        Route::get('/', [UserController::class, 'index'])->name('index');
-        Route::get('create', [UserController::class, 'create'])->name('create');
-        Route::post('create', [UserController::class, 'store'])->name('store');
-        Route::get('edit/{id}', [UserController::class, 'edit'])->name('edit');
-        Route::post('edit/{id}', [UserController::class, 'update'])->name('update');
-        Route::delete('delete/{id}', [UserController::class, 'destroy'])->name('delete');
+    // Admin Routes
+    Route::group(['middleware' => 'admin'], function () {
+        // User: list all users and edit user
+        Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
+            Route::get('/', [UserController::class, 'index'])->name('index');
+            Route::get('create', [UserController::class, 'create'])->name('create');
+            Route::post('create', [UserController::class, 'store'])->name('store');
+            Route::get('edit/{id}', [UserController::class, 'edit'])->name('edit');
+            Route::post('edit/{id}', [UserController::class, 'update'])->name('update');
+            Route::delete('delete/{id}', [UserController::class, 'destroy'])->name('delete');
+        });
     });
+
 
     // Client: list all clients and edit client
     Route::group(['middleware' => 'trucking', 'prefix' => 'client', 'as' => 'client.'], function () {

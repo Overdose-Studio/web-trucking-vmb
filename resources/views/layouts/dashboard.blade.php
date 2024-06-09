@@ -6,16 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>VMB Admin</title>
 
-    <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
-        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <!-- <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css"> -->
-    <!-- Theme style -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
+    <!-- Google Font: Source Sans Pro   --> <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome                   --> <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Theme style                    --> <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
+    <!-- jQuery                         --> <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+    <!-- DataTables CSS                 --> <link href="https://cdn.datatables.net/v/dt/jq-3.7.0/dt-2.0.8/r-3.0.2/datatables.min.css" rel="stylesheet">
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -40,18 +35,14 @@
                         <i class="far fa-user mr-2"></i> {{ Auth::user()->name }}
                     </a>
                     <div class="dropdown-menu dropdown-menu-right">
-                        {{-- <span class="dropdown-item dropdown-header">15 Notifications</span> --}}
-                        {{-- <div class="dropdown-divider"></div> --}}
                         <form action="{{ route('logout') }}" method="post">
                             @csrf
-                            <button type="submit" class="dropdown-item dropdown-footer">Logout</button>
+                            <button type="submit" class="dropdown-item dropdown-footer">
+                                <i class="fas fa-sign-out-alt mr-2"></i>
+                                Logout
+                            </button>
                         </form>
                     </div>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-widget="fullscreen" href="#" role="button">
-                        <i class="fas fa-expand-arrows-alt"></i>
-                    </a>
                 </li>
             </ul>
         </nav>
@@ -68,78 +59,26 @@
             <div class="sidebar">
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
-                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
-                        data-accordion="false">
+                    @switch(Auth::user()->role)
+                        @case('admin')
+                            <x-menu.admin/>
+                            @break
 
-                        <li class="nav-item">
-                            <a href="{{ route('dashboard') }}"
-                                class="nav-link {{ request()->is('dashboard') ? 'active' : '' }}">
-                                <i class="nav-icon fas fa-house"></i>
-                                <p>
-                                    Dashboard
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('client.index') }}"
-                                class="nav-link {{ request()->is('dashboard/client*') ? 'active' : '' }}">
-                                <i class="nav-icon fas fa-person"></i>
-                                <p>
-                                    Client List
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('truck.index') }}"
-                                class="nav-link {{ request()->is('dashboard/truck*') ? 'active' : '' }}">
-                                <i class="nav-icon fas fa-truck"></i>
-                                <p>
-                                    Trucking
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('dtp.index') }}"
-                                class="nav-link {{ request()->is('dashboard/dtp*') ? 'active' : '' }}">
-                                <i class="nav-icon fas fa-p"></i>
-                                <p>
-                                    DTP
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('dta.index') }}"
-                                class="nav-link {{ request()->is('dashboard/dta*') ? 'active' : '' }}">
-                                <i class="nav-icon fas fa-a"></i>
-                                <p>
-                                    DTA
-                                </p>
-                            </a>
-                        </li>
-                        @if (auth()->user()->role == 'admin' || auth()->user()->role == 'finance')
-                            <li class="nav-item">
-                                <a href="{{ route('bill.index') }}"
-                                    class="nav-link {{ request()->is('dashboard/bill*') ? 'active' : '' }}">
-                                    <i class="nav-icon fas fa-coins"></i>
-                                    <p>
-                                        Finance
-                                    </p>
-                                </a>
-                            </li>
-                        @endif
-                        @if (auth()->user()->role == 'admin')
-                            <li class="nav-item">
-                                <a href="{{ route('user.index') }}"
-                                    class="nav-link {{ request()->is('dashboard/user*') ? 'active' : '' }}">
-                                    <i class="nav-icon fas fa-user"></i>
-                                    <p>
-                                        Account List
-                                    </p>
-                                </a>
-                            </li>
-                        @endif
+                        @case('operation')
+                            <x-menu.operation/>
+                            @break
 
-                    </ul>
+                        @case('trucking')
+                            <x-menu.trucking/>
+                            @break
+
+                        @case('finance')
+                            <x-menu.finance/>
+                            @break
+
+                        @default
+
+                    @endswitch
                 </nav>
                 <!-- /.sidebar-menu -->
             </div>
@@ -158,19 +97,13 @@
     </div>
     <!-- ./wrapper -->
 
-    <!-- jQuery -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
-        integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <!-- Bootstrap 4 -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.1/js/bootstrap.bundle.min.js"
-        integrity="sha512-mULnawDVcCnsk9a4aG1QLZZ6rcce/jSzEGqUkeOLy0b6q0+T6syHrxlsAGH7ZVoqC93Pd0lBqd6WguPWih7VHA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <!-- AdminLTE App -->
-    <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
+    <!-- jQuery         --> <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- Bootstrap 4    --> <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.1/js/bootstrap.bundle.min.js" integrity="sha512-mULnawDVcCnsk9a4aG1QLZZ6rcce/jSzEGqUkeOLy0b6q0+T6syHrxlsAGH7ZVoqC93Pd0lBqd6WguPWih7VHA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- AdminLTE App   --> <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
+    <!-- DataTables JS  --> <script src="https://cdn.datatables.net/v/dt/jq-3.7.0/dt-2.0.8/r-3.0.2/datatables.min.js"></script>
 
     @yield('modal')
-
+    @yield('script')
 </body>
 
 </html>
