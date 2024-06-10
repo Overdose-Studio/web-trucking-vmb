@@ -39,17 +39,28 @@
                                 <td>{{ $shipment->party }}</td>
                                 <td>{{ $shipment->client->name }}</td>
                                 <td>
-                                    @if ($shipment->bill_id)
-                                        <span class="badge badge-success">
-                                            <i class="fas fa-check"></i>&nbsp;
-                                            Billed
-                                        </span>
-                                    @else
-                                        <span class="badge badge-warning">
-                                            <i class="fas fa-spinner"></i>&nbsp;
-                                            Running
-                                        </span>
-                                    @endif
+                                    @switch($shipment->status)
+                                        @case("Waiting Bill")
+                                            <span class="badge badge-warning">
+                                                <i class="fas fa-coins"></i>&nbsp;
+                                                Waiting Bill
+                                            </span>
+                                            @break
+
+                                        @case("Completed")
+                                            <span class="badge badge-warning">
+                                                <i class="fas fa-check"></i>&nbsp;
+                                                Completed
+                                            </span>
+                                            @break
+
+                                        @default
+                                            <span class="badge badge-warning">
+                                                <i class="fas fa-spinner"></i>&nbsp;
+                                                {{ $shipment->status }}
+                                            </span>
+                                            @break
+                                    @endswitch
                                 </td>
                                 <td>
                                     @if (!$shipment->bill_id)
