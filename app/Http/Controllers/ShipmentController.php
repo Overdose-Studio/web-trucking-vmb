@@ -48,9 +48,9 @@ class ShipmentController extends Controller
         $shipment = Shipment::findOrFail($id);
         $clients = Client::orderBy('name')->get();
         if ($shipment->bill_id) {
-            return redirect()->route('dtp.show', $shipment->id)->with('error', 'Bill already created, cannot edit shipment');
+            return redirect()->route('shipment.index', $shipment->id)->with('error', 'Bill already created, cannot edit shipment');
         }
-        return view('admin.dtp.edit_shipment', compact('shipment', 'clients'));
+        return view('admin.shipment.edit', compact('shipment', 'clients'));
     }
 
     // Update: update shipment to database
@@ -60,20 +60,22 @@ class ShipmentController extends Controller
         $request->validate([
             'order_type' => 'required|in:import,export',
             'client_id' => 'required|exists:clients,id',
+            'party' => 'required|numeric|min:0',
         ]);
 
         // Get shipment from database
         $shipment = Shipment::findOrFail($id);
         if ($shipment->bill_id) {
-            return redirect()->route('dtp.show', $shipment->id)->with('error', 'Bill already created, cannot edit shipment');
+            return redirect()->route('shipment.index', $shipment->id)->with('error', 'Bill already created, cannot edit shipment');
         }
 
         // Update shipment to database
         $shipment->order_type = $request->order_type;
         $shipment->client_id = $request->client_id;
+        $shipment->party = $request->party;
         $shipment->save();
 
-        return redirect()->route('dtp.index')->with('success', 'Shipment updated successfully.');
+        return redirect()->route('shipment.index')->with('success', 'Shipment updated successfully.');
     }
 
     // Delete: delete shipment from database
@@ -82,12 +84,12 @@ class ShipmentController extends Controller
         // Get shipment from database
         $shipment = Shipment::findOrFail($id);
         if ($shipment->bill_id) {
-            return redirect()->route('dtp.show', $shipment->id)->with('error', 'Bill already created, cannot delete shipment');
+            return redirect()->route('shipment.index', $shipment->id)->with('error', 'Bill already created, cannot delete shipment');
         }
 
         // Delete shipment from database
         $shipment->delete();
 
-        return redirect()->route('dtp.index')->with('success', 'Shipment deleted successfully.');
+        return redirect()->route('shipment.index')->with('success', 'Shipment deleted successfully.');
     }
 }
