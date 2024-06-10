@@ -59,8 +59,8 @@
     </li>
 
     {{-- Trucking --}}
-    <li class="nav-item">
-        <a href="{{ route('dashboard') }}" class="nav-link">
+    <li class="nav-item {{ request()->is('dashboard/truck*') ? 'menu-is-opening menu-open' : '' }}">
+        <a href="#" class="nav-link">
             <i class="nav-icon fas fa-truck-loading"></i>
             <p>Trucking</p>
             <i class="right fas fa-angle-left"></i>

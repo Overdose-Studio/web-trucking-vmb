@@ -77,17 +77,20 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
         });
     });
 
-    //-----------------------------------------------------------------------------------
-
-    // Truck: list all trucks and edit truck
-    Route::group(['middleware' => 'trucking', 'prefix' => 'truck', 'as' => 'truck.'], function () {
-        Route::get('/', [TruckController::class, 'index'])->name('index');
-        Route::get('create', [TruckController::class, 'create'])->name('create');
-        Route::post('create', [TruckController::class, 'store'])->name('store');
-        Route::get('edit/{id}', [TruckController::class, 'edit'])->name('edit');
-        Route::post('edit/{id}', [TruckController::class, 'update'])->name('update');
-        Route::delete('delete/{id}', [TruckController::class, 'delete'])->name('destroy');
+    // Trucking Routes
+    Route::group(['middleware' => 'trucking'], function () {
+        // Truck: list all trucks and edit truck
+        Route::group(['prefix' => 'truck', 'as' => 'truck.'], function () {
+            Route::get('/', [TruckController::class, 'index'])->name('index');
+            Route::get('create', [TruckController::class, 'create'])->name('create');
+            Route::post('create', [TruckController::class, 'store'])->name('store');
+            Route::get('edit/{id}', [TruckController::class, 'edit'])->name('edit');
+            Route::post('edit/{id}', [TruckController::class, 'update'])->name('update');
+            Route::delete('delete/{id}', [TruckController::class, 'delete'])->name('destroy');
+        });
     });
+
+    //-----------------------------------------------------------------------------------
 
     // Daily Trucking Plan (DTP): list all DTP and edit DTP
     Route::group(['middleware' => 'trucking', 'prefix' => 'dtp', 'as' => 'dtp.'], function () {
