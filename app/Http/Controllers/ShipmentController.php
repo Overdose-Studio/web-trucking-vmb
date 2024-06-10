@@ -19,7 +19,7 @@ class ShipmentController extends Controller
     public function create()
     {
         $clients = Client::orderBy('name')->get();
-        return view('admin.dtp.create_shipment', compact('clients'));
+        return view('admin.shipment.create', compact('clients'));
     }
 
     // Store: store shipment to database
