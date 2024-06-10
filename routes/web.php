@@ -54,16 +54,30 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
         });
     });
 
+    // Operation Routes
+    Route::group(['middleware' => 'operation'], function () {
+        // Client: list all clients and edit client
+        Route::group(['prefix' => 'client', 'as' => 'client.'], function () {
+            Route::get('/', [ClientController::class, 'index'])->name('index');
+            Route::get('create', [ClientController::class, 'create'])->name('create');
+            Route::post('create', [ClientController::class, 'store'])->name('store');
+            Route::get('edit/{id}', [ClientController::class, 'edit'])->name('edit');
+            Route::post('edit/{id}', [ClientController::class, 'update'])->name('update');
+            Route::delete('delete/{id}', [ClientController::class, 'destroy'])->name('delete');
+        });
 
-    // Client: list all clients and edit client
-    Route::group(['middleware' => 'trucking', 'prefix' => 'client', 'as' => 'client.'], function () {
-        Route::get('/', [ClientController::class, 'index'])->name('index');
-        Route::get('create', [ClientController::class, 'create'])->name('create');
-        Route::post('create', [ClientController::class, 'store'])->name('store');
-        Route::get('edit/{id}', [ClientController::class, 'edit'])->name('edit');
-        Route::post('edit/{id}', [ClientController::class, 'update'])->name('update');
-        Route::delete('delete/{id}', [ClientController::class, 'destroy'])->name('delete');
+        // Shipment: list all shipments and edit shipment
+        Route::group(['prefix' => 'shipment', 'as' => 'shipment.'], function () {
+            Route::get('/', [ShipmentController::class, 'index'])->name('index');
+            Route::get('create', [ShipmentController::class, 'create'])->name('create');
+            Route::post('create', [ShipmentController::class, 'store'])->name('store');
+            Route::get('edit/{id}', [ShipmentController::class, 'edit'])->name('edit');
+            Route::post('edit/{id}', [ShipmentController::class, 'update'])->name('update');
+            Route::delete('delete/{id}', [ShipmentController::class, 'delete'])->name('destroy');
+        });
     });
+
+    //-----------------------------------------------------------------------------------
 
     // Truck: list all trucks and edit truck
     Route::group(['middleware' => 'trucking', 'prefix' => 'truck', 'as' => 'truck.'], function () {
