@@ -2,8 +2,13 @@
 
 @section('content')
     <div class="card">
+        <div class="card-header">
+            <div class="d-flex align-items-center">
+                <i class="fas fa-plus fa-2x"></i>&nbsp;&nbsp;&nbsp;
+                <h1 class="panel-heading">Create Truck</h1>
+            </div>
+        </div>
         <div class="card-body">
-            <h1 class="panel-heading">Create Truck</h1>
             <div class="panel-body">
                 <form action="{{ route('truck.store') }}" method="POST" enctype="multipart/form-data">
                     {{ csrf_field() }}
@@ -35,8 +40,11 @@
                         <input type="file" accept="image/*" name="state_evidence" id="state_evidence"
                             class="form-control">
                     </div>
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-primary">Create</button>
+                    <div class="form-group d-flex justify-content-end">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-plus"></i>&nbsp;
+                            Create New Truck
+                        </button>
                     </div>
                 </form>
             </div>
