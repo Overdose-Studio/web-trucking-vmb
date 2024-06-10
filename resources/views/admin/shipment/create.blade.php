@@ -29,10 +29,11 @@
                     </div>
                     <div class="form-group">
                         <label for="party">Party</label>
-                        <input type="number" name="party" class="form-control">
+                        <input type="number" name="party" class="form-control" value="0">
                     </div>
                     <div class="form-group d-flex justify-content-end">
                         <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-plus"></i>&nbsp;
                             Create Shipment
                         </button>
                     </div>

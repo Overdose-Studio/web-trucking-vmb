@@ -24,6 +24,7 @@
                             <th>Shipment ID</th>
                             <th>Date</th>
                             <th>Order Type</th>
+                            <th>Party</th>
                             <th>Client Name</th>
                             <th>Status</th>
                             <th>Action</th>
@@ -35,26 +36,41 @@
                                 <td>{{ $shipment->id }}</td>
                                 <td>{{ $shipment->date }}</td>
                                 <td>{{ ucfirst($shipment->order_type) }}</td>
+                                <td>{{ $shipment->party }}</td>
                                 <td>{{ $shipment->client->name }}</td>
                                 <td>
                                     @if ($shipment->bill_id)
-                                        <span class="badge badge-success">Billed</span>
+                                        <span class="badge badge-success">
+                                            <i class="fas fa-check"></i>&nbsp;
+                                            Billed
+                                        </span>
                                     @else
-                                        <span class="badge badge-warning">Running</span>
+                                        <span class="badge badge-warning">
+                                            <i class="fas fa-spinner"></i>&nbsp;
+                                            Running
+                                        </span>
                                     @endif
                                 </td>
                                 <td>
-                                    <a href="{{ route('dtp.show', $shipment->id) }}" class="btn btn-primary">Show</a>
                                     @if (!$shipment->bill_id)
-                                        <a href="{{ route('dtp.edit_shipment', $shipment->id) }}"
-                                            class="btn btn-warning">Edit</a>
-                                        <form action="{{ route('dtp.destroy_shipment', $shipment->id) }}" method="POST"
-                                            class="d-inline">
+                                        <a href="{{ route('shipment.edit', $shipment->id) }}" class="btn btn-warning">
+                                            <i class="fas fa-edit"></i>&nbsp;
+                                            Edit
+                                        </a>
+                                        <form action="{{ route('dtp.destroy_shipment', $shipment->id) }}" method="POST" class="d-inline">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-danger"
-                                                onclick="return confirm('Are you sure?')">Delete</button>
+                                            <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">
+                                                <i class="fas fa-trash"></i>&nbsp;
+                                                Delete
+                                            </button>
                                         </form>
+                                    @else
+                                        {{-- TODO  --}}
+                                        {{-- <a href="{{ route('shipment.show', $shipment->id) }}" class="btn btn-primary">
+                                            <i class="fas fa-eye"></i>&nbsp;
+                                            View
+                                        </a> --}}
                                     @endif
                                 </td>
                             </tr>

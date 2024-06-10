@@ -29,15 +29,17 @@ class ShipmentController extends Controller
         $request->validate([
             'order_type' => 'required|in:import,export',
             'client_id' => 'required|exists:clients,id',
+            'party' => 'required|numeric|min:0',
         ]);
 
         // Store shipment to database
         $shipment = new Shipment;
         $shipment->order_type = $request->order_type;
         $shipment->client_id = $request->client_id;
+        $shipment->party = $request->party;
         $shipment->save();
 
-        return redirect()->route('dtp.index')->with('success', 'Shipment created successfully.');
+        return redirect()->route('shipment.index')->with('success', 'Shipment created successfully.');
     }
 
     // Edit: show form edit shipment
