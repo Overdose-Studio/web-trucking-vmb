@@ -2,11 +2,23 @@
 
 @section('content')
     <div class="card">
+        <div class="card-header">
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="d-flex align-items-center">
+                    <i class="fas fa-truck fa-2x"></i>&nbsp;&nbsp;&nbsp;
+                    <h1 class="panel-heading">Truck</h1>
+                </div>
+                <div>
+                    <a href="{{ route('truck.create') }}" class="btn btn-success mb-2">
+                        <i class="fas fa-plus"></i>&nbsp;
+                        Add New Truck
+                    </a>
+                </div>
+            </div>
+        </div>
         <div class="card-body">
-            <h1 class="panel-heading">Truck List</h1>
-            <a href="{{ route('truck.create') }}" class="btn btn-success mb-2">Add New Truck</a>
             <div class="panel-body">
-                <table class="table table-bordered">
+                <table class="table table-bordered" id="truck-table">
                     <thead>
                         <tr>
                             <th>No.</th>
@@ -20,7 +32,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($trucks as $truck)
+                        @foreach ($trucks as $truck)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $truck->license_plate }}</td>
@@ -47,21 +59,21 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <a href="{{ route('truck.edit', $truck->id) }}" class="btn btn-primary">Edit</a>
-                                    <form action="{{ route('truck.destroy', $truck->id) }}" method="POST"
-                                        style="display: inline-block;">
+                                    <a href="{{ route('truck.edit', $truck->id) }}" class="btn btn-warning">
+                                        <i class="fas fa-edit"></i>&nbsp;
+                                        Edit
+                                    </a>
+                                    <form action="{{ route('truck.destroy', $truck->id) }}" method="POST" style="display: inline-block;">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-danger"
-                                            onclick="return confirm('Are you sure?')">Delete</button>
+                                        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">
+                                            <i class="fas fa-trash"></i>&nbsp;
+                                            Delete
+                                        </button>
                                     </form>
                                 </td>
                             </tr>
-                        @empty
-                            <tr>
-                                <td colspan="7" class="text-center">No data available</td>
-                            </tr>
-                        @endforelse
+                        @endforeach
                     </tbody>
                 </table>
             </div>
@@ -100,5 +112,23 @@
         //         'show'
         //     ); // imagemodal is the id attribute assigned to the bootstrap modal, then i use the show function
         // });
+    </script>
+@endsection
+
+@section('script')
+    <script>
+        $(document).ready(function() {
+            $('#truck-table').DataTable({
+                responsive: true,
+                autoWidth: false,
+                order: [
+                    [0, 'asc']
+                ],
+                columnDefs: [{
+                    orderable: false,
+                    targets: 5
+                }]
+            });
+        });
     </script>
 @endsection
