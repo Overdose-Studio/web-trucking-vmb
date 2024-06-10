@@ -68,7 +68,7 @@
                                             <i class="fas fa-edit"></i>&nbsp;
                                             Edit
                                         </a>
-                                        <form action="{{ route('dtp.destroy_shipment', $shipment->id) }}" method="POST" class="d-inline">
+                                        <form action="{{ route('shipment.destroy', $shipment->id) }}" method="POST" class="d-inline">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">
