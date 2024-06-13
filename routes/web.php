@@ -112,6 +112,13 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
         Route::delete('{shipment}/delete-truck/{id}', [DailyTruckingPlanController::class, 'delete'])->name('destroy');
     });
 
+    //Approve DTP by Finance
+    Route::group(['middleware' => 'finance', 'prefix' => 'approve', 'as' => 'approve.'], function () {
+        Route::get('/', [DailyTruckingPlanController::class, 'approve'])->name('index');
+        Route::put('/update_approve/{id}',  [DailyTruckingPlanController::class, 'update_approve'])->name('update');
+        // Route::get('{shipment}/approve', [DailyTruckingPlanController::class, 'approve'])->name('approve');
+    });
+
     // Daily Trucking Actually (DTA): list all DTA and edit DTA
     Route::group(['middleware' => 'trucking', 'prefix' => 'dta', 'as' => 'dta.'], function () {
         Route::get('/', [DailyTruckingActuallyController::class, 'index'])->name('index');
@@ -131,6 +138,8 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
         Route::delete('delete/{id}', [BillController::class, 'delete'])->name('destroy');
         Route::get('download/{id}', [BillController::class, 'export'])->name('download');
     });
+
+
 
     // Logout: when user whant to logout
     Route::post('logout', [AuthController::class, 'logout'])->name('logout');

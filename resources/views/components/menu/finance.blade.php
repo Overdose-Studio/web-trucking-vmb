@@ -1,8 +1,7 @@
 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
     {{-- Dashboard --}}
     <li class="nav-item">
-        <a href="{{ route('dashboard') }}"
-            class="nav-link {{ request()->is('dashboard') ? 'active' : '' }}">
+        <a href="{{ route('dashboard') }}" class="nav-link {{ request()->is('dashboard') ? 'active' : '' }}">
             <i class="nav-icon fas fa-house"></i>
             <p>Dashboard</p>
         </a>
@@ -10,7 +9,7 @@
 
     {{-- Finance --}}
     <li class="nav-item">
-        <a href="{{ route('dashboard') }}" class="nav-link">
+        <a href="{{ route('approve.index') }}" class="nav-link">
             <i class="nav-icon fas fa-check"></i>
             <p>Approval DTP</p>
         </a>

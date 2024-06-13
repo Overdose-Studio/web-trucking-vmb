@@ -19,6 +19,7 @@ class Shipment extends Model
         'order_type',
         'client_id',
         'bill_id',
+        'status',
     ];
 
     public function bill() {
