@@ -97,7 +97,7 @@
     </li>
 
     {{-- Finance --}}
-    <li class="nav-item">
+    <li class="nav-item {{ request()->is('dashboard/approval-dtp*') ? 'menu-is-opening menu-open' : '' }}">
         <a href="{{ route('dashboard') }}" class="nav-link">
             <i class="nav-icon fas fa-money-check-alt"></i>
             <p>Finance</p>
@@ -105,7 +105,8 @@
         </a>
         <ul class="nav nav-treeview">
             <li class="nav-item">
-                <a href="{{ route('approve.index') }}" class="nav-link">
+                <a href="{{ route('dtp.approval.index') }}"
+                    class="nav-link {{ request()->is('dashboard/approval-dtp*') ? 'active' : '' }}">
                     &nbsp;&nbsp;&nbsp;&nbsp;
                     <i class="nav-icon fas fa-check"></i>
                     <p>Approval DTP</p>

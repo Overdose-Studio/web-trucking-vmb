@@ -102,8 +102,17 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
         });
     });
 
+    // Finance Routes
+    Route::group(['middleware' => 'finance'], function () {
+        // DTP: list all DTP and edit DTP
+        Route::group(['prefix' => 'approval-dtp', 'as' => 'dtp.approval.'], function () {
+            Route::get('/', [DailyTruckingPlanController::class, 'approval'])->name('index');
+            Route::put('/{id}/set',  [DailyTruckingPlanController::class, 'set_approval'])->name('set');
+        });
+    });
+
     //-----------------------------------------------------------------------------------
-  
+
     // Daily Trucking Actually (DTA): list all DTA and edit DTA
     Route::group(['middleware' => 'trucking', 'prefix' => 'dta', 'as' => 'dta.'], function () {
         Route::get('/', [DailyTruckingActuallyController::class, 'index'])->name('index');

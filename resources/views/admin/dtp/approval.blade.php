@@ -3,7 +3,7 @@
 @section('content')
     <div class="card">
         <div class="card-header">
-            <h1 class="panel-heading">Approval - Daily Trucking Plan List </h1>
+            <h1 class="panel-heading">Approval - Daily Trucking Plan List</h1>
         </div>
         <div class="card-body">
             <div class="panel-body">
@@ -16,7 +16,6 @@
                             <th>Client Name</th>
                             <th>Total Price</th>
                             <th>Status</th>
-                            {{-- <th>Action</th> --}}
                         </tr>
                     </thead>
                     <tbody>
@@ -29,7 +28,7 @@
                                 <td>Rp {{ number_format($shipment->dailyTruckingPlan->sum('price'), 0, ',', '.') }}</td>
                                 <td>
                                     <form id="statusForm-{{ $shipment->id }}"
-                                        action="{{ route('approve.update', $shipment->id) }}" method="POST">
+                                        action="{{ route('dtp.approval.set', $shipment->id) }}" method="POST">
                                         @csrf
                                         @method('put')
                                         <select name="status" class="form-control shipmentStatus"
