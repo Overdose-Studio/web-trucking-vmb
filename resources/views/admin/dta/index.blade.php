@@ -19,8 +19,8 @@
                             <th>Party</th>
                             <th>Client Name</th>
                             <th>Total Price</th>
-                            <th>Status</th>
                             <th>DTP - DTA</th>
+                            <th>Status</th>
                             <th>Action</th>
                         </tr>
                     </thead>
