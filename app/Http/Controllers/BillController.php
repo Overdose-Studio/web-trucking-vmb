@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Exports\InvoiceExport;
 use App\Models\Bill;
+use App\Models\DailyTruckingActually;
+use App\Models\DailyTruckingPlan;
 use App\Models\Shipment;
+use App\Models\Truck;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -142,5 +145,28 @@ class BillController extends Controller
 
         // Export bill to excel
         return Excel::download(new InvoiceExport($bill, $shipments), 'invoice.xlsx');
+    }
+
+    // DTA Detail: Display DTA data
+    public function dta_detail($shipment)
+    {
+        $shipment = Shipment::findOrFail($shipment);
+        $dtas = DailyTruckingActually::where('shipment_id', $shipment->id)->get()->sortBy('truck.license_plate');
+        return view('admin.bill.dta.detail', compact('dtas', 'shipment'));
+    }
+
+    // DTA Truck: Display Truck by Finance
+    public function dta_truck($shipment, $id)
+    {
+        // Get data
+        $dta = DailyTruckingActually::findOrFail($id);
+        $shipment = Shipment::findOrfail($shipment);
+        $selected = DailyTruckingPlan::where('id', $dta->daily_trucking_plan_id)->first();
+        $trucks = Truck::whereHas('state', function ($query) {
+            $query->where('type', 'good');
+        })->get()->sortBy('license_plate');
+
+        // Return view
+        return view('admin.bill.dta.truck', compact('dta', 'shipment', 'selected', 'trucks'));
     }
 }

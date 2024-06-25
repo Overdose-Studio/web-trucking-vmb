@@ -2,11 +2,23 @@
 
 @section('content')
     <div class="card">
+        <div class="card-header">
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="d-flex align-items-center">
+                    <i class="fas fa-coins fa-2x"></i>&nbsp;&nbsp;&nbsp;
+                    <h1 class="panel-heading">Bill List</h1>
+                </div>
+                <div>
+                    <a href="{{ route('bill.create') }}" class="btn btn-success mb-2">
+                        <i class="fas fa-plus"></i>&nbsp;
+                        Create Invoice
+                    </a>
+                </div>
+            </div>
+        </div>
         <div class="card-body">
-            <h1 class="panel-heading">Bill List</h1>
-            <a href="{{ route('bill.create') }}" class="btn btn-primary mb-2">Create Invoice</a>
             <div class="panel-body">
-                <table class="table table-bordered">
+                <table class="table table-bordered" id="bill-table">
                     <thead>
                         <tr>
                             <th>No.</th>
@@ -38,8 +50,8 @@
                                 <td>Rp {{ number_format($shipment->dailyTruckingActually->sum('price'), 0, ',', '.') }}</td>
                                 <td>Rp {{ number_format($shipment->diff, 0, ',', '.') }}</td>
                                 <td>
-                                    <a href="{{ route('dta.show', $shipment->id) }}" class="btn btn-primary">DTA</a>
-                                    <a href="{{ route('dtp.show', $shipment->id) }}" class="btn btn-warning">DTP</a>
+                                    <a href="{{ route('bill.dta.detail', $shipment->id) }}" class="btn btn-primary">DTA</a>
+                                    <a href="{{ route('dtp.show', $shipment->id) }}" class="btn btn-secondary">DTP</a>
                                 </td>
                             </tr>
                         @empty
@@ -106,4 +118,22 @@
             </div>
         </div>
     @endforeach
+@endsection
+
+@section('script')
+    <script>
+        $(document).ready(function() {
+            $('#bill-table').DataTable({
+                responsive: true,
+                autoWidth: false,
+                order: [
+                    [0, 'asc']
+                ],
+                columnDefs: [{
+                    orderable: false,
+                    targets: 9
+                }]
+            });
+        });
+    </script>
 @endsection
