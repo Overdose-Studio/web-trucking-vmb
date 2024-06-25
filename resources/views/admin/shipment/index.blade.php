@@ -40,26 +40,26 @@
                                 <td>{{ $shipment->client->name }}</td>
                                 <td>
                                     @switch($shipment->status)
-                                        @case("Waiting Bill")
+                                        @case('Waiting Bill')
                                             <span class="badge badge-warning">
                                                 <i class="fas fa-coins"></i>&nbsp;
                                                 Waiting Bill
                                             </span>
-                                            @break
+                                        @break
 
-                                        @case("Completed")
+                                        @case('Completed')
                                             <span class="badge badge-warning">
                                                 <i class="fas fa-check"></i>&nbsp;
                                                 Completed
                                             </span>
-                                            @break
+                                        @break
 
                                         @default
                                             <span class="badge badge-warning">
                                                 <i class="fas fa-spinner"></i>&nbsp;
                                                 {{ $shipment->status }}
                                             </span>
-                                            @break
+                                        @break
                                     @endswitch
                                 </td>
                                 <td>
@@ -71,7 +71,8 @@
                                         <form action="{{ route('shipment.destroy', $shipment->id) }}" method="POST" class="d-inline">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">
+                                            <button type="submit" class="btn btn-danger"
+                                                onclick="return confirm('Are you sure?')">
                                                 <i class="fas fa-trash"></i>&nbsp;
                                                 Delete
                                             </button>

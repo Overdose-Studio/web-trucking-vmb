@@ -18,6 +18,7 @@ return new class extends Migration
             $table->enum('status', [
                     'Waiting DTP',
                     'Approving DTP',
+                    'Rejected DTP',
                     'Waiting DTA',
                     'Approving DTA',
                     'Waiting Bill',

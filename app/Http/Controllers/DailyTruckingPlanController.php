@@ -372,4 +372,25 @@ class DailyTruckingPlanController extends Controller
         // Redirect to daily trucking plan index
         return redirect()->route('dtp.show', $shipment->id)->with('success', 'Delete truck on DTP' . $shipment->client->name . ' successfully');
     }
+
+    //Approval DTP by Finance
+    public function approve(){
+        $shipments = Shipment::latest()->get();
+        return view('admin.dtp.approve_index', compact('shipments'));
+    }
+
+    //Approve DTP by Finance edit
+    public function update_approve(Request $request, $id) {
+        $shipment = Shipment::where('id', $id)->firstOrFail();
+        $request->validate([
+            'status' => 'required|string',
+        ]);
+        $statusBaru = $request->input('status');
+        $shipment->update([
+            'status' => $statusBaru
+        ]);
+        return redirect()->route('approve.index');
+      }
+
+
 }

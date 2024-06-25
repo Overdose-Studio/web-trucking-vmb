@@ -1,8 +1,7 @@
 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
     {{-- Dashboard --}}
     <li class="nav-item">
-        <a href="{{ route('dashboard') }}"
-            class="nav-link {{ request()->is('dashboard') ? 'active' : '' }}">
+        <a href="{{ route('dashboard') }}" class="nav-link {{ request()->is('dashboard') ? 'active' : '' }}">
             <i class="nav-icon fas fa-house"></i>
             <p>Dashboard</p>
         </a>
@@ -17,7 +16,8 @@
         </a>
         <ul class="nav nav-treeview">
             <li class="nav-item">
-                <a href="{{ route('user.index') }}" class="nav-link {{ request()->is('dashboard/user*') ? 'active' : '' }}">
+                <a href="{{ route('user.index') }}"
+                    class="nav-link {{ request()->is('dashboard/user*') ? 'active' : '' }}">
                     &nbsp;&nbsp;&nbsp;&nbsp;
                     <i class="nav-icon fas fa-users"></i>
                     <p>User Account</p>
@@ -27,7 +27,8 @@
     </li>
 
     {{-- Operations --}}
-    <li class="nav-item {{ request()->is('dashboard/client*') || request()->is('dashboard/shipment*') ? 'menu-is-opening menu-open' : '' }}">
+    <li
+        class="nav-item {{ request()->is('dashboard/client*') || request()->is('dashboard/shipment*') ? 'menu-is-opening menu-open' : '' }}">
         <a href="#" class="nav-link">
             <i class="nav-icon fas fa-cogs"></i>
             <p>Operation</p>
@@ -35,14 +36,16 @@
         </a>
         <ul class="nav nav-treeview">
             <li class="nav-item">
-                <a href="{{ route('client.index') }}"class="nav-link {{ request()->is('dashboard/client*') ? 'active' : '' }}">
+                <a
+                    href="{{ route('client.index') }}"class="nav-link {{ request()->is('dashboard/client*') ? 'active' : '' }}">
                     &nbsp;&nbsp;&nbsp;&nbsp;
                     <i class="nav-icon fas fa-person"></i>
                     <p>Client</p>
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ route('shipment.index') }}" class="nav-link {{ request()->is('dashboard/shipment*') ? 'active' : '' }}">
+                <a href="{{ route('shipment.index') }}"
+                    class="nav-link {{ request()->is('dashboard/shipment*') ? 'active' : '' }}">
                     &nbsp;&nbsp;&nbsp;&nbsp;
                     <i class="nav-icon fas fa-boxes"></i>
                     <p>Shipment</p>
@@ -67,21 +70,24 @@
         </a>
         <ul class="nav nav-treeview">
             <li class="nav-item">
-                <a href="{{ route('truck.index') }}" class="nav-link {{ request()->is('dashboard/truck*') ? 'active' : '' }}">
+                <a href="{{ route('truck.index') }}"
+                    class="nav-link {{ request()->is('dashboard/truck*') ? 'active' : '' }}">
                     &nbsp;&nbsp;&nbsp;&nbsp;
                     <i class="nav-icon fas fa-truck"></i>
                     <p>Truck</p>
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ route('dtp.index') }}" class="nav-link {{ request()->is('dashboard/dtp*') ? 'active' : '' }}">
+                <a href="{{ route('dtp.index') }}"
+                    class="nav-link {{ request()->is('dashboard/dtp*') ? 'active' : '' }}">
                     &nbsp;&nbsp;&nbsp;&nbsp;
                     <i class="nav-icon fas fa-p"></i>
                     <p>DTP</p>
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ route('dta.index') }}" class="nav-link {{ request()->is('dashboard/dta*') ? 'active' : '' }}">
+                <a href="{{ route('dta.index') }}"
+                    class="nav-link {{ request()->is('dashboard/dta*') ? 'active' : '' }}">
                     &nbsp;&nbsp;&nbsp;&nbsp;
                     <i class="nav-icon fas fa-a"></i>
                     <p>DTA</p>
@@ -99,14 +105,15 @@
         </a>
         <ul class="nav nav-treeview">
             <li class="nav-item">
-                <a href="{{ route('dashboard') }}" class="nav-link">
+                <a href="{{ route('approve.index') }}" class="nav-link">
                     &nbsp;&nbsp;&nbsp;&nbsp;
                     <i class="nav-icon fas fa-check"></i>
                     <p>Approval DTP</p>
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ route('bill.index') }}" class="nav-link {{ request()->is('dashboard/bill*') ? 'active' : '' }}">
+                <a href="{{ route('bill.index') }}"
+                    class="nav-link {{ request()->is('dashboard/bill*') ? 'active' : '' }}">
                     &nbsp;&nbsp;&nbsp;&nbsp;
                     <i class="nav-icon fas fa-coins"></i>
                     <p>Bill</p>

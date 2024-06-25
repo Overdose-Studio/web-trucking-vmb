@@ -103,7 +103,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
     });
 
     //-----------------------------------------------------------------------------------
-
+  
     // Daily Trucking Actually (DTA): list all DTA and edit DTA
     Route::group(['middleware' => 'trucking', 'prefix' => 'dta', 'as' => 'dta.'], function () {
         Route::get('/', [DailyTruckingActuallyController::class, 'index'])->name('index');
@@ -123,6 +123,8 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
         Route::delete('delete/{id}', [BillController::class, 'delete'])->name('destroy');
         Route::get('download/{id}', [BillController::class, 'export'])->name('download');
     });
+
+
 
     // Logout: when user whant to logout
     Route::post('logout', [AuthController::class, 'logout'])->name('logout');
