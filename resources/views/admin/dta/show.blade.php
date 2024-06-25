@@ -50,7 +50,7 @@
                                 @break
                         @endswitch
                     @else
-                        <a href="{{ route('dtp.approving', $shipment->id) }}" class="btn btn-primary mb-2" onclick="return confirm('Are you sure?')">
+                        <a href="{{ route('dta.approving', $shipment->id) }}" class="btn btn-primary mb-2" onclick="return confirm('Are you sure?')">
                             <i class="fas fa-paper-plane"></i>&nbsp;
                             Approving DTA to Operation
                         </a>
@@ -117,10 +117,14 @@
                                 <td>Rp {{ number_format($dta->price, 0, ',', '.') }}</td>
                                 <td>Rp {{ number_format($dta->diff, 0, ',', '.') }}</td>
                                 <td>
-                                    <a href="{{ route('dta.edit', [$shipment->id, $dta->id]) }}" class="btn btn-warning">
-                                        <i class="fas fa-edit"></i>&nbsp;
-                                        Set DTA
-                                    </a>
+                                    @if ($shipment->status != 'Waiting DTA')
+                                        <span>-</span>
+                                    @else
+                                        <a href="{{ route('dta.edit', [$shipment->id, $dta->id]) }}" class="btn btn-warning">
+                                            <i class="fas fa-edit"></i>&nbsp;
+                                            Set DTA
+                                        </a>
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach

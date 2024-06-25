@@ -165,6 +165,15 @@ class DailyTruckingActuallyController extends Controller
         return redirect()->route('dta.show', $shipment->id)->with('success', 'Daily trucking actually has been updated');
     }
 
+    // Approving: change state on shipment
+    public function approving($shipment)
+    {
+        $shipment = Shipment::findOrFail($shipment);
+        $shipment->status = 'Approving DTA';
+        $shipment->save();
+        return redirect()->route('dta.show', $shipment->id)->with('success', 'Sending approving DTA to Operation');
+    }
+
     // Download: download client file
     public function downloadClientFile($file)
     {
