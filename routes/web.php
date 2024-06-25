@@ -123,7 +123,6 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
         Route::get('{shipment}/show', [DailyTruckingActuallyController::class, 'show'])->name('show');
         Route::get('{shipment}/edit/{id}', [DailyTruckingActuallyController::class, 'edit'])->name('edit');
         Route::post('{shipment}/edit/{id}', [DailyTruckingActuallyController::class, 'update'])->name('update');
-        Route::get('edit-shipment/{id}', [DailyTruckingActuallyController::class, 'edit_shipment'])->name('edit_shipment');
     });
 
     // Billing: list all billing and edit billing
