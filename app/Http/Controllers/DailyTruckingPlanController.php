@@ -376,7 +376,7 @@ class DailyTruckingPlanController extends Controller
     // Approval: approve DTP by Finance
     public function approval(){
         $shipments = Shipment::latest()->get();
-        return view('admin.dtp.approval', compact('shipments'));
+        return view('admin.dtp.approval.index', compact('shipments'));
     }
 
     // Set Approval: approve DTP by Finance edit
