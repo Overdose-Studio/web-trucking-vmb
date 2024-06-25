@@ -127,23 +127,24 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
             Route::get('/{id}/show', [DailyTruckingPlanController::class, 'approval_show'])->name('show');
             Route::get('/{id}/set',  [DailyTruckingPlanController::class, 'approval_set'])->name('set');
         });
+
+        // Billing: list all billing and edit billing
+        Route::group(['prefix' => 'bill', 'as' => 'bill.'], function () {
+            Route::get('/', [BillController::class, 'index'])->name('index');
+            Route::get('create', [BillController::class, 'create'])->name('create');
+            Route::post('create', [BillController::class, 'store'])->name('store');
+            Route::get('edit/{id}', [BillController::class, 'edit'])->name('edit');
+            Route::post('edit/{id}', [BillController::class, 'update'])->name('update');
+            Route::delete('delete/{id}', [BillController::class, 'delete'])->name('destroy');
+            Route::get('download/{id}', [BillController::class, 'export'])->name('download');
+            Route::get('dtp/{id}', [BillController::class, 'dtp_detail'])->name('dtp.detail');
+            Route::get('dta/{id}', [BillController::class, 'dta_detail'])->name('dta.detail');
+            Route::get('dta/{id}/truck/{truck}', [BillController::class, 'dta_truck'])->name('dta.truck');
+        });
     });
 
     // Logout: when user whant to logout
     Route::post('logout', [AuthController::class, 'logout'])->name('logout');
-
-    //-----------------------------------------------------------------------------------
-
-    // Billing: list all billing and edit billing
-    Route::group(['middleware' => 'finance', 'prefix' => 'bill', 'as' => 'bill.'], function () {
-        Route::get('/', [BillController::class, 'index'])->name('index');
-        Route::get('create', [BillController::class, 'create'])->name('create');
-        Route::post('create', [BillController::class, 'store'])->name('store');
-        Route::get('edit/{id}', [BillController::class, 'edit'])->name('edit');
-        Route::post('edit/{id}', [BillController::class, 'update'])->name('update');
-        Route::delete('delete/{id}', [BillController::class, 'delete'])->name('destroy');
-        Route::get('download/{id}', [BillController::class, 'export'])->name('download');
-    });
 });
 
 Route::group(['middleware' => 'auth'], function () {
