@@ -9,7 +9,7 @@
 
     {{-- Finance --}}
     <li class="nav-item">
-        <a href="{{ route('approve.index') }}" class="nav-link">
+        <a href="{{ route('dtp.approval.index') }}" class="nav-link {{ request()->is('dashboard/approval-dtp*') ? 'active' : '' }}">
             <i class="nav-icon fas fa-check"></i>
             <p>Approval DTP</p>
         </a>
