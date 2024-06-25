@@ -12,12 +12,19 @@
                     </div>
                 </div>
                 <div class="d-flex flex-column">
-                    @if ($shipment->status != 'Approving DTP')
+                    @if ($shipment->status != 'Approving DTA')
                         @switch($shipment->status)
                             @case("Waiting DTP")
                                 <span class="badge badge-secondary">
-                                    <i class="fas fa-truck"></i>&nbsp;
-                                    Waiting Truck
+                                    <i class="fas fa-spinner"></i>&nbsp;
+                                    Waiting DTP
+                                </span>
+                                @break
+
+                            @case("Approving DTP")
+                                <span class="badge badge-secondary">
+                                    <i class="fas fa-spinner"></i>&nbsp;
+                                    Approving DTP
                                 </span>
                                 @break
 
@@ -43,9 +50,9 @@
                                 @break
                         @endswitch
                     @else
-                        <a href="{{ route('dtp.approval.set', $shipment->id) }}" class="btn btn-success mb-2" onclick="return confirm('Are you sure?')">
+                        <a href="{{ route('dta.approval.set', $shipment->id) }}" class="btn btn-success mb-2" onclick="return confirm('Are you sure?')">
                             <i class="fas fa-check"></i>&nbsp;
-                            Approve DTP
+                            Approve DTA
                         </a>
                     @endif
                 </div>
@@ -53,7 +60,7 @@
         </div>
         <div class="card-body">
             <div class="panel-body">
-                <table class="table table-bordered" id="dtp-table">
+                <table class="table table-bordered" id="dta-table">
                     <thead>
                         <tr>
                             <th>No.</th>
@@ -63,24 +70,58 @@
                             <th>Destination 2</th>
                             <th>Destination 3</th>
                             <th>Size</th>
-                            <th>Price</th>
+                            <th>(DTP) Price</th>
+                            <th>(DTA) Price</th>
+                            <th>DTP - DTA</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($dtps as $dtp)
+                        @foreach ($dtas as $dta)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                @if ($dtp->truck_id)
-                                    <td>{{ $dtp->truck->license_plate }} | {{ $dtp->truck->brand }}</td>
-                                @else
-                                    <td>Vendor Truck</td>
-                                @endif
-                                <td>{{ $dtp->driver_name }}</td>
-                                <td>{{ $dtp->destination1->detail }}</td>
-                                <td>{{ $dtp->destination2->detail }}</td>
-                                <td>{{ $dtp->destination3->detail }}</td>
-                                <td>{{ $dtp->size }}</td>
-                                <td>Rp {{ number_format($dtp->price, 0, ',', '.') }}</td>
+                                <td>
+                                    @if ($dta->truck_id)
+                                        <span>{{ $dta->truck->license_plate }} | {{ $dta->truck->brand }}</span>
+                                    @else
+                                        <span>Vendor Truck</span>
+                                    @endif
+                                </td>
+                                <td>{{ $dta->driver_name }}</td>
+                                <td>
+                                    @if ($dta->destination1->image)
+                                        <a class="border p-1 mb-1"
+                                            href="{{ route('dta.download', ['file' => $dta->destination1->image]) }}">Download</a>
+                                        <br>
+                                    @endif
+                                    {{ $dta->destination1->detail }}
+                                </td>
+                                <td>
+                                    @if ($dta->destination2->image)
+                                        <a class="border p-1 mb-1"
+                                            href="{{ route('dta.download', ['file' => $dta->destination2->image]) }}">Download</a>
+                                        <br>
+                                    @endif
+                                    {{ $dta->destination2->detail }}
+                                </td>
+                                <td>
+                                    @if ($dta->destination3->image)
+                                        <a class="border p-1 mb-1"
+                                            href="{{ route('dta.download', ['file' => $dta->destination3->image]) }}">Download</a>
+                                        <br>
+                                    @endif
+                                    {{ $dta->destination3->detail }}
+                                </td>
+                                <td>{{ $dta->size }}</td>
+                                <td>Rp {{ number_format($dta->dailyTruckingPlan->price, 0, ',', '.') }}</td>
+                                <td>Rp {{ number_format($dta->price, 0, ',', '.') }}</td>
+                                <td>Rp {{ number_format($dta->diff, 0, ',', '.') }}</td>
+                                <td>
+                                    <a href="{{ route('dta.edit', [$shipment->id, $dta->id]) }}" class="btn btn-secondary btn-sm">
+                                        <i class="fas fa-eye"></i>&nbsp;
+                                        Check DTA
+                                    </a>
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>
@@ -93,12 +134,16 @@
 @section('script')
     <script>
         $(document).ready(function() {
-            $('#dtp-table').DataTable({
+            $('#dta-table').DataTable({
                 responsive: true,
                 autoWidth: false,
                 order: [
                     [0, 'asc']
                 ],
+                columnDefs: [{
+                    orderable: false,
+                    targets: 10
+                }]
             });
         });
     </script>

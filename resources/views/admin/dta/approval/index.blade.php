@@ -80,7 +80,7 @@
                                     @endswitch
                                 </td>
                                 <td>
-                                    <a href="{{ route('dta.show', $shipment->id) }}" class="btn btn-primary">Show</a>
+                                    <a href="{{ route('dta.approval.show', $shipment->id) }}" class="btn btn-primary">Show</a>
                                 </td>
                             </tr>
                         @endforeach
