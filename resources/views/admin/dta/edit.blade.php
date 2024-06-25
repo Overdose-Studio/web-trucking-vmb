@@ -1,13 +1,14 @@
 @extends('layouts.dashboard')
 
 @section('content')
-    <a href="{{ route('dta.show', $shipment->id) }}" class="btn btn-primary mb-2"><i class="fa fa-arrow-left"></i> Back to DTP
-        List</a>
     <div class="row">
         <div class="col-md">
             <div class="card">
                 <div class="card-header">
-                    <h1 class="panel-heading">Update Daily Trucking Actually</h1>
+                    <div class="d-flex align-items-center">
+                        <i class="fas fa-edit fa-2x mr-3"></i>
+                        <h1 class="panel-heading mb-0">Set Daily Trucking Actually</h1>
+                    </div>
                 </div>
                 <div class="card-body">
                     <div class="panel-body">
@@ -98,8 +99,11 @@
                                 </select>
                                 <span class="text-danger">{{ $errors->first('truck_id') }}</span>
                             </div>
-                            <div class="form-group">
-                                <button type="submit" class="btn btn-primary">Save</button>
+                            <div class="form-group d-flex justify-content-end">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-save"></i>&nbsp;
+                                    Save DTA
+                                </button>
                             </div>
                         </form>
                     </div>
@@ -109,22 +113,54 @@
         <div class="col-md">
             <div class="card">
                 <div class="card-header">
-                    <h2>Daily Trucking Plan</h2>
+                    <div class="d-flex align-items-center">
+                        <i class="fas fa-file fa-2x mr-3"></i>
+                        <h1 class="panel-heading mb-0">Daily Trucking Plan</h1>
+                    </div>
                 </div>
-                <div class="card-body">
-                    <h5>Truck : {{ $selected->truck_id ? $selected->truck->license_plate : 'Vendor Truck' }}</h5>
-                    <p><strong>Driver Name </strong>: {{ $selected->driver_name }}</p>
-                    <p><strong>Size </strong>: {{ $selected->size }}</p>
-                    <p><strong>Price </strong>: {{ $selected->price }}</p>
-                    <p><strong>Destination 1
-                        </strong>:{{ $selected->destination_1_id != null ? $selected->destination1->detail : '' }} </br>
-                        {{ $selected->destination_1_id != null ? $selected->destination1->image : '' }}</p>
-                    <p><strong>Destination 2
-                        </strong>:{{ $selected->destination_2_id != null ? $selected->destination2->detail : '' }} </br>
-                        {{ $selected->destination_2_id != null ? $selected->destination2->image : '' }}</p>
-                    <p><strong>Destination 3
-                        </strong>:{{ $selected->destination_3_id != null ? $selected->destination3->detail : '' }} </br>
-                        {{ $selected->destination_3_id != null ? $selected->destination3->image : '' }}</p>
+                <div class="card-header">
+                    <div class="d-flex align-items-center mb-2">
+                        <i class="fas fa-truck fa-xl mr-2"></i>
+                        <h3 class="mb-0">Truck</h3>
+                    </div>
+                    <div class="d-flex flex-column">
+                        <p class="card-text mb-0"><strong>Vehicle:</strong> {{ $selected->truck_id ? $selected->truck->license_plate : 'Vendor Truck' }}</p>
+                        <p class="card-text mb-0"><strong>Driver Name:</strong> {{ $selected->driver_name }}</p>
+                    </div>
+                </div>
+                <div class="card-header">
+                    <div class="d-flex align-items-center mb-2">
+                        <i class="fas fa-box-open fa-xl mr-2"></i>
+                        <h3 class="mb-0">Delivery</h3>
+                    </div>
+                    <div class="d-flex flex-column">
+                        <p class="card-text mb-0"><strong>Size:</strong> {{ $selected->size }}</p>
+                        <p class="card-text mb-0"><strong>Price:</strong> Rp {{ number_format($selected->price, 0, ',', '.') }}</p>
+                    </div>
+                </div>
+                <div class="card-header">
+                    <div class="d-flex align-items-center mb-2">
+                        <i class="fas fa-map fa-xl mr-2"></i>
+                        <h3 class="mb-0">Route</h3>
+                    </div>
+                    <div class="d-flex flex-column mb-2">
+                        <p class="mb-1"><strong>Destination 1:</strong> {{ $selected->destination_1_id != null ? $selected->destination1->detail : '' }}</p>
+                        @if($selected->destination1->image)
+                            <img src="{{ $selected->destination_1_id != null ? $selected->destination1->image : '' }}" alt="Destination 1 Image" class="img-fluid">
+                        @endif
+                    </div>
+                    <div class="d-flex flex-column mb-2">
+                        <p class="mb-1"><strong>Destination 2:</strong> {{ $selected->destination_2_id != null ? $selected->destination2->detail : '' }}</p>
+                        @if($selected->destination2->image)
+                            <img src="{{ $selected->destination_2_id != null ? $selected->destination2->image : '' }}" alt="Destination 2 Image" class="img-fluid">
+                        @endif
+                    </div>
+                    <div class="d-flex flex-column">
+                        <p class="mb-1"><strong>Destination 3:</strong> {{ $selected->destination_3_id != null ? $selected->destination3->detail : '' }}</p>
+                        @if($selected->destination3->image)
+                            <img src="{{ $selected->destination_3_id != null ? $selected->destination3->image : '' }}" alt="Destination 3 Image" class="img-fluid">
+                        @endif
+                    </div>
                 </div>
             </div>
         </div>

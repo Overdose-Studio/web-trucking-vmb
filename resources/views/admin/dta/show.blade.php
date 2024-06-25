@@ -1,15 +1,66 @@
 @extends('layouts.dashboard')
 
 @section('content')
-    <a href="{{ route('dta.index') }}" class="btn btn-primary mb-2"><i class="fa fa-arrow-left"></i> Back to DTP List</a>
     <div class="card">
         <div class="card-header">
-            <h5 class="mb-0 mt-1">Truck list for {{ $shipment->client->name }}</h5>
-            <h1>{{ $shipment->date }}</h1>
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="d-flex align-items-center">
+                    <i class="fas fa-truck-loading fa-3x mr-4"></i>
+                    <div class="d-flex flex-column">
+                        <h5 class="mb-0 mt-1">Truck list for {{ $shipment->client->name }}</h5>
+                        <h1>{{ $shipment->date }}</h1>
+                    </div>
+                </div>
+                <div class="d-flex flex-column">
+                    @if ($shipment->status != 'Waiting DTA')
+                        @switch($shipment->status)
+                            @case("Waiting DTP")
+                                <span class="badge badge-secondary">
+                                    <i class="fas fa-spinner"></i>&nbsp;
+                                    Waiting DTP
+                                </span>
+                                @break
+
+                            @case("Approving DTP")
+                                <span class="badge badge-secondary">
+                                    <i class="fas fa-spinner"></i>&nbsp;
+                                    Approving DTP
+                                </span>
+                                @break
+
+                            @case("Waiting Bill")
+                                <span class="badge badge-warning">
+                                    <i class="fas fa-coins"></i>&nbsp;
+                                    Waiting Bill
+                                </span>
+                                @break
+
+                            @case("Completed")
+                                <span class="badge badge-warning">
+                                    <i class="fas fa-check"></i>&nbsp;
+                                    Completed
+                                </span>
+                                @break
+
+                            @default
+                                <span class="badge badge-warning">
+                                    <i class="fas fa-spinner"></i>&nbsp;
+                                    {{ $shipment->status }}
+                                </span>
+                                @break
+                        @endswitch
+                    @else
+                        <a href="{{ route('dta.approving', $shipment->id) }}" class="btn btn-primary mb-2" onclick="return confirm('Are you sure?')">
+                            <i class="fas fa-paper-plane"></i>&nbsp;
+                            Approving DTA to Operation
+                        </a>
+                    @endif
+                </div>
+            </div>
         </div>
         <div class="card-body">
             <div class="panel-body">
-                <table class="table table-bordered">
+                <table class="table table-bordered" id="dta-table">
                     <thead>
                         <tr>
                             <th>No.</th>
@@ -26,14 +77,16 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($dtas as $dta)
+                        @foreach ($dtas as $dta)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                @if ($dta->truck_id)
-                                    <td>{{ $dta->truck->license_plate }} | {{ $dta->truck->brand }}</td>
-                                @else
-                                    <td>Vendor Truck</td>
-                                @endif
+                                <td>
+                                    @if ($dta->truck_id)
+                                        <span>{{ $dta->truck->license_plate }} | {{ $dta->truck->brand }}</span>
+                                    @else
+                                        <span>Vendor Truck</span>
+                                    @endif
+                                </td>
                                 <td>{{ $dta->driver_name }}</td>
                                 <td>
                                     @if ($dta->destination1->image)
@@ -64,18 +117,38 @@
                                 <td>Rp {{ number_format($dta->price, 0, ',', '.') }}</td>
                                 <td>Rp {{ number_format($dta->diff, 0, ',', '.') }}</td>
                                 <td>
-                                    <a href="{{ route('dta.edit', [$shipment->id, $dta->id]) }}"
-                                        class="btn btn-warning">Edit</a>
+                                    @if ($shipment->status != 'Waiting DTA')
+                                        <span>-</span>
+                                    @else
+                                        <a href="{{ route('dta.edit', [$shipment->id, $dta->id]) }}" class="btn btn-warning">
+                                            <i class="fas fa-edit"></i>&nbsp;
+                                            Set DTA
+                                        </a>
+                                    @endif
                                 </td>
                             </tr>
-                        @empty
-                            <tr>
-                                <td colspan="9" class="text-center">No data available</td>
-                            </tr>
-                        @endforelse
+                        @endforeach
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
+@endsection
+
+@section('script')
+    <script>
+        $(document).ready(function() {
+            $('#dta-table').DataTable({
+                responsive: true,
+                autoWidth: false,
+                order: [
+                    [0, 'asc']
+                ],
+                columnDefs: [{
+                    orderable: false,
+                    targets: 10
+                }]
+            });
+        });
+    </script>
 @endsection

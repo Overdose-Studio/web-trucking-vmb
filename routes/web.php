@@ -100,6 +100,15 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
             Route::post('{shipment}/edit-truck/{id}', [DailyTruckingPlanController::class, 'update'])->name('update');
             Route::delete('{shipment}/delete-truck/{id}', [DailyTruckingPlanController::class, 'delete'])->name('destroy');
         });
+
+        // DTA: list all DTA and edit DTA
+        Route::group(['prefix' => 'dta', 'as' => 'dta.'], function () {
+            Route::get('/', [DailyTruckingActuallyController::class, 'index'])->name('index');
+            Route::get('{shipment}/show', [DailyTruckingActuallyController::class, 'show'])->name('show');
+            Route::get('{shipment}/edit/{id}', [DailyTruckingActuallyController::class, 'edit'])->name('edit');
+            Route::post('{shipment}/edit/{id}', [DailyTruckingActuallyController::class, 'update'])->name('update');
+            Route::get('{shipment}/approving', [DailyTruckingActuallyController::class, 'approving'])->name('approving');
+        });
     });
 
     // Finance Routes
@@ -116,15 +125,6 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
     Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 
     //-----------------------------------------------------------------------------------
-
-    // Daily Trucking Actually (DTA): list all DTA and edit DTA
-    Route::group(['middleware' => 'trucking', 'prefix' => 'dta', 'as' => 'dta.'], function () {
-        Route::get('/', [DailyTruckingActuallyController::class, 'index'])->name('index');
-        Route::get('{shipment}/show', [DailyTruckingActuallyController::class, 'show'])->name('show');
-        Route::get('{shipment}/edit/{id}', [DailyTruckingActuallyController::class, 'edit'])->name('edit');
-        Route::post('{shipment}/edit/{id}', [DailyTruckingActuallyController::class, 'update'])->name('update');
-        Route::get('edit-shipment/{id}', [DailyTruckingActuallyController::class, 'edit_shipment'])->name('edit_shipment');
-    });
 
     // Billing: list all billing and edit billing
     Route::group(['middleware' => 'finance', 'prefix' => 'bill', 'as' => 'bill.'], function () {

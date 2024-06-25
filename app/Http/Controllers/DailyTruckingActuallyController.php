@@ -165,15 +165,13 @@ class DailyTruckingActuallyController extends Controller
         return redirect()->route('dta.show', $shipment->id)->with('success', 'Daily trucking actually has been updated');
     }
 
-    // Edit: show form edit shipment
-    public function edit_shipment($id)
+    // Approving: change state on shipment
+    public function approving($shipment)
     {
-        $shipment = Shipment::findOrFail($id);
-        $clients = Client::orderBy('name')->get();
-        if ($shipment->bill_id) {
-            return redirect()->route('dta.show', $shipment->id)->with('error', 'Bill already created, cannot edit shipment');
-        }
-        return view('admin.dta.edit_shipment', compact('shipment', 'clients'));
+        $shipment = Shipment::findOrFail($shipment);
+        $shipment->status = 'Approving DTA';
+        $shipment->save();
+        return redirect()->route('dta.show', $shipment->id)->with('success', 'Sending approving DTA to Operation');
     }
 
     // Download: download client file

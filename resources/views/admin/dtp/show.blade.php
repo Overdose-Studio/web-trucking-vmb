@@ -68,11 +68,13 @@
                         @foreach ($dtps as $dtp)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                @if ($dtp->truck_id)
-                                    <td>{{ $dtp->truck->license_plate }} | {{ $dtp->truck->brand }}</td>
-                                @else
-                                    <td>Vendor Truck</td>
-                                @endif
+                                <td>
+                                    @if ($dtp->truck_id)
+                                        <span>{{ $dtp->truck->license_plate }} | {{ $dtp->truck->brand }}</span>
+                                    @else
+                                        <span>Vendor Truck</span>
+                                    @endif
+                                </td>
                                 <td>{{ $dtp->driver_name }}</td>
                                 <td>{{ $dtp->destination1->detail }}</td>
                                 <td>{{ $dtp->destination2->detail }}</td>
@@ -83,14 +85,18 @@
                                     @if ($shipment->status != 'Waiting DTP')
                                         <span>-</span>
                                     @else
-                                        <a href="{{ route('dtp.edit', [$shipment->id, $dtp->id]) }}"
-                                            class="btn btn-warning">Edit</a>
+                                        <a href="{{ route('dtp.edit', [$shipment->id, $dtp->id]) }}" class="btn btn-warning">
+                                            <i class="fas fa-edit"></i>&nbsp;
+                                            Edit
+                                        </a>
                                         <form action="{{ route('dtp.destroy', [$shipment->id, $dtp->id]) }}" method="POST"
                                             class="d-inline">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-danger"
-                                                onclick="return confirm('Are you sure?')">Delete</button>
+                                            <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">
+                                                <i class="fas fa-trash"></i>&nbsp;
+                                                Delete
+                                            </button>
                                         </form>
                                     @endif
                                 </td>
