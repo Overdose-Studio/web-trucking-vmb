@@ -189,6 +189,21 @@ class DailyTruckingActuallyController extends Controller
         return view('admin.dta.approval.show', compact('dtas', 'shipment'));
     }
 
+    // Approval Truck: Display Truck by Finance
+    public function approval_truck($shipment, $id)
+    {
+        // Get data
+        $dta = DailyTruckingActually::findOrFail($id);
+        $shipment = Shipment::findOrfail($shipment);
+        $selected = DailyTruckingPlan::where('id', $dta->daily_trucking_plan_id)->first();
+        $trucks = Truck::whereHas('state', function ($query) {
+            $query->where('type', 'good');
+        })->get()->sortBy('license_plate');
+
+        // Return view
+        return view('admin.dta.approval.truck', compact('dta', 'shipment', 'selected', 'trucks'));
+    }
+
     // Approval Set: Approve DTA by Finance edit
     public function approval_set($shipment)
     {

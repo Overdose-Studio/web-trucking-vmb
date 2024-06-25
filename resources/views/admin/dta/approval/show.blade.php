@@ -117,7 +117,7 @@
                                 <td>Rp {{ number_format($dta->price, 0, ',', '.') }}</td>
                                 <td>Rp {{ number_format($dta->diff, 0, ',', '.') }}</td>
                                 <td>
-                                    <a href="{{ route('dta.edit', [$shipment->id, $dta->id]) }}" class="btn btn-secondary btn-sm">
+                                    <a href="{{ route('dta.approval.truck', [$shipment->id, $dta->id]) }}" class="btn btn-secondary btn-sm">
                                         <i class="fas fa-eye"></i>&nbsp;
                                         Check DTA
                                     </a>
