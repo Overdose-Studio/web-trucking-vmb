@@ -75,6 +75,13 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
             Route::post('edit/{id}', [ShipmentController::class, 'update'])->name('update');
             Route::delete('delete/{id}', [ShipmentController::class, 'delete'])->name('destroy');
         });
+
+        // DTA: list all DTA and edit DTA
+        Route::group(['prefix' => 'approval-dta', 'as' => 'dta.approval.'], function () {
+            Route::get('/', [DailyTruckingActuallyController::class, 'approval_index'])->name('index');
+            Route::get('/{id}/show', [DailyTruckingActuallyController::class, 'approval_show'])->name('show');
+            Route::get('/{id}/set',  [DailyTruckingActuallyController::class, 'approval_set'])->name('set');
+        });
     });
 
     // Trucking Routes

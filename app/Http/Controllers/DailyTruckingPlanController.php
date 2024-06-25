@@ -395,5 +395,5 @@ class DailyTruckingPlanController extends Controller
         $shipment->status = 'Waiting DTA';
         $shipment->save();
         return redirect()->route('dtp.approval.index', $shipment->id)->with('success', 'Success approving DTP for ' . $shipment->client->name . '.');
-      }
+    }
 }
