@@ -62,7 +62,7 @@
     </li>
 
     {{-- Trucking --}}
-    <li class="nav-item {{ request()->is('dashboard/truck*') ? 'menu-is-opening menu-open' : '' }}">
+    <li class="nav-item {{ request()->is('dashboard/truck*') || request()->is('dashboard/dtp*') ? 'menu-is-opening menu-open' : '' }}">
         <a href="#" class="nav-link">
             <i class="nav-icon fas fa-truck-loading"></i>
             <p>Trucking</p>

@@ -3,53 +3,88 @@
 @section('content')
     <div class="card">
         <div class="card-header">
-            <h1 class="panel-heading">Daily Trucking Plan List</h1>
+            <div class="d-flex align-items-center">
+                <i class="fas fa-list fa-2x"></i>&nbsp;&nbsp;&nbsp;
+                <h1 class="panel-heading">Daily Trucking Plan List</h1>
+            </div>
         </div>
         <div class="card-body">
-            <a href="{{ route('dtp.create_shipment') }}" class="btn btn-success mb-2">Create Shipment</a>
             <div class="panel-body">
-                <table class="table table-bordered">
+                <table class="table table-bordered" id="shipment-table">
                     <thead>
                         <tr>
                             <th>Shipment ID</th>
                             <th>Date</th>
                             <th>Order Type</th>
+                            <th>Party</th>
                             <th>Client Name</th>
+                            <th>Status</th>
                             <th>Total Price</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($shipments as $shipment)
+                        @foreach ($shipments as $shipment)
                             <tr>
                                 <td>{{ $shipment->id }}</td>
                                 <td>{{ $shipment->date }}</td>
                                 <td>{{ ucfirst($shipment->order_type) }}</td>
+                                <td>{{ $shipment->party }}</td>
                                 <td>{{ $shipment->client->name }}</td>
+                                <td>
+                                    @switch($shipment->status)
+                                        @case("Waiting DTP")
+                                            <span class="badge badge-success">
+                                                <i class="fas fa-pencil"></i>&nbsp;
+                                                Open
+                                            </span>
+                                            @break
+
+                                        @case("Approving DTP")
+                                            <span class="badge badge-warning">
+                                                <i class="fas fa-spinner"></i>&nbsp;
+                                                Waiting Approval
+                                            </span>
+                                            @break
+
+                                        @default
+                                            <span class="badge badge-danger">
+                                                <i class="fas fa-ban"></i>&nbsp;
+                                                Closed
+                                            </span>
+                                            @break
+                                    @endswitch
+                                </td>
                                 <td>Rp {{ number_format($shipment->dailyTruckingPlan->sum('price'), 0, ',', '.') }}</td>
                                 <td>
-                                    <a href="{{ route('dtp.show', $shipment->id) }}" class="btn btn-primary">Show</a>
-                                    @if (!$shipment->bill_id)
-                                        <a href="{{ route('dtp.edit_shipment', $shipment->id) }}"
-                                            class="btn btn-warning">Edit</a>
-                                        <form action="{{ route('dtp.destroy_shipment', $shipment->id) }}" method="POST"
-                                            class="d-inline">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger"
-                                                onclick="return confirm('Are you sure?')">Delete</button>
-                                        </form>
-                                    @endif
+                                    <a href="{{ route('dtp.show', $shipment->id) }}" class="btn btn-primary">
+                                        <i class="fas fa-eye"></i>&nbsp;
+                                        Detail
+                                    </a>
                                 </td>
                             </tr>
-                        @empty
-                            <tr>
-                                <td colspan="5" class="text-center">No data available</td>
-                            </tr>
-                        @endforelse
+                        @endforeach
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
+@endsection
+
+@section('script')
+    <script>
+        $(document).ready(function() {
+            $('#shipment-table').DataTable({
+                responsive: true,
+                autoWidth: false,
+                order: [
+                    [0, 'asc']
+                ],
+                columnDefs: [{
+                    orderable: false,
+                    targets: 7
+                }]
+            });
+        });
+    </script>
 @endsection
