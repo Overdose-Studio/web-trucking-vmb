@@ -1,10 +1,12 @@
 @extends('layouts.dashboard')
 
 @section('content')
-    <a href="{{ route('bill.index') }}" class="btn btn-primary mb-2"><i class="fa fa-arrow-left"></i> Back to Finance</a>
     <div class="card">
         <div class="card-header">
-            <h1 class="panel-heading">Create Invoice</h1>
+            <div class="d-flex align-items-center">
+                <i class="fas fa-plus fa-2x"></i>&nbsp;&nbsp;&nbsp;
+                <h1 class="panel-heading mb-0">Create Invoice</h1>
+            </div>
         </div>
         <div class="card-body">
             <div class="panel-body">
@@ -26,8 +28,11 @@
                         <label for="person_in_charge">Person in Charge (PIC)</label>
                         <input type="text" name="person_in_charge" id="person_in_charge" class="form-control">
                     </div>
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-primary">Create</button>
+                    <div class="form-group form-group d-flex justify-content-end">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-plus"></i>&nbsp;
+                            Create Invoice
+                        </button>
                     </div>
                 </form>
             </div>
