@@ -106,8 +106,9 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
     Route::group(['middleware' => 'finance'], function () {
         // DTP: list all DTP and edit DTP
         Route::group(['prefix' => 'approval-dtp', 'as' => 'dtp.approval.'], function () {
-            Route::get('/', [DailyTruckingPlanController::class, 'approval'])->name('index');
-            Route::put('/{id}/set',  [DailyTruckingPlanController::class, 'set_approval'])->name('set');
+            Route::get('/', [DailyTruckingPlanController::class, 'approval_index'])->name('index');
+            Route::get('/{id}/show', [DailyTruckingPlanController::class, 'approval_show'])->name('show');
+            Route::put('/{id}/set',  [DailyTruckingPlanController::class, 'approval_set'])->name('set');
         });
     });
 

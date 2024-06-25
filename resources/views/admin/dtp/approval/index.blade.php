@@ -34,8 +34,8 @@
                                 <td>
                                     @switch($shipment->status)
                                         @case("Waiting DTP")
-                                            <span class="badge badge-warning">
-                                                <i class="fas fa-spinner"></i>&nbsp;
+                                            <span class="badge badge-secondary">
+                                                <i class="fas fa-truck"></i>&nbsp;
                                                 Waiting Truck
                                             </span>
                                             @break
@@ -64,7 +64,7 @@
                                 </td>
                                 <td>Rp {{ number_format($shipment->dailyTruckingPlan->sum('price'), 0, ',', '.') }}</td>
                                 <td>
-                                    <a href="{{ route('dtp.show', $shipment->id) }}" class="btn btn-primary">
+                                    <a href="{{ route('dtp.approval.show', $shipment->id) }}" class="btn btn-primary">
                                         <i class="fas fa-eye"></i>&nbsp;
                                         Detail
                                     </a>

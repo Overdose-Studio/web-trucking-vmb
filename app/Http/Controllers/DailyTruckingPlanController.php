@@ -373,14 +373,21 @@ class DailyTruckingPlanController extends Controller
         return redirect()->route('dtp.show', $shipment->id)->with('success', 'Delete truck on DTP' . $shipment->client->name . ' successfully');
     }
 
-    // Approval: approve DTP by Finance
-    public function approval(){
+    // Approval Index: List of approval DTP by Finance
+    public function approval_index(){
         $shipments = Shipment::latest()->get();
         return view('admin.dtp.approval.index', compact('shipments'));
     }
 
-    // Set Approval: approve DTP by Finance edit
-    public function set_approval(Request $request, $id) {
+    // Approval Show: Display DTP by Finance
+    public function approval_show($shipment) {
+        $shipment = Shipment::findOrFail($shipment);
+        $dtps = DailyTruckingPlan::where('shipment_id', $shipment->id)->get()->sortBy('truck.license_plate');
+        return view('admin.dtp.approval.show', compact('dtps', 'shipment'));
+    }
+
+    // Approval Set: Approve DTP by Finance edit
+    public function approval_set(Request $request, $id) {
         $shipment = Shipment::where('id', $id)->firstOrFail();
         $request->validate([
             'status' => 'required|string',
