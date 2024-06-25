@@ -174,6 +174,45 @@ class DailyTruckingActuallyController extends Controller
         return redirect()->route('dta.show', $shipment->id)->with('success', 'Sending approving DTA to Operation');
     }
 
+    // Approval Index: List of approval DTA by Finance
+    public function approval_index()
+    {
+        $shipments = Shipment::latest()->get();
+        return view('admin.dta.approval.index', compact('shipments'));
+    }
+
+    // Approval Show: Display DTA by Finance
+    public function approval_show($shipment)
+    {
+        $shipment = Shipment::findOrFail($shipment);
+        $dtas = DailyTruckingActually::where('shipment_id', $shipment->id)->get()->sortBy('truck.license_plate');
+        return view('admin.dta.approval.show', compact('dtas', 'shipment'));
+    }
+
+    // Approval Truck: Display Truck by Finance
+    public function approval_truck($shipment, $id)
+    {
+        // Get data
+        $dta = DailyTruckingActually::findOrFail($id);
+        $shipment = Shipment::findOrfail($shipment);
+        $selected = DailyTruckingPlan::where('id', $dta->daily_trucking_plan_id)->first();
+        $trucks = Truck::whereHas('state', function ($query) {
+            $query->where('type', 'good');
+        })->get()->sortBy('license_plate');
+
+        // Return view
+        return view('admin.dta.approval.truck', compact('dta', 'shipment', 'selected', 'trucks'));
+    }
+
+    // Approval Set: Approve DTA by Finance edit
+    public function approval_set($shipment)
+    {
+        $shipment = Shipment::findOrFail($shipment);
+        $shipment->status = 'Waiting Bill';
+        $shipment->save();
+        return redirect()->route('dta.approval.index', $shipment->id)->with('success', 'Success approving DTA for ' . $shipment->client->name . '.');
+    }
+
     // Download: download client file
     public function downloadClientFile($file)
     {

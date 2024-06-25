@@ -5,12 +5,12 @@
         <div class="card-header">
             <div class="d-flex align-items-center">
                 <i class="fas fa-list fa-2x"></i>&nbsp;&nbsp;&nbsp;
-                <h1 class="panel-heading">Daily Trucking Actually List</h1>
+                <h1 class="panel-heading">Approval Daily Trucking Actually List</h1>
             </div>
         </div>
         <div class="card-body">
             <div class="panel-body">
-                <table class="table table-bordered" id="shipment-table">
+                <table class="table table-bordered" id="dta-table">
                     <thead>
                         <tr>
                             <th>Shipment ID</th>
@@ -18,7 +18,7 @@
                             <th>Order Type</th>
                             <th>Party</th>
                             <th>Client Name</th>
-                            <th>Trip Fee</th>
+                            <th>Total Price</th>
                             <th>DTP - DTA</th>
                             <th>Status</th>
                             <th>Action</th>
@@ -36,31 +36,38 @@
                                 <td>Rp {{ number_format($shipment->diff, 0, ',', '.') }}</td>
                                 <td>
                                     @switch($shipment->status)
-                                        @case('Waiting DTP')
+                                        @case("Waiting DTP")
                                             <span class="badge badge-secondary">
                                                 <i class="fas fa-spinner"></i>&nbsp;
                                                 Waiting DTP
                                             </span>
-                                        @break
+                                            @break
 
-                                        @case('Approving DTP')
+                                        @case("Approving DTP")
                                             <span class="badge badge-secondary">
                                                 <i class="fas fa-spinner"></i>&nbsp;
                                                 Approving DTP
                                             </span>
-                                        @break
+                                            @break
 
-                                        @case('Waiting DTA')
-                                            <span class="badge badge-success">
+                                        @case("Waiting DTA")
+                                            <span class="badge badge-secondary">
                                                 <i class="fas fa-pencil"></i>&nbsp;
-                                                Open
+                                                Waiting DTA
                                             </span>
-                                        @break
+                                            @break
 
-                                        @case('Approving DTA')
+                                        @case("Approving DTA")
                                             <span class="badge badge-warning">
                                                 <i class="fas fa-spinner"></i>&nbsp;
                                                 Waiting Approval
+                                            </span>
+                                            @break
+
+                                        @case("Waiting Bill")
+                                            <span class="badge badge-success">
+                                                <i class="fas fa-check"></i>&nbsp;
+                                                Approved
                                             </span>
                                         @break
 
@@ -69,11 +76,11 @@
                                                 <i class="fas fa-ban"></i>&nbsp;
                                                 Closed
                                             </span>
-                                        @break
+                                            @break
                                     @endswitch
                                 </td>
                                 <td>
-                                    <a href="{{ route('dta.show', $shipment->id) }}" class="btn btn-primary">Show</a>
+                                    <a href="{{ route('dta.approval.show', $shipment->id) }}" class="btn btn-primary">Show</a>
                                 </td>
                             </tr>
                         @endforeach
@@ -87,7 +94,7 @@
 @section('script')
     <script>
         $(document).ready(function() {
-            $('#shipment-table').DataTable({
+            $('#dta-table').DataTable({
                 responsive: true,
                 autoWidth: false,
                 order: [
