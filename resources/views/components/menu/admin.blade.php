@@ -52,7 +52,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ route('dashboard') }}" class="nav-link">
+                <a href="{{ route('operation.approve.index') }}" class="nav-link">
                     &nbsp;&nbsp;&nbsp;&nbsp;
                     <i class="nav-icon fas fa-check"></i>
                     <p>Approval DTA</p>
@@ -105,7 +105,7 @@
         </a>
         <ul class="nav nav-treeview">
             <li class="nav-item">
-                <a href="{{ route('approve.index') }}" class="nav-link">
+                <a href="{{ route('finance.approve.index') }}" class="nav-link">
                     &nbsp;&nbsp;&nbsp;&nbsp;
                     <i class="nav-icon fas fa-check"></i>
                     <p>Approval DTP</p>

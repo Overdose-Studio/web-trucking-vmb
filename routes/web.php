@@ -113,9 +113,16 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
     });
 
     //Approve DTP by Finance
-    Route::group(['middleware' => 'finance', 'prefix' => 'approve', 'as' => 'approve.'], function () {
+    Route::group(['middleware' => 'finance', 'prefix' => 'finance', 'as' => 'finance.approve.'], function () {
         Route::get('/', [DailyTruckingPlanController::class, 'approve'])->name('index');
         Route::put('/update_approve/{id}',  [DailyTruckingPlanController::class, 'update_approve'])->name('update');
+        // Route::get('{shipment}/approve', [DailyTruckingPlanController::class, 'approve'])->name('approve');
+    });
+
+    //Approve DTA by Operation
+    Route::group(['middleware' => 'operation', 'prefix' => 'operation', 'as' => 'operation.approve.'], function () {
+        Route::get('/', [DailyTruckingActuallyController::class, 'approve'])->name('index');
+        Route::put('/update_approve/{id}',  [DailyTruckingActuallyController::class, 'update_approve'])->name('update');
         // Route::get('{shipment}/approve', [DailyTruckingPlanController::class, 'approve'])->name('approve');
     });
 

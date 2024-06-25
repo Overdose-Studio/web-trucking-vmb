@@ -181,4 +181,23 @@ class DailyTruckingActuallyController extends Controller
     {
         return response()->download($file);
     }
+
+     //Approval DTA by Operations
+     public function approve(){
+        $shipments = Shipment::latest()->get();
+        return view('admin.dta.approve_index', compact('shipments'));
+    }
+
+    //Approve DTA by Operations edit
+    public function update_approve(Request $request, $id) {
+        $shipment = Shipment::where('id', $id)->firstOrFail();
+        $request->validate([
+            'status' => 'required|string',
+        ]);
+        $statusBaru = $request->input('status');
+        $shipment->update([
+            'status' => $statusBaru
+        ]);
+        return redirect()->route('approve.index');
+      }
 }
