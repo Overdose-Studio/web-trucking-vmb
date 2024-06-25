@@ -51,7 +51,7 @@
                                 <td>Rp {{ number_format($shipment->diff, 0, ',', '.') }}</td>
                                 <td>
                                     <a href="{{ route('bill.dta.detail', $shipment->id) }}" class="btn btn-primary">DTA</a>
-                                    <a href="{{ route('dtp.show', $shipment->id) }}" class="btn btn-secondary">DTP</a>
+                                    <a href="{{ route('bill.dtp.detail', $shipment->id) }}" class="btn btn-secondary">DTP</a>
                                 </td>
                             </tr>
                         @empty

@@ -147,7 +147,15 @@ class BillController extends Controller
         return Excel::download(new InvoiceExport($bill, $shipments), 'invoice.xlsx');
     }
 
-    // DTA Detail: Display DTA data
+    // DTP Detail: Display DTP
+    public function dtp_detail($shipment)
+    {
+        $shipment = Shipment::findOrFail($shipment);
+        $dtps = DailyTruckingPlan::where('shipment_id', $shipment->id)->get()->sortBy('truck.license_plate');
+        return view('admin.bill.dtp.detail', compact('dtps', 'shipment'));
+    }
+
+    // DTA Detail: Display DTA
     public function dta_detail($shipment)
     {
         $shipment = Shipment::findOrFail($shipment);
@@ -155,7 +163,7 @@ class BillController extends Controller
         return view('admin.bill.dta.detail', compact('dtas', 'shipment'));
     }
 
-    // DTA Truck: Display Truck by Finance
+    // DTA Truck: Display Truck
     public function dta_truck($shipment, $id)
     {
         // Get data

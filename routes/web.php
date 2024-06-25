@@ -137,6 +137,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
             Route::post('edit/{id}', [BillController::class, 'update'])->name('update');
             Route::delete('delete/{id}', [BillController::class, 'delete'])->name('destroy');
             Route::get('download/{id}', [BillController::class, 'export'])->name('download');
+            Route::get('dtp/{id}', [BillController::class, 'dtp_detail'])->name('dtp.detail');
             Route::get('dta/{id}', [BillController::class, 'dta_detail'])->name('dta.detail');
             Route::get('dta/{id}/truck/{truck}', [BillController::class, 'dta_truck'])->name('dta.truck');
         });
