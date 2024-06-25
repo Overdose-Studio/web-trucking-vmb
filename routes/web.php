@@ -108,9 +108,12 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
         Route::group(['prefix' => 'approval-dtp', 'as' => 'dtp.approval.'], function () {
             Route::get('/', [DailyTruckingPlanController::class, 'approval_index'])->name('index');
             Route::get('/{id}/show', [DailyTruckingPlanController::class, 'approval_show'])->name('show');
-            Route::put('/{id}/set',  [DailyTruckingPlanController::class, 'approval_set'])->name('set');
+            Route::get('/{id}/set',  [DailyTruckingPlanController::class, 'approval_set'])->name('set');
         });
     });
+
+    // Logout: when user whant to logout
+    Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 
     //-----------------------------------------------------------------------------------
 
@@ -133,11 +136,6 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
         Route::delete('delete/{id}', [BillController::class, 'delete'])->name('destroy');
         Route::get('download/{id}', [BillController::class, 'export'])->name('download');
     });
-
-
-
-    // Logout: when user whant to logout
-    Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 });
 
 Route::group(['middleware' => 'auth'], function () {

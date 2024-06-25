@@ -43,7 +43,7 @@
                                 @break
                         @endswitch
                     @else
-                        <a href="{{ route('dtp.approving', $shipment->id) }}" class="btn btn-success mb-2" onclick="return confirm('Are you sure?')">
+                        <a href="{{ route('dtp.approval.set', $shipment->id) }}" class="btn btn-success mb-2" onclick="return confirm('Are you sure?')">
                             <i class="fas fa-check"></i>&nbsp;
                             Approve DTP
                         </a>
