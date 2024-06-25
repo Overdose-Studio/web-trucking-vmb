@@ -28,7 +28,7 @@
                         <label for="person_in_charge">Person in Charge (PIC)</label>
                         <input type="text" name="person_in_charge" id="person_in_charge" class="form-control">
                     </div>
-                    <div class="form-group form-group d-flex justify-content-end">
+                    <div class="form-group d-flex justify-content-end">
                         <button type="submit" class="btn btn-primary">
                             <i class="fas fa-plus"></i>&nbsp;
                             Create Invoice
