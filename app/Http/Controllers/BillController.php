@@ -63,11 +63,15 @@ class BillController extends Controller
         $bill->save();
 
         // Get all shipments
-        $shipments = Shipment::where('bill_id', null)->get()->sortBy('id');
+        $shipments = Shipment::where('bill_id', null)
+            ->where('status', 'Waiting Bill')
+            ->get()
+            ->sortBy('id');
 
         // Update bill_id for each shipment
         foreach ($shipments as $shipment) {
             $shipment->bill_id = $bill->id;
+            $shipment->status = 'Completed';
             $shipment->save();
         }
 
@@ -124,6 +128,7 @@ class BillController extends Controller
         // Update bill_id for each shipment
         foreach ($shipments as $shipment) {
             $shipment->bill_id = null;
+            $shipment->status = 'Waiting Bill';
             $shipment->save();
         }
 

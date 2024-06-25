@@ -22,10 +22,11 @@
                     <thead>
                         <tr>
                             <th>No.</th>
-                            <th>Shipment ID</th>
+                            <th>ID</th>
                             <th>Date</th>
                             <th>Client</th>
                             <th>Deadline</th>
+                            <th>Status</th>
                             <th>Order Type</th>
                             <th>(DTP) Price</th>
                             <th>(DTA) Price</th>
@@ -44,6 +45,30 @@
                                     <span class="badge badge-{{ $shipment->deadline_status }}" style="font-size: 1rem">
                                         H{{ $shipment->deadline > 0 ? "+" : "" }}{{ $shipment->deadline }}
                                     </span>
+                                </td>
+                                <td>
+                                    @switch($shipment->status)
+                                        @case('Waiting Bill')
+                                            <span class="badge badge-warning">
+                                                <i class="fas fa-coins"></i>&nbsp;
+                                                Waiting Bill
+                                            </span>
+                                        @break
+
+                                        @case('Completed')
+                                            <span class="badge badge-warning">
+                                                <i class="fas fa-check"></i>&nbsp;
+                                                Completed
+                                            </span>
+                                        @break
+
+                                        @default
+                                            <span class="badge badge-warning">
+                                                <i class="fas fa-spinner"></i>&nbsp;
+                                                {{ $shipment->status }}
+                                            </span>
+                                        @break
+                                    @endswitch
                                 </td>
                                 <td>{{ ucfirst($shipment->order_type) }}</td>
                                 <td>Rp {{ number_format($shipment->dailyTruckingPlan->sum('price'), 0, ',', '.') }}</td>
@@ -142,7 +167,7 @@
                 ],
                 columnDefs: [{
                     orderable: false,
-                    targets: 9
+                    targets: 10
                 }]
             });
 
