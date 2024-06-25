@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   app:
     build:
@@ -30,7 +28,7 @@ services:
       - app
 
   db:
-    image: mysql:5.7
+    image: mysql:lts
     container_name: mysql
     restart: unless-stopped
     environment:
