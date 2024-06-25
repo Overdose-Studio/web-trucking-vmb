@@ -19,7 +19,7 @@
                             <th>Party</th>
                             <th>Client Name</th>
                             <th>Status</th>
-                            <th>Total Price</th>
+                            <th>Trip Fee</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -33,33 +33,33 @@
                                 <td>{{ $shipment->client->name }}</td>
                                 <td>
                                     @switch($shipment->status)
-                                        @case("Waiting DTP")
+                                        @case('Waiting DTP')
                                             <span class="badge badge-secondary">
                                                 <i class="fas fa-truck"></i>&nbsp;
                                                 Waiting Truck
                                             </span>
-                                            @break
+                                        @break
 
-                                        @case("Approving DTP")
+                                        @case('Approving DTP')
                                             <span class="badge badge-warning">
                                                 <i class="fas fa-spinner"></i>&nbsp;
                                                 Waiting Approval
                                             </span>
-                                            @break
+                                        @break
 
-                                        @case("Waiting DTA")
+                                        @case('Waiting DTA')
                                             <span class="badge badge-success">
                                                 <i class="fas fa-check"></i>&nbsp;
                                                 Approved
                                             </span>
-                                            @break
+                                        @break
 
                                         @default
                                             <span class="badge badge-danger">
                                                 <i class="fas fa-ban"></i>&nbsp;
                                                 Closed
                                             </span>
-                                            @break
+                                        @break
                                     @endswitch
                                 </td>
                                 <td>Rp {{ number_format($shipment->dailyTruckingPlan->sum('price'), 0, ',', '.') }}</td>
