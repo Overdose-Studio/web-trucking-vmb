@@ -12,14 +12,39 @@
                     </div>
                 </div>
                 <div class="d-flex flex-column">
-                    <a href="{{ route('shipment.create') }}" class="btn btn-primary mb-2 @if ($shipment->status != 'Waiting DTP') disabled @endif">
-                        <i class="fas fa-paper-plane"></i>&nbsp;
-                        Approving DTP to Finance
-                    </a>
-                    <a href="{{ route('shipment.create') }}" class="btn btn-success mb-2 text-left @if ($shipment->status != 'Waiting DTP') disabled @endif">
-                        <i class="fas fa-plus"></i>&nbsp;
-                        Add Truck
-                    </a>
+                    @if ($shipment->status != 'Waiting DTP')
+                        @switch($shipment->status)
+                            @case("Waiting Bill")
+                                <span class="badge badge-warning">
+                                    <i class="fas fa-coins"></i>&nbsp;
+                                    Waiting Bill
+                                </span>
+                                @break
+
+                            @case("Completed")
+                                <span class="badge badge-warning">
+                                    <i class="fas fa-check"></i>&nbsp;
+                                    Completed
+                                </span>
+                                @break
+
+                            @default
+                                <span class="badge badge-warning">
+                                    <i class="fas fa-spinner"></i>&nbsp;
+                                    {{ $shipment->status }}
+                                </span>
+                                @break
+                        @endswitch
+                    @else
+                        <a href="{{ route('dtp.approving', $shipment->id) }}" class="btn btn-primary mb-2" onclick="return confirm('Are you sure?')">
+                            <i class="fas fa-paper-plane"></i>&nbsp;
+                            Approving DTP to Finance
+                        </a>
+                        <a href="{{ route('dtp.create', $shipment->id) }}" class="btn btn-success mb-2 text-left">
+                            <i class="fas fa-plus"></i>&nbsp;
+                            Add Truck
+                        </a>
+                    @endif
                 </div>
             </div>
         </div>
@@ -55,15 +80,19 @@
                                 <td>{{ $dtp->size }}</td>
                                 <td>Rp {{ number_format($dtp->price, 0, ',', '.') }}</td>
                                 <td>
-                                    <a href="{{ route('dtp.edit', [$shipment->id, $dtp->id]) }}"
-                                        class="btn btn-warning">Edit</a>
-                                    <form action="{{ route('dtp.destroy', [$shipment->id, $dtp->id]) }}" method="POST"
-                                        class="d-inline">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger"
-                                            onclick="return confirm('Are you sure?')">Delete</button>
-                                    </form>
+                                    @if ($shipment->status != 'Waiting DTP')
+                                        <span>-</span>
+                                    @else
+                                        <a href="{{ route('dtp.edit', [$shipment->id, $dtp->id]) }}"
+                                            class="btn btn-warning">Edit</a>
+                                        <form action="{{ route('dtp.destroy', [$shipment->id, $dtp->id]) }}" method="POST"
+                                            class="d-inline">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger"
+                                                onclick="return confirm('Are you sure?')">Delete</button>
+                                        </form>
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach

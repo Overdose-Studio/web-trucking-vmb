@@ -28,6 +28,15 @@ class DailyTruckingPlanController extends Controller
         return view('admin.dtp.show', compact('dtps', 'shipment'));
     }
 
+    // Approving: change state on shipment
+    public function approving($shipment)
+    {
+        $shipment = Shipment::findOrFail($shipment);
+        $shipment->status = 'Approving DTP';
+        $shipment->save();
+        return redirect()->route('dtp.show', $shipment->id)->with('success', 'Sending approving DTP to Finance');
+    }
+
     // Create: show the form to create new daily trucking plan
     public function create($shipment)
     {
@@ -148,7 +157,7 @@ class DailyTruckingPlanController extends Controller
         $dta->save();
 
         // Redirect to the daily trucking plan index page
-        return redirect()->route('dtp.show', $shipment->id)->with('success', 'Add truck on DTP' . $shipment->client->name . 'successfully');
+        return redirect()->route('dtp.show', $shipment->id)->with('success', 'Add truck on DTP ' . $shipment->client->name . ' successfully');
     }
 
     // Edit: show the form to edit daily trucking plan
@@ -284,7 +293,7 @@ class DailyTruckingPlanController extends Controller
         $dtp->save();
 
         // Redirect to daily trucking plan index
-        return redirect()->route('dtp.show', $shipment->id)->with('success', 'Update truck on DTP'. $shipment->client->name .' successfully');
+        return redirect()->route('dtp.show', $shipment->id)->with('success', 'Update truck on DTP '. $shipment->client->name .' successfully');
     }
 
     // Delete: delete daily trucking plan from database
