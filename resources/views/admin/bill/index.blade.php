@@ -133,6 +133,7 @@
 @section('script')
     <script>
         $(document).ready(function() {
+            // Datable `bill-table`
             $('#bill-table').DataTable({
                 responsive: true,
                 autoWidth: false,
@@ -143,6 +144,22 @@
                     orderable: false,
                     targets: 9
                 }]
+            });
+
+            // Datatable each bill id
+            const billsId = @json($bills->pluck('id'));
+            billsId.forEach(element => {
+                $(`#bill-${element}-table`).DataTable({
+                    responsive: true,
+                    autoWidth: false,
+                    order: [
+                        [0, 'asc']
+                    ],
+                    columnDefs: [{
+                        orderable: false,
+                        targets: 8
+                    }]
+                });
             });
         });
     </script>
