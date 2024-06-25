@@ -91,7 +91,7 @@
     </li>
 
     {{-- Finance --}}
-    <li class="nav-item {{ request()->is('dashboard/approval-dtp*') ? 'menu-is-opening menu-open' : '' }}">
+    <li class="nav-item {{ request()->is('dashboard/approval-dtp*') || request()->is('dashboard/bill*') ? 'menu-is-opening menu-open' : '' }}">
         <a href="{{ route('dashboard') }}" class="nav-link">
             <i class="nav-icon fas fa-money-check-alt"></i>
             <p>Finance</p>
