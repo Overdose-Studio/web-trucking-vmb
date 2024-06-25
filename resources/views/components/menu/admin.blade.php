@@ -27,7 +27,7 @@
 
     {{-- Operations --}}
     <li
-        class="nav-item {{ request()->is('dashboard/client*') || request()->is('dashboard/shipment*') ? 'menu-is-opening menu-open' : '' }}">
+        class="nav-item {{ request()->is('dashboard/client*') || request()->is('dashboard/shipment*') || request()->is('dashboard/approval-dta*') ? 'menu-is-opening menu-open' : '' }}">
         <a href="#" class="nav-link">
             <i class="nav-icon fas fa-cogs"></i>
             <p>Operation</p>
