@@ -104,7 +104,7 @@
                 ],
                 columnDefs: [{
                     orderable: false,
-                    targets: 5
+                    targets: 6
                 }]
             });
         });
