@@ -66,7 +66,7 @@
                     </div>
                     <div class="form-group
                                 {{ $errors->has('price') ? 'has-error' : '' }}">
-                        <label>Price</label>
+                        <label>Trip Fee</label>
                         <input type="number" class="form-control" name="price" placeholder="Price"
                             value="{{ $dtp->price }}">
                         <span class="text-danger">{{ $errors->first('price') }}</span>

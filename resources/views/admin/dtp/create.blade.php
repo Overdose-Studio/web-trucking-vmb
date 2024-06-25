@@ -47,7 +47,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="price">Price</label>
+                        <label for="price">Trip Fee</label>
                         <input type="number" class="form-control" name="price" placeholder="Price"
                             value="{{ old('price') }}">
                     </div>

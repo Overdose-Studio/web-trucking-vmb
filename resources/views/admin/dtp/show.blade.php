@@ -14,29 +14,30 @@
                 <div class="d-flex flex-column">
                     @if ($shipment->status != 'Waiting DTP')
                         @switch($shipment->status)
-                            @case("Waiting Bill")
+                            @case('Waiting Bill')
                                 <span class="badge badge-warning">
                                     <i class="fas fa-coins"></i>&nbsp;
                                     Waiting Bill
                                 </span>
-                                @break
+                            @break
 
-                            @case("Completed")
+                            @case('Completed')
                                 <span class="badge badge-warning">
                                     <i class="fas fa-check"></i>&nbsp;
                                     Completed
                                 </span>
-                                @break
+                            @break
 
                             @default
                                 <span class="badge badge-warning">
                                     <i class="fas fa-spinner"></i>&nbsp;
                                     {{ $shipment->status }}
                                 </span>
-                                @break
+                            @break
                         @endswitch
                     @else
-                        <a href="{{ route('dtp.approving', $shipment->id) }}" class="btn btn-primary mb-2" onclick="return confirm('Are you sure?')">
+                        <a href="{{ route('dtp.approving', $shipment->id) }}" class="btn btn-primary mb-2"
+                            onclick="return confirm('Are you sure?')">
                             <i class="fas fa-paper-plane"></i>&nbsp;
                             Approving DTP to Finance
                         </a>
@@ -60,7 +61,7 @@
                             <th>Destination 2</th>
                             <th>Destination 3</th>
                             <th>Size</th>
-                            <th>Price</th>
+                            <th>Trip Fee</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -85,7 +86,8 @@
                                     @if ($shipment->status != 'Waiting DTP')
                                         <span>-</span>
                                     @else
-                                        <a href="{{ route('dtp.edit', [$shipment->id, $dtp->id]) }}" class="btn btn-warning">
+                                        <a href="{{ route('dtp.edit', [$shipment->id, $dtp->id]) }}"
+                                            class="btn btn-warning">
                                             <i class="fas fa-edit"></i>&nbsp;
                                             Edit
                                         </a>
@@ -93,7 +95,8 @@
                                             class="d-inline">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">
+                                            <button type="submit" class="btn btn-danger"
+                                                onclick="return confirm('Are you sure?')">
                                                 <i class="fas fa-trash"></i>&nbsp;
                                                 Delete
                                             </button>

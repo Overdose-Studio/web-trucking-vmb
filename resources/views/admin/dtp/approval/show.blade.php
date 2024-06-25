@@ -14,36 +14,37 @@
                 <div class="d-flex flex-column">
                     @if ($shipment->status != 'Approving DTP')
                         @switch($shipment->status)
-                            @case("Waiting DTP")
+                            @case('Waiting DTP')
                                 <span class="badge badge-secondary">
                                     <i class="fas fa-truck"></i>&nbsp;
                                     Waiting Truck
                                 </span>
-                                @break
+                            @break
 
-                            @case("Waiting Bill")
+                            @case('Waiting Bill')
                                 <span class="badge badge-warning">
                                     <i class="fas fa-coins"></i>&nbsp;
                                     Waiting Bill
                                 </span>
-                                @break
+                            @break
 
-                            @case("Completed")
+                            @case('Completed')
                                 <span class="badge badge-warning">
                                     <i class="fas fa-check"></i>&nbsp;
                                     Completed
                                 </span>
-                                @break
+                            @break
 
                             @default
                                 <span class="badge badge-warning">
                                     <i class="fas fa-spinner"></i>&nbsp;
                                     {{ $shipment->status }}
                                 </span>
-                                @break
+                            @break
                         @endswitch
                     @else
-                        <a href="{{ route('dtp.approval.set', $shipment->id) }}" class="btn btn-success mb-2" onclick="return confirm('Are you sure?')">
+                        <a href="{{ route('dtp.approval.set', $shipment->id) }}" class="btn btn-success mb-2"
+                            onclick="return confirm('Are you sure?')">
                             <i class="fas fa-check"></i>&nbsp;
                             Approve DTP
                         </a>

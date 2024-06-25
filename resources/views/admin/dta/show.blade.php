@@ -14,43 +14,44 @@
                 <div class="d-flex flex-column">
                     @if ($shipment->status != 'Waiting DTA')
                         @switch($shipment->status)
-                            @case("Waiting DTP")
+                            @case('Waiting DTP')
                                 <span class="badge badge-secondary">
                                     <i class="fas fa-spinner"></i>&nbsp;
                                     Waiting DTP
                                 </span>
-                                @break
+                            @break
 
-                            @case("Approving DTP")
+                            @case('Approving DTP')
                                 <span class="badge badge-secondary">
                                     <i class="fas fa-spinner"></i>&nbsp;
                                     Approving DTP
                                 </span>
-                                @break
+                            @break
 
-                            @case("Waiting Bill")
+                            @case('Waiting Bill')
                                 <span class="badge badge-warning">
                                     <i class="fas fa-coins"></i>&nbsp;
                                     Waiting Bill
                                 </span>
-                                @break
+                            @break
 
-                            @case("Completed")
+                            @case('Completed')
                                 <span class="badge badge-warning">
                                     <i class="fas fa-check"></i>&nbsp;
                                     Completed
                                 </span>
-                                @break
+                            @break
 
                             @default
                                 <span class="badge badge-warning">
                                     <i class="fas fa-spinner"></i>&nbsp;
                                     {{ $shipment->status }}
                                 </span>
-                                @break
+                            @break
                         @endswitch
                     @else
-                        <a href="{{ route('dta.approving', $shipment->id) }}" class="btn btn-primary mb-2" onclick="return confirm('Are you sure?')">
+                        <a href="{{ route('dta.approving', $shipment->id) }}" class="btn btn-primary mb-2"
+                            onclick="return confirm('Are you sure?')">
                             <i class="fas fa-paper-plane"></i>&nbsp;
                             Approving DTA to Operation
                         </a>
@@ -70,8 +71,8 @@
                             <th>Destination 2</th>
                             <th>Destination 3</th>
                             <th>Size</th>
-                            <th>(DTP) Price</th>
-                            <th>(DTA) Price</th>
+                            <th>(DTP) Trip Fee</th>
+                            <th>(DTA) Trip Fee</th>
                             <th>DTP - DTA</th>
                             <th>Actions</th>
                         </tr>
@@ -120,7 +121,8 @@
                                     @if ($shipment->status != 'Waiting DTA')
                                         <span>-</span>
                                     @else
-                                        <a href="{{ route('dta.edit', [$shipment->id, $dta->id]) }}" class="btn btn-warning">
+                                        <a href="{{ route('dta.edit', [$shipment->id, $dta->id]) }}"
+                                            class="btn btn-warning">
                                             <i class="fas fa-edit"></i>&nbsp;
                                             Set DTA
                                         </a>

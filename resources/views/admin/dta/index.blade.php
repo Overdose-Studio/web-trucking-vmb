@@ -18,7 +18,7 @@
                             <th>Order Type</th>
                             <th>Party</th>
                             <th>Client Name</th>
-                            <th>Total Price</th>
+                            <th>Trip Fee</th>
                             <th>Status</th>
                             <th>DTP - DTA</th>
                             <th>Action</th>
@@ -36,40 +36,40 @@
                                 <td>Rp {{ number_format($shipment->diff, 0, ',', '.') }}</td>
                                 <td>
                                     @switch($shipment->status)
-                                        @case("Waiting DTP")
+                                        @case('Waiting DTP')
                                             <span class="badge badge-secondary">
                                                 <i class="fas fa-spinner"></i>&nbsp;
                                                 Waiting DTP
                                             </span>
-                                            @break
+                                        @break
 
-                                        @case("Approving DTP")
+                                        @case('Approving DTP')
                                             <span class="badge badge-secondary">
                                                 <i class="fas fa-spinner"></i>&nbsp;
                                                 Approving DTP
                                             </span>
-                                            @break
+                                        @break
 
-                                        @case("Waiting DTA")
+                                        @case('Waiting DTA')
                                             <span class="badge badge-success">
                                                 <i class="fas fa-pencil"></i>&nbsp;
                                                 Open
                                             </span>
-                                            @break
+                                        @break
 
-                                        @case("Approving DTA")
+                                        @case('Approving DTA')
                                             <span class="badge badge-warning">
                                                 <i class="fas fa-spinner"></i>&nbsp;
                                                 Waiting Approval
                                             </span>
-                                            @break
+                                        @break
 
                                         @default
                                             <span class="badge badge-danger">
                                                 <i class="fas fa-ban"></i>&nbsp;
                                                 Closed
                                             </span>
-                                            @break
+                                        @break
                                     @endswitch
                                 </td>
                                 <td>
