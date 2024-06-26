@@ -25,9 +25,18 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 COPY . /var/www
 RUN chown -R www-data:www-data /var/www
 
+# Copy entrypoint script and set permissions
+COPY docker-entrypoint.sh /usr/local/bin/entrypoint.sh
+RUN chmod +x /usr/local/bin/entrypoint.sh
+
 # Change current user to www-data
 USER www-data
 
 # Expose port 9000 and start php-fpm server
 EXPOSE 9000
+
+# Set entrypoint
+ENTRYPOINT ["entrypoint.sh"]
+
+# Default command
 CMD ["php-fpm"]
