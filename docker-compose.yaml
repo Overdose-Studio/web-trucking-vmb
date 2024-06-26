@@ -12,7 +12,6 @@ services:
       - ./docker/php/local.ini:/usr/local/etc/php/conf.d/local.ini
     networks:
       - web-vmb-prototype
-    entrypoint: ["/usr/local/bin/entrypoint.sh"]
 
   web:
     image: nginx:alpine
