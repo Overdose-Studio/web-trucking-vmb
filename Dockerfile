@@ -8,15 +8,16 @@ WORKDIR /var/www
 RUN apk --no-cache add \
     git \
     curl \
+    curl-dev \
     libpng-dev \
     libjpeg-turbo-dev \
     freetype-dev \
     oniguruma-dev \
     libxml2-dev \
-    zip \
-    unzip && \
-    docker-php-ext-configure gd --with-freetype --with-jpeg && \
-    docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
+    libzip-dev \
+    unzip \
+    && docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd mysqli xml zip curl
 
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
