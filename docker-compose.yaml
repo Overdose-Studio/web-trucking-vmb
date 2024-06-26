@@ -4,7 +4,7 @@ services:
       context: .
       dockerfile: Dockerfile
     image: web-vmb-prototype
-    container_name: web-vmb-prototype
+    container_name: vmb-prototype-app
     restart: unless-stopped
     working_dir: /var/www
     volumes:
@@ -15,7 +15,7 @@ services:
 
   web:
     image: nginx:alpine
-    container_name: nginx
+    container_name: vmb-prototype-web
     restart: unless-stopped
     ports:
       - "8000:80"
@@ -29,7 +29,7 @@ services:
 
   db:
     image: mysql:lts
-    container_name: mysql
+    container_name: vmb-prototype-db
     restart: unless-stopped
     environment:
       MYSQL_DATABASE: laravel
