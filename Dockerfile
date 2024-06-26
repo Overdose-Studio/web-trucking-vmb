@@ -26,9 +26,6 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 COPY . /var/www
 RUN chown -R www-data:www-data /var/www
 
-# Install application dependencies
-RUN composer install --no-interaction
-
 # Change current user to www-data
 USER www-data
 
