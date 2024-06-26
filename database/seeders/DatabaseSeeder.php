@@ -15,6 +15,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        // Get users with email `admin@example.com`
+        $admin = User::where('email', 'admin@example.com')->first();
+
+        // If there has admin user, then exit
+        if ($admin) {
+            return;
+        }
+
         // Factories
         User::factory(20)->create();
         Client::factory(10)->create();
