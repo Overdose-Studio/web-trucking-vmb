@@ -12,21 +12,21 @@ composer install --no-interaction
 
 # Create Docker Container
 echo -e "${YELLOW}[process] Creating Docker Container...${NC}"
-docker-compose up -d
+docker compose up -d
 
 # Generate Laravel Key
 echo -e "${YELLOW}[process] Generating Laravel Key...${NC}"
-docker-compose exec app php artisan key:generate
+docker compose exec app php artisan key:generate
 
 # Generate storage link
 echo -e "${YELLOW}[process] Generating Storage Link...${NC}"
-docker-compose exec app php artisan storage:link
+docker compose exec app php artisan storage:link
 
 # Ask to run migrations
 read -p "Do you want to run migrations? (y/n): " run_migrations
 if [ "$run_migrations" == "y" ]; then
     echo -e "${YELLOW}[process] Running Migrations...${NC}"
-    docker-compose exec app php artisan migrate
+    docker compose exec app php artisan migrate
 else
     echo -e "${RED}[skip] Migrations not run.${NC}"
 fi
@@ -35,7 +35,7 @@ fi
 read -p "Do you want to run seeders? (y/n): " run_seeders
 if [ "$run_seeders" == "y" ]; then
     echo -e "${YELLOW}[process] Running Seeders...${NC}"
-    docker-compose exec app php artisan db:seed
+    docker compose exec app php artisan db:seed
 else
     echo -e "${RED}[skip] Seeders not run.${NC}"
 fi

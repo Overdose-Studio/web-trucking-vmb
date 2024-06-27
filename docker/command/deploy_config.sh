@@ -11,8 +11,11 @@ read -p "Enter your application name: " app_name
 read -p "Enter the port number: " port
 read -p "Enter the server name: " server_name
 
-# Format application name to snake case
-app_name=$(echo $app_name | sed -r 's/[^a-zA-Z0-9]+/_/g' | tr -s '_' | tr A-Z a-z)
+# Format application name to kebab-case
+app_name=$(echo "$app_name" | tr '[:upper:]' '[:lower:]' | tr -s ' ' '-' | tr -s '_' '-')
+
+# Remove any characters that are not letters, numbers, or hyphens
+app_name=$(echo "$app_name" | tr -cd '[:alnum:]-')
 
 # Update the docker-compose.yaml file
 echo -e "${YELLOW}[process] Setting up Docker Compose...${NC}"
