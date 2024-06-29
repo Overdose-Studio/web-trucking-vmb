@@ -15,9 +15,9 @@ echo -e "${BLUE}Welcome to Laravel 9.x Deployment Script${NC}"
 
 # Run all installation scripts
 ./docker/command/install_curl.sh
-./docker/command/install_php.sh
-./docker/command/install_composer.sh
-./docker/command/install_npm.sh
+# ./docker/command/install_php.sh           => This script will be installed on container
+# ./docker/command/install_composer.sh      => This script will be installed on container
+# ./docker/command/install_npm.sh           => This script will be installed on container
 ./docker/command/install_nginx.sh
 ./docker/command/install_docker.sh
 

@@ -6,13 +6,13 @@ GREEN='\033[0;32m'
 RED='\033[0;31m'
 NC='\033[0m' # No Color
 
-# Install Laravel Dependencies
-echo -e "${YELLOW}[process] Installing Laravel Dependencies...${NC}"
-composer install --no-interaction
-
 # Create Docker Container
 echo -e "${YELLOW}[process] Creating Docker Container...${NC}"
 docker compose up -d
+
+# Install Laravel Dependencies
+echo -e "${YELLOW}[process] Installing Laravel Dependencies...${NC}"
+docker compose exec app composer install --no-interaction
 
 # Generate Laravel Key
 echo -e "${YELLOW}[process] Generating Laravel Key...${NC}"
@@ -40,11 +40,12 @@ else
     echo -e "${RED}[skip] Seeders not run.${NC}"
 fi
 
-# Ask to install npm dependencies
-read -p "Do you want to install npm dependencies? (y/n): " install_npm
-if [ "$install_npm" == "y" ]; then
-    echo -e "${YELLOW}[process] Installing NPM dependencies...${NC}"
-    npm install
-else
-    echo -e "${RED}[skip] NPM dependencies not installed.${NC}"
-fi
+# => This script will be installed on container
+# # Ask to install npm dependencies
+# read -p "Do you want to install npm dependencies? (y/n): " install_npm
+# if [ "$install_npm" == "y" ]; then
+#     echo -e "${YELLOW}[process] Installing NPM dependencies...${NC}"
+#     npm install
+# else
+#     echo -e "${RED}[skip] NPM dependencies not installed.${NC}"
+# fi
