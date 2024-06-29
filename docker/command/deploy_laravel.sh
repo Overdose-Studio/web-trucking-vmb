@@ -39,13 +39,3 @@ if [ "$run_seeders" == "y" ]; then
 else
     echo -e "${RED}[skip] Seeders not run.${NC}"
 fi
-
-# => This script will be installed on container
-# # Ask to install npm dependencies
-# read -p "Do you want to install npm dependencies? (y/n): " install_npm
-# if [ "$install_npm" == "y" ]; then
-#     echo -e "${YELLOW}[process] Installing NPM dependencies...${NC}"
-#     npm install
-# else
-#     echo -e "${RED}[skip] NPM dependencies not installed.${NC}"
-# fi
