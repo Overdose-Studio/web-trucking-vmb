@@ -10,7 +10,6 @@ NC='\033[0m' # No Color
 read -p "Enter your application name: " app_name
 read -p "Enter the port number: " port
 read -p "Enter the server name: " server_name
-read -p "Enter your email address: " email
 
 # Format application name to kebab-case
 app_name=$(echo "$app_name" | tr '[:upper:]' '[:lower:]' | tr -s ' ' '-' | tr -s '_' '-')

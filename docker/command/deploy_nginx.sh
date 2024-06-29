@@ -14,5 +14,7 @@ sudo systemctl restart nginx
 
 # Generate SSL Certificate
 echo -e "${YELLOW}[process] Generating SSL Certificate...${NC}"
-sudo certbot --nginx -d $server_name -n -m $email --agree-tos
+read -p "Enter the server name (SSL): " server_name
+read -p "Enter your email address (SSL): " email
+sudo certbot --nginx --agree-tos -n -m $email -d $server_name
 sudo systemctl restart nginx
