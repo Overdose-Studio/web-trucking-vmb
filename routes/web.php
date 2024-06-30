@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AssetController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BillController;
 use App\Http\Controllers\ClientController;
@@ -147,6 +148,11 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
     Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 });
 
+// Assets routes
+Route::get('/assets/{file}', [AssetController::class, 'getAssets'])->name('assets');
+
+
+// Auth routes
 Route::group(['middleware' => 'auth'], function () {
     Route::get('{file}', [DailyTruckingActuallyController::class, 'download'])->name('dta.download');
 });
