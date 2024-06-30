@@ -22,7 +22,7 @@ class AssetController extends Controller
     }
 
     // Access Directory Files: public access to asset directory
-    public function getDirectory(string $directory, string $file) {
+    public function getDirectoryFile(string $directory, string $file) {
         // Get file path
         $filePath = public_path("assets/{$directory}/{$file}");
 
