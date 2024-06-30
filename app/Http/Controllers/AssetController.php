@@ -21,6 +21,13 @@ class AssetController extends Controller
         // Get the file's MIME type
         $mimeType = mime_content_type($filePath);
 
+        // Set appropriate headers based on file type
+        $headers = [];
+        if (strpos($mimeType, 'text') !== false) {
+            $headers['Content-Type'] = $mimeType;
+            $headers['Content-Disposition'] = 'inline';
+        }
+
         // Return the file as a response with the correct content type
         return response()->file($filePath, [
             'Content-Type' => $mimeType,
