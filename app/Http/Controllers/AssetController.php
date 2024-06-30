@@ -18,7 +18,11 @@ class AssetController extends Controller
             abort(404, 'File not found');
         }
 
-        // Return the file as a response
-        return Response::file($filePath);
+        // Check if the file is `.css` set the header to `text/css`
+        if (pathinfo($filePath, PATHINFO_EXTENSION) === 'css') {
+            return Response::file($filePath, ['Content-Type' => 'text/css']);
+        } else {
+            return Response::file($filePath);
+        }
     }
 }
