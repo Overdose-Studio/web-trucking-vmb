@@ -18,14 +18,17 @@ class AssetController extends Controller
             abort(404, 'File not found');
         }
 
-        // Get the file's MIME type
-        $mimeType = mime_content_type($filePath);
-
-        // Set appropriate headers based on file type
-        $headers = [];
-        if (strpos($mimeType, 'text') !== false) {
-            $headers['Content-Type'] = $mimeType;
-            $headers['Content-Disposition'] = 'inline';
+        // Return the file as a response depending on the file type
+        switch (pathinfo($filePath, PATHINFO_EXTENSION)) {
+            case 'css':
+                $mimeType = 'text/css';
+                break;
+            case 'js':
+                $mimeType = 'text/javascript';
+                break;
+            default:
+                $mimeType = File::mimeType($filePath);
+                break;
         }
 
         // Return the file as a response with the correct content type
