@@ -149,8 +149,9 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
 });
 
 // Assets routes: all assets after `assets/` will be handled by this route
-Route::get('/assets/{file}', [AssetController::class, 'getFile'])->name('assets');
-Route::get('/assets/{dir}/{file}', [AssetController::class, 'getDirectoryFile'])->name('assets');
+Route::get('/assets/{path}', [AssetController::class, 'getFile'])
+    ->where('path', '.*')
+    ->name('assets');
 
 
 // Auth routes

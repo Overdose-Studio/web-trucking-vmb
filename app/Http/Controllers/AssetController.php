@@ -8,30 +8,17 @@ use Illuminate\Support\Facades\Response;
 class AssetController extends Controller
 {
     // Access File: public access to asset
-    public function getFile(string $file) {
-        // Get file path
-        $filePath = public_path("assets/{$file}");
+    public function getFile(string $path)
+    {
+        // Construct the full file path
+        $filePath = public_path("assets/{$path}");
 
-        // If file not found, return 404
+        // Check if the file exists
         if (!File::exists($filePath)) {
             abort(404, 'File not found');
         }
 
-        // Return file
-        return Response::file($filePath);
-    }
-
-    // Access Directory Files: public access to asset directory
-    public function getDirectoryFile(string $directory, string $file) {
-        // Get file path
-        $filePath = public_path("assets/{$directory}/{$file}");
-
-        // If file not found, return 404
-        if (!File::exists($filePath)) {
-            abort(404, 'File not found');
-        }
-
-        // Return file
+        // Return the file as a response
         return Response::file($filePath);
     }
 }
