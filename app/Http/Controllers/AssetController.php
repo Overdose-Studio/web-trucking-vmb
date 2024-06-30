@@ -18,11 +18,12 @@ class AssetController extends Controller
             abort(404, 'File not found');
         }
 
-        // Check if the file is `.css` set the header to `text/css`
-        if (pathinfo($filePath, PATHINFO_EXTENSION) === 'css') {
-            return Response::file($filePath, ['Content-Type' => 'text/css']);
-        } else {
-            return Response::file($filePath);
-        }
+        // Get the file's MIME type
+        $mimeType = mime_content_type($filePath);
+
+        // Return the file as a response with the correct content type
+        return response()->file($filePath, [
+            'Content-Type' => $mimeType,
+        ]);
     }
 }
