@@ -148,8 +148,9 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
     Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 });
 
-// Assets routes
-Route::get('/assets/{file}', [AssetController::class, 'getAssets'])->name('assets');
+// Assets routes: all assets after `assets/` will be handled by this route
+Route::get('/assets/{file}', [AssetController::class, 'getFile'])->name('assets');
+Route::get('/assets/{dir}/{file}', [AssetController::class, 'getDirectoryFile'])->name('assets');
 
 
 // Auth routes
