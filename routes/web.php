@@ -6,6 +6,7 @@ use App\Http\Controllers\BillController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\DailyTruckingPlanController;
 use App\Http\Controllers\DailyTruckingActuallyController;
+use App\Http\Controllers\DriverController;
 use App\Http\Controllers\ShipmentController;
 use App\Http\Controllers\TruckController;
 use App\Http\Controllers\UserController;
@@ -83,6 +84,16 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
 
     // Trucking Routes
     Route::group(['middleware' => 'trucking'], function () {
+        // Driver: list all drivers and edit driver
+        Route::group(['prefix' => 'driver', 'as' => 'driver.'], function () {
+            Route::get('/', [DriverController::class, 'index'])->name('index');
+            Route::get('create', [DriverController::class, 'create'])->name('create');
+            Route::post('create', [DriverController::class, 'store'])->name('store');
+            Route::get('edit/{id}', [DriverController::class, 'edit'])->name('edit');
+            Route::post('edit/{id}', [DriverController::class, 'update'])->name('update');
+            Route::delete('delete/{id}', [DriverController::class, 'delete'])->name('destroy');
+        });
+
         // Truck: list all trucks and edit truck
         Route::group(['prefix' => 'truck', 'as' => 'truck.'], function () {
             Route::get('/', [TruckController::class, 'index'])->name('index');

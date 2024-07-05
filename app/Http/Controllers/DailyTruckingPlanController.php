@@ -6,6 +6,7 @@ use App\Models\Client;
 use App\Models\DailyTruckingPlan;
 use App\Models\DailyTruckingActually;
 use App\Models\Destination;
+use App\Models\Driver;
 use App\Models\Shipment;
 use App\Models\Truck;
 use Illuminate\Http\Request;
@@ -45,12 +46,13 @@ class DailyTruckingPlanController extends Controller
         $trucks = Truck::whereHas('state', function ($query) {
             $query->where('type', 'good');
         })->get()->sortBy('license_plate');
+        $drivers = Driver::orderBy('name')->get();
 
         // If bill already created, cannot create new truck
         if ($shipment->bill_id) {
             return redirect()->route('dtp.show', $shipment->id)->with('error', 'Bill already created, cannot create add new truck');
         } else {
-            return view('admin.dtp.create', compact('shipment', 'trucks'));
+            return view('admin.dtp.create', compact('shipment', 'trucks', 'drivers'));
         }
     }
 
@@ -175,12 +177,13 @@ class DailyTruckingPlanController extends Controller
         $trucks = Truck::whereHas('state', function ($query) {
             $query->where('type', 'good');
         })->get()->sortBy('license_plate');
+        $drivers = Driver::orderBy('name')->get();
 
         // Check if bill is already created
         if ($shipment->bill_id) {
             return redirect()->route('dtp.show', $shipment->id)->with('error', 'Bill already created, cannot update truck on DTP ' . $shipment->client->name);
         } else {
-            return view('admin.dtp.edit', compact('dtp', 'shipment', 'trucks'));
+            return view('admin.dtp.edit', compact('dtp', 'shipment', 'trucks', 'drivers'));
         }
     }
 

@@ -13,12 +13,17 @@
                 <form action="{{ route('dtp.update', [$shipment->id, $dtp->id]) }}" method="POST"
                     enctype="multipart/form-data">
                     {{ csrf_field() }}
-                    <div
-                        class="form-group
-                                {{ $errors->has('driver_name') ? 'has-error' : '' }}">
+                    <div class="form-group {{ $errors->has('driver_name') ? 'has-error' : '' }}">
                         <label for="driver_name">Driver Name</label>
-                        <input type="text" class="form-control" name="driver_name" placeholder="Driver Name"
-                            value="{{ $dtp->driver_name }}">
+                        <select name="driver_name" class="form-control">
+                            <option value="" disabled selected>Driver Name</option>
+                            @foreach ($drivers as $driver)
+                                <option value="{{ $driver->name }}"
+                                    {{ old('driver_name') == $driver->name || $dtp->driver_name == $driver->name ? 'selected' : '' }}>
+                                    {{ $driver->name }}
+                                </option>
+                            @endforeach
+                        </select>
                         <span class="text-danger">{{ $errors->first('driver_name') }}</span>
                     </div>
                     <div
