@@ -95,7 +95,7 @@
                                             href="{{ route('dta.download', ['file' => $dta->destination1->image]) }}">Download</a>
                                         <br>
                                     @endif
-                                    {{ $dta->destination1->detail }}
+                                    {{ $dta->destination1->detail ?? '-' }}
                                 </td>
                                 <td>
                                     @if ($dta->destination2->image)
@@ -103,7 +103,7 @@
                                             href="{{ route('dta.download', ['file' => $dta->destination2->image]) }}">Download</a>
                                         <br>
                                     @endif
-                                    {{ $dta->destination2->detail }}
+                                    {{ $dta->destination2->detail ?? '-' }}
                                 </td>
                                 <td>
                                     @if ($dta->destination3->image)
@@ -111,7 +111,7 @@
                                             href="{{ route('dta.download', ['file' => $dta->destination3->image]) }}">Download</a>
                                         <br>
                                     @endif
-                                    {{ $dta->destination3->detail }}
+                                    {{ $dta->destination3->detail ?? '-' }}
                                 </td>
                                 <td>{{ $dta->size }}</td>
                                 <td>Rp {{ number_format($dta->dailyTruckingPlan->price, 0, ',', '.') }}</td>
