@@ -21,8 +21,7 @@
             <!-- Left navbar links -->
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i
-                            class="fas fa-bars"></i></a>
+                    <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
                 </li>
             </ul>
 
@@ -52,7 +51,7 @@
         <aside class="main-sidebar sidebar-dark-primary elevation-4" style="height: 100vh">
             <!-- Brand Logo -->
             <a href="{{ route('dashboard') }}" class="brand-link">
-                <img src="{{ asset('assets/images/VMB.jpg') }}" class="img-fluid" alt="">
+                <img src="{{ asset('assets/images/logo.png') }}" class="img-fluid" alt="">
             </a>
 
             <!-- Sidebar -->
