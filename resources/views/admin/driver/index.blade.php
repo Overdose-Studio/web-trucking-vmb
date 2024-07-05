@@ -42,7 +42,10 @@
                                 <td>{{ $driver->sim }}</td>
                                 <td>{{ $driver->address }}</td>
                                 <td>
-                                    <span>-</span>
+                                    <a href="{{ route('driver.edit', $driver->id) }}" class="btn btn-warning">
+                                        <i class="fas fa-edit"></i>&nbsp;
+                                        Edit
+                                    </a>
                                 </td>
                             </tr>
                         @endforeach

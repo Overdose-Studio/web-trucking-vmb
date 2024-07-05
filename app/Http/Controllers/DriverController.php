@@ -45,4 +45,11 @@ class DriverController extends Controller
 
         return redirect()->route('driver.index')->with('success', 'Driver ' . $driver->name . ' created successfully.');
     }
+
+    // Edit: show form edit driver
+    public function edit($id)
+    {
+        $driver = Driver::findOrFail($id);
+        return view('admin.driver.edit', compact('driver'));
+    }
 }
