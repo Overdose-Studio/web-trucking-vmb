@@ -11,6 +11,24 @@
     <!-- Theme style                    --> <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
     <!-- jQuery                         --> <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
     <!-- DataTables CSS                 --> <link href="https://cdn.datatables.net/v/dt/jq-3.7.0/dt-2.0.8/r-3.0.2/datatables.min.css" rel="stylesheet">
+
+    <link rel="apple-touch-icon" sizes="57x57" href="{{ asset('assets/favicon/apple-icon-57x57.png') }}">
+    <link rel="apple-touch-icon" sizes="60x60" href="{{ asset('assets/favicon/apple-icon-57x57.png') }}">
+    <link rel="apple-touch-icon" sizes="72x72" href="{{ asset('assets/favicon/apple-icon-57x57.png') }}">
+    <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('assets/favicon/apple-icon-57x57.png') }}">
+    <link rel="apple-touch-icon" sizes="114x114" href="{{ asset('assets/favicon/apple-icon-57x57.png') }}">
+    <link rel="apple-touch-icon" sizes="120x120" href="{{ asset('assets/favicon/apple-icon-57x57.png') }}">
+    <link rel="apple-touch-icon" sizes="144x144" href="{{ asset('assets/favicon/apple-icon-57x57.png') }}">
+    <link rel="apple-touch-icon" sizes="152x152" href="{{ asset('assets/favicon/apple-icon-57x57.png') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('assets/favicon/apple-icon-57x57.png') }}">
+    <link rel="icon" type="image/png" sizes="192x192"  href="{{ asset('assets/favicon/apple-icon-57x57.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('assets/favicon/apple-icon-57x57.png') }}">
+    <link rel="icon" type="image/png" sizes="96x96" href="{{ asset('assets/favicon/apple-icon-57x57.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/favicon/apple-icon-57x57.png') }}">
+    <link rel="manifest" href="{{ asset('assets/favicon/apple-icon-57x57.png') }}">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="{{ asset('assets/favicon/ms-icon-144x144.png') }}">
+    <meta name="theme-color" content="#ffffff">
 </head>
 
 <body class="hold-transition sidebar-mini">
