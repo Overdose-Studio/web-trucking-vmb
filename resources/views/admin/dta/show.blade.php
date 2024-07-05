@@ -90,7 +90,7 @@
                                 </td>
                                 <td>{{ $dta->driver_name }}</td>
                                 <td>
-                                    @if ($dta->destination2)
+                                    @if ($dta->destination1)
                                         @if ($dta->destination1->image)
                                             <a class="border p-1 mb-1"
                                                 href="{{ route('dta.download', ['file' => $dta->destination1->image]) }}">Download</a>
