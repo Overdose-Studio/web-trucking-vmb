@@ -46,6 +46,16 @@
                                         <i class="fas fa-edit"></i>&nbsp;
                                         Edit
                                     </a>
+                                    <form action="{{ route('driver.destroy', $driver->id) }}" method="POST"
+                                        class="d-inline">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger"
+                                            onclick="return confirm('Are you sure?')">
+                                            <i class="fas fa-trash"></i>&nbsp;
+                                            Delete
+                                        </button>
+                                    </form>
                                 </td>
                             </tr>
                         @endforeach

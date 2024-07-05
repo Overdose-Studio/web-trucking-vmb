@@ -78,4 +78,12 @@ class DriverController extends Controller
 
         return redirect()->route('driver.index')->with('success', 'Driver ' . $driver->name . ' updated successfully.');
     }
+
+    // Delete: delete driver from database
+    public function delete($id)
+    {
+        $driver = Driver::findOrFail($id);
+        $driver->delete();
+        return redirect()->route('driver.index')->with('success', 'Driver ' . $driver->name . ' deleted successfully.');
+    }
 }
