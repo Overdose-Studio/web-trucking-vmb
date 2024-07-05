@@ -10,6 +10,12 @@
 
     {{-- Trucking --}}
     <li class="nav-item">
+        <a href="{{ route('driver.index') }}" class="nav-link {{ request()->is('dashboard/driver*') ? 'active' : '' }}">
+            <i class="nav-icon fas fa-screwdriver-wrench"></i>
+            <p>Driver</p>
+        </a>
+    </li>
+    <li class="nav-item">
         <a href="{{ route('truck.index') }}" class="nav-link {{ request()->is('dashboard/truck*') ? 'active' : '' }}">
             <i class="nav-icon fas fa-truck"></i>
             <p>Truck</p>

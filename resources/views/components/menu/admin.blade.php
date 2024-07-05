@@ -59,13 +59,20 @@
     </li>
 
     {{-- Trucking --}}
-    <li class="nav-item {{ request()->is('dashboard/truck*') || request()->is('dashboard/dtp*') || request()->is('dashboard/dta*') ? 'menu-is-opening menu-open' : '' }}">
+    <li class="nav-item {{ request()->is('dashboard/truck*') || request()->is('dashboard/dtp*') || request()->is('dashboard/dta*') || request()->is('dashboard/driver*') ? 'menu-is-opening menu-open' : '' }}">
         <a href="#" class="nav-link">
             <i class="nav-icon fas fa-truck-loading"></i>
             <p>Trucking</p>
             <i class="right fas fa-angle-left"></i>
         </a>
         <ul class="nav nav-treeview">
+            <li class="nav-item">
+                <a href="{{ route('driver.index') }}" class="nav-link {{ request()->is('dashboard/driver*') ? 'active' : '' }}">
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <i class="nav-icon fas fa-screwdriver-wrench"></i>
+                    <p>Driver</p>
+                </a>
+            </li>
             <li class="nav-item">
                 <a href="{{ route('truck.index') }}" class="nav-link {{ request()->is('dashboard/truck*') ? 'active' : '' }}">
                     &nbsp;&nbsp;&nbsp;&nbsp;
