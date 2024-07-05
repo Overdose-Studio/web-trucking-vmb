@@ -1,0 +1,48 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: <name>
+    container_name: <name>-app
+    restart: unless-stopped
+    working_dir: /var/www
+    volumes:
+      - ./docker/php/local.ini:/usr/local/etc/php/conf.d/local.ini
+    networks:
+      - <name>
+
+  web:
+    image: nginx:alpine
+    container_name: <name>-web
+    restart: unless-stopped
+    ports:
+      - "<port-http>:80"
+      - "<port-https>:443"
+    volumes:
+      - .:/var/www
+      - ./docker/nginx/conf.d:/etc/nginx/conf.d
+    networks:
+      - <name>
+    depends_on:
+      - app
+
+  db:
+    image: mysql:lts
+    container_name: <name>-db
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: laravel
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_USER: laravel
+      MYSQL_PASSWORD: secret
+    volumes:
+      - dbdata:/var/lib/mysql
+    networks:
+      - <name>
+
+networks:
+  <name>:
+
+volumes:
+  dbdata:

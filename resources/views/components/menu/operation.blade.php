@@ -10,19 +10,19 @@
 
     {{-- Operation --}}
     <li class="nav-item">
-        <a href="{{ route('client.index') }}"class="nav-link {{ request()->is('dashboard/client*') ? 'active' : '' }}">
+        <a href="{{ route('client.index') }}" class="nav-link {{ request()->is('dashboard/client*') ? 'active' : '' }}">
             <i class="nav-icon fas fa-person"></i>
             <p>Client</p>
         </a>
     </li>
     <li class="nav-item">
-        <a href="{{ route('dashboard') }}" class="nav-link">
+        <a href="{{ route('shipment.index') }}" class="nav-link {{ request()->is('dashboard/shipment*') ? 'active' : '' }}">
             <i class="nav-icon fas fa-boxes"></i>
             <p>Shipment</p>
         </a>
     </li>
     <li class="nav-item">
-        <a href="{{ route('dashboard') }}" class="nav-link">
+        <a href="{{ route('dta.approval.index') }}" class="nav-link {{ request()->is('dashboard/approval-dta*') ? 'active' : '' }}">
             <i class="nav-icon fas fa-check"></i>
             <p>Approval DTA</p>
         </a>

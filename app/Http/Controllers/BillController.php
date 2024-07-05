@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Exports\InvoiceExport;
 use App\Models\Bill;
+use App\Models\DailyTruckingActually;
+use App\Models\DailyTruckingPlan;
 use App\Models\Shipment;
+use App\Models\Truck;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -60,11 +63,15 @@ class BillController extends Controller
         $bill->save();
 
         // Get all shipments
-        $shipments = Shipment::where('bill_id', null)->get()->sortBy('id');
+        $shipments = Shipment::where('bill_id', null)
+            ->where('status', 'Waiting Bill')
+            ->get()
+            ->sortBy('id');
 
         // Update bill_id for each shipment
         foreach ($shipments as $shipment) {
             $shipment->bill_id = $bill->id;
+            $shipment->status = 'Completed';
             $shipment->save();
         }
 
@@ -121,6 +128,7 @@ class BillController extends Controller
         // Update bill_id for each shipment
         foreach ($shipments as $shipment) {
             $shipment->bill_id = null;
+            $shipment->status = 'Waiting Bill';
             $shipment->save();
         }
 
@@ -142,5 +150,36 @@ class BillController extends Controller
 
         // Export bill to excel
         return Excel::download(new InvoiceExport($bill, $shipments), 'invoice.xlsx');
+    }
+
+    // DTP Detail: Display DTP
+    public function dtp_detail($shipment)
+    {
+        $shipment = Shipment::findOrFail($shipment);
+        $dtps = DailyTruckingPlan::where('shipment_id', $shipment->id)->get()->sortBy('truck.license_plate');
+        return view('admin.bill.dtp.detail', compact('dtps', 'shipment'));
+    }
+
+    // DTA Detail: Display DTA
+    public function dta_detail($shipment)
+    {
+        $shipment = Shipment::findOrFail($shipment);
+        $dtas = DailyTruckingActually::where('shipment_id', $shipment->id)->get()->sortBy('truck.license_plate');
+        return view('admin.bill.dta.detail', compact('dtas', 'shipment'));
+    }
+
+    // DTA Truck: Display Truck
+    public function dta_truck($shipment, $id)
+    {
+        // Get data
+        $dta = DailyTruckingActually::findOrFail($id);
+        $shipment = Shipment::findOrfail($shipment);
+        $selected = DailyTruckingPlan::where('id', $dta->daily_trucking_plan_id)->first();
+        $trucks = Truck::whereHas('state', function ($query) {
+            $query->where('type', 'good');
+        })->get()->sortBy('license_plate');
+
+        // Return view
+        return view('admin.bill.dta.truck', compact('dta', 'shipment', 'selected', 'trucks'));
     }
 }
