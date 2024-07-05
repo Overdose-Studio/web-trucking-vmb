@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Models\Client;
+use App\Models\Driver;
 
 class DatabaseSeeder extends Seeder
 {
@@ -26,6 +27,7 @@ class DatabaseSeeder extends Seeder
         // Factories
         User::factory(20)->create();
         Client::factory(10)->create();
+        Driver::factory(10)->create();
 
         // Seeders
         $this->call([
