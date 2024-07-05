@@ -52,4 +52,30 @@ class DriverController extends Controller
         $driver = Driver::findOrFail($id);
         return view('admin.driver.edit', compact('driver'));
     }
+
+    // Update: update driver to database
+    public function update(Request $request, $id)
+    {
+        // Validate form
+        $request->validate([
+            'name' => 'required|string',
+            'age' => 'required|numeric|min:0',
+            'phone' => 'required|string',
+            'nik' => 'required|string',
+            'sim' => 'required|string',
+            'address' => 'required|string',
+        ]);
+
+        // Update driver to database
+        $driver = Driver::findOrFail($id);
+        $driver->name = $request->name;
+        $driver->age = $request->age;
+        $driver->phone = $request->phone;
+        $driver->nik = $request->nik;
+        $driver->sim = $request->sim;
+        $driver->address = $request->address;
+        $driver->save();
+
+        return redirect()->route('driver.index')->with('success', 'Driver ' . $driver->name . ' updated successfully.');
+    }
 }
