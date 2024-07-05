@@ -23,13 +23,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Guest routes
-Route::get('/', function () {
-    return view('client.index');
-})->name('landing');
-
-Route::get('about', function () {
-    return view('client.about');
-})->name('about');
+Route::view('/', 'client.index')->name('landing');
+Route::view('about', 'client.about')->name('about');
 
 // Login: when user whant to login
 Route::group(['prefix' => 'login', 'as' => 'login.'], function () {
