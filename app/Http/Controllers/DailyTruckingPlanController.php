@@ -77,6 +77,12 @@ class DailyTruckingPlanController extends Controller
             return redirect()->route('dtp.show', $shipment->id)->with('error', 'Bill already created, cannot create add new truck');
         }
 
+        // Check `DTP` limit using `party` on `shipment`
+        $totalDTP = DailyTruckingPlan::where('shipment_id', $shipment->id)->count();
+        if ($totalDTP >= $shipment->party) {
+            return redirect()->route('dtp.show', $shipment->id)->with('error', 'Cannot add new truck, DTP limit reached for ' . $shipment->client->name . ' party ' . $shipment->party . ' trucks');
+        }
+
         // Create new daily trucking plan
         $dtp = new DailyTruckingPlan;
         $dtp->shipment_id = $shipment->id;
