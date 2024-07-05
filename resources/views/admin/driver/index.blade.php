@@ -9,7 +9,7 @@
                     <h1 class="panel-heading">Driver</h1>
                 </div>
                 <div>
-                    <a href="{{ route('shipment.create') }}" class="btn btn-success mb-2">
+                    <a href="{{ route('driver.create') }}" class="btn btn-success mb-2">
                         <i class="fas fa-plus"></i>&nbsp;
                         Add New Driver
                     </a>

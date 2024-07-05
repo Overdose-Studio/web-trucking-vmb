@@ -87,6 +87,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
         // Driver: list all drivers and edit driver
         Route::group(['prefix' => 'driver', 'as' => 'driver.'], function () {
             Route::get('/', [DriverController::class, 'index'])->name('index');
+            Route::get('create', [DriverController::class, 'create'])->name('create');
         });
 
         // Truck: list all trucks and edit truck
