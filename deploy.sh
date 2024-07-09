@@ -10,8 +10,15 @@ NC='\033[0m' # No Color
 # Show Greeting Message
 echo -e "${BLUE}Welcome to Laravel 9.x Deployment Script${NC}"
 
+# Ask application name, port, server name, and email
+read -p "Enter your application name: " app_name
+read -p "Enter the HTTP port number: " port_http
+read -p "Enter the HTTPS port number: " port_https
+read -p "Enter the server name: " server_name
+read -p "Enter your email address: " email
+
 # Run deployment configuration script
-./docker/command/deploy_config.sh
+./docker/command/deploy_config.sh $app_name $port_http $port_https $server_name $email
 
 # Run all installation scripts
 ./docker/command/install_curl.sh
@@ -21,7 +28,7 @@ echo -e "${BLUE}Welcome to Laravel 9.x Deployment Script${NC}"
 
 # Run Laravel deployment script
 ./docker/command/deploy_laravel.sh
-./docker/command/deploy_nginx.sh
+./docker/command/deploy_nginx.sh $app_name $port_http $port_https $server_name $email
 
 # Show completion message
 echo -e "${GREEN}[complete] Laravel 9.x deployment script finished.${NC}"

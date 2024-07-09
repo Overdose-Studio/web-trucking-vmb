@@ -1,6 +1,16 @@
 @extends('layouts.dashboard')
 
 @section('content')
+    @if ($shipment->party <= $dtps->count() && $shipment->status == 'Waiting DTP')
+        <div class="alert alert-warning">
+            <h5>
+                <i class="icon fas fa-exclamation-triangle mr-2"></i>
+                Warning!
+            </h5>
+            <p>The party has reached its maximum capacity. You cannot add more trucks. Please remove or edit an existing truck to proceed.</p>
+        </div>
+    @endif
+
     <div class="card">
         <div class="card-header">
             <div class="d-flex justify-content-between align-items-center">
@@ -41,7 +51,7 @@
                             <i class="fas fa-paper-plane"></i>&nbsp;
                             Approving DTP to Finance
                         </a>
-                        <a href="{{ route('dtp.create', $shipment->id) }}" class="btn btn-success mb-2 text-left">
+                        <a href="{{ route('dtp.create', $shipment->id) }}" class="btn btn-success mb-2 text-left @if ($shipment->party <= $dtps->count()) disabled @endif">
                             <i class="fas fa-plus"></i>&nbsp;
                             Add Truck
                         </a>

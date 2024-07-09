@@ -1,10 +1,12 @@
 <?php
 
+use App\Http\Controllers\AssetController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BillController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\DailyTruckingPlanController;
 use App\Http\Controllers\DailyTruckingActuallyController;
+use App\Http\Controllers\DriverController;
 use App\Http\Controllers\ShipmentController;
 use App\Http\Controllers\TruckController;
 use App\Http\Controllers\UserController;
@@ -22,13 +24,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Guest routes
-Route::get('/', function () {
-    return view('client.index');
-})->name('landing');
-
-Route::get('about', function () {
-    return view('client.about');
-})->name('about');
+Route::view('/', 'client.index')->name('landing');
+Route::view('about', 'client.about')->name('about');
 
 // Login: when user whant to login
 Route::group(['prefix' => 'login', 'as' => 'login.'], function () {
@@ -87,6 +84,16 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
 
     // Trucking Routes
     Route::group(['middleware' => 'trucking'], function () {
+        // Driver: list all drivers and edit driver
+        Route::group(['prefix' => 'driver', 'as' => 'driver.'], function () {
+            Route::get('/', [DriverController::class, 'index'])->name('index');
+            Route::get('create', [DriverController::class, 'create'])->name('create');
+            Route::post('create', [DriverController::class, 'store'])->name('store');
+            Route::get('edit/{id}', [DriverController::class, 'edit'])->name('edit');
+            Route::post('edit/{id}', [DriverController::class, 'update'])->name('update');
+            Route::delete('delete/{id}', [DriverController::class, 'delete'])->name('destroy');
+        });
+
         // Truck: list all trucks and edit truck
         Route::group(['prefix' => 'truck', 'as' => 'truck.'], function () {
             Route::get('/', [TruckController::class, 'index'])->name('index');
@@ -147,6 +154,13 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
     Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 });
 
+// Assets routes: all assets after `assets/` will be handled by this route
+Route::get('/assets/{path}', [AssetController::class, 'getFile'])
+    ->where('path', '.*')
+    ->name('assets');
+
+
+// Auth routes
 Route::group(['middleware' => 'auth'], function () {
     Route::get('{file}', [DailyTruckingActuallyController::class, 'download'])->name('dta.download');
 });

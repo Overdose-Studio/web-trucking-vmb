@@ -52,10 +52,10 @@ class DailyTruckingActuallyController extends Controller
     {
         // Validate the form
         $request->validate([
-            'driver_name' => 'required',
-            'size' => 'required|numeric',
             'price' => 'required|numeric',
+            'destination_3_detail' => 'required|string',
         ]);
+        // dd($request);
 
         // If truck is not vendor truck, validate truck_id
         if ($request->truck_id) {

@@ -14,8 +14,14 @@
                     {{ csrf_field() }}
                     <div class="form-group">
                         <label for="driver_name">Driver Name</label>
-                        <input type="text" class="form-control" name="driver_name" placeholder="Driver Name"
-                            value="{{ old('driver_name') }}">
+                        <select name="driver_name" class="form-control">
+                            <option value="" disabled selected>Driver Name</option>
+                            @foreach ($drivers as $driver)
+                                <option value="{{ $driver->name }}" {{ old('driver_name') == $driver->name ? 'selected' : '' }}>
+                                    {{ $driver->name }}
+                                </option>
+                            @endforeach
+                        </select>
                     </div>
                     <div class="form-group">
                         <label>Destination 1</label>
