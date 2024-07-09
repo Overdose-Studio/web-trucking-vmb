@@ -3,32 +3,20 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: <name>
-    container_name: <name>-app
+    image: vmb-prototype
+    container_name: vmb-prototype-app
     restart: unless-stopped
     working_dir: /var/www
     volumes:
       - ./docker/php/local.ini:/usr/local/etc/php/conf.d/local.ini
     networks:
-      - <name>
-
-  web:
-    image: nginx:alpine
-    container_name: <name>-web
-    restart: unless-stopped
+      - vmb-prototype
     ports:
-      - "<port>:80"
-    volumes:
-      - .:/var/www
-      - ./docker/nginx/conf.d:/etc/nginx/conf.d
-    networks:
-      - <name>
-    depends_on:
-      - app
+      - "8001:9000"
 
   db:
     image: mysql:lts
-    container_name: <name>-db
+    container_name: vmb-prototype-db
     restart: unless-stopped
     environment:
       MYSQL_DATABASE: laravel
@@ -38,10 +26,10 @@ services:
     volumes:
       - dbdata:/var/lib/mysql
     networks:
-      - <name>
+      - vmb-prototype
 
 networks:
-  <name>:
+  vmb-prototype:
 
 volumes:
   dbdata:
