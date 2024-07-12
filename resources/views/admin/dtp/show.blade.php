@@ -87,9 +87,9 @@
                                     @endif
                                 </td>
                                 <td>{{ $dtp->driver_name }}</td>
-                                <td>{{ $dtp->destination1->detail }}</td>
-                                <td>{{ $dtp->destination2->detail }}</td>
-                                <td>{{ $dtp->destination3->detail }}</td>
+                                <td>{{ $dtp->destination1 ? $dtp->destination1->detail : '-' }}</td>
+                                <td>{{ $dtp->destination2 ? $dtp->destination2->detail : '-' }}</td>
+                                <td>{{ $dtp->destination3 ? $dtp->destination3->detail : '-' }}</td>
                                 <td>{{ $dtp->size }}</td>
                                 <td>Rp {{ number_format($dtp->price, 0, ',', '.') }}</td>
                                 <td>
