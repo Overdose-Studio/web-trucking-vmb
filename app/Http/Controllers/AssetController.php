@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Response;
 
 class AssetController extends Controller
 {
