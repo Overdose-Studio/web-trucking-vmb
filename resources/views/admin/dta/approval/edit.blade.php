@@ -12,7 +12,7 @@
                 </div>
                 <div class="card-body">
                     <div class="panel-body">
-                        <form action="{{ route('dta.update', [$shipment->id, $dta->id]) }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('dta.approval.update', [$shipment->id, $dta->id]) }}" method="POST" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             <div class="form-group {{ $errors->has('driver_name') ? 'has-error' : '' }}">
                                 <label for="driver_name">Driver Name</label>
@@ -54,13 +54,13 @@
                             <hr>
                             <div class="form-group {{ $errors->has('destination_1_detail') ? 'has-error' : '' }}">
                                 <label>Destination 1</label>
-                                <input type="text" class="form-control" name="destination_1_detail" placeholder="Destination 1"value="{{ $dta->destination_1_id ? $dta->destination1->detail : '' }}" readonly>
+                                <input type="text" class="form-control" name="destination_1_detail" placeholder="Destination 1"value="{{ $dta->destination_1_id ? $dta->destination1->detail : '' }}">
                                 <input type="file" class="form-control-file mt-1" name="destination_1_image" placeholder="Destination 1 Image">
                                 <span class="text-danger">{{ $errors->first('destination_1_detail') }}</span>
                             </div>
                             <div class="form-group {{ $errors->has('destination_2_detail') ? 'has-error' : '' }}">
                                 <label>Destination 2</label>
-                                <input type="text" class="form-control" name="destination_2_detail" placeholder="Destination 2" value="{{ $dta->destination_2_id ? $dta->destination2->detail : '' }}" readonly>
+                                <input type="text" class="form-control" name="destination_2_detail" placeholder="Destination 2" value="{{ $dta->destination_2_id ? $dta->destination2->detail : '' }}">
                                 <input type="file" class="form-control-file mt-1" name="destination_2_image" placeholder="Destination 2 Image">
                                 <span class="text-danger">{{ $errors->first('destination_2_detail') }}</span>
                             </div>

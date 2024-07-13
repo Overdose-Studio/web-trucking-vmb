@@ -55,7 +55,6 @@ class DailyTruckingActuallyController extends Controller
             'price' => 'required|numeric',
             'destination_3_detail' => 'required|string',
         ]);
-        // dd($request);
 
         // If truck is not vendor truck, validate truck_id
         if ($request->truck_id) {
@@ -67,7 +66,7 @@ class DailyTruckingActuallyController extends Controller
         // Get shipment from database
         $shipment = Shipment::findOrFail($shipment);
         if ($shipment->bill_id) {
-            return redirect()->route('dtp.show', $shipment->id)->with('error', 'Bill already created, cannot edit daily trucking actually.');
+            return redirect()->route('dta.show', $shipment->id)->with('error', 'Bill already created, cannot edit daily trucking actually.');
         }
 
         // Find daily trucking actually
@@ -218,7 +217,7 @@ class DailyTruckingActuallyController extends Controller
     {
         // Check if bill is already created
         if ($shipment->bill_id) {
-            return redirect()->route('dtp.approval.show', $shipment->id)
+            return redirect()->route('dta.approval.show', $shipment->id)
                              ->with('error', 'Bill already created, cannot update truck on DTA ' . $shipment->client->name);
         }
 
@@ -232,9 +231,76 @@ class DailyTruckingActuallyController extends Controller
         return view('admin.dta.approval.edit', compact('dta', 'shipment', 'selected', 'trucks'));
     }
 
+    // Approval Update: Update DTA by Operation
+    public function approval_update(Request $request, Shipment $shipment, DailyTruckingActually $dta)
+    {
+        // Validate the form
+        $request->validate([
+            'price' => 'required|numeric',
+            'destination_3_detail' => 'required|string',
+        ]);
+
+        // Check if bill is already created
+        if ($shipment->bill_id) {
+            return redirect()->route('dta.approval.show', $shipment->id)
+                             ->with('error', 'Bill already created, cannot update truck on DTA ' . $shipment->client->name);
+        }
+
+        // Update daily trucking actually
+        $dta->driver_name = $request->driver_name;
+        $dta->price = $request->price;
+
+        // Update destinations
+        $this->updateDestination($dta, 'destination_1', $request);
+        $this->updateDestination($dta, 'destination_2', $request);
+        $this->updateDestination($dta, 'destination_3', $request);
+
+        // Save daily trucking actually
+        $dta->save();
+
+        // Redirect to index
+        return redirect()->route('dta.approval.show', $shipment->id)->with('success', 'Daily trucking actually has been updated');
+    }
+
     // Download: download client file
     public function downloadClientFile($file)
     {
         return response()->download($file);
+    }
+
+    // Update Destination: Function to update destination
+    private function updateDestination(DailyTruckingActually $dta, $destinationField, Request $request)
+    {
+        // Set destination fields
+        $destinationIdField = $destinationField . '_id';
+        $destinationDetailField = $destinationField . '_detail';
+        $destinationImageField = $destinationField . '_image';
+
+        // Check if destination exists
+        $destination = $dta->$destinationIdField ? Destination::find($dta->$destinationIdField) : new Destination;
+
+        // Set destination details
+        $destination->detail = $request->$destinationDetailField;
+
+        // Handle image upload
+        if ($request->hasFile($destinationImageField)) {
+            if ($destination->image) {
+                Storage::delete(str_replace('storage', 'public', $destination->image));
+            }
+            $path = $request->file($destinationImageField)->store('destinations', 'public');
+            $destination->image = 'storage/' . $path;
+        }
+
+        // Save new destination if it doesn't exist
+        if (!$dta->$destinationIdField && $request->$destinationDetailField) {
+            $destination->type = substr($destinationField, -1);
+            $destination->save();
+            $dta->$destinationIdField = $destination->id;
+        }
+
+        // Save updated destination details
+        if ($dta->$destinationIdField) {
+            $destination->save();
+        }
     }
 }
