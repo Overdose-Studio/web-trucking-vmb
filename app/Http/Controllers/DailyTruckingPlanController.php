@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\LogType;
+use App\Http\Services\LogService;
 use App\Models\Client;
 use App\Models\DailyTruckingPlan;
 use App\Models\DailyTruckingActually;
@@ -14,6 +16,15 @@ use Illuminate\Support\Facades\Storage;
 
 class DailyTruckingPlanController extends Controller
 {
+    /**
+     * DailyTruckingPlanController constructor.
+     *
+     * Initializes the service with the provided LogService instance.
+     *
+     * @param LogService $service The LogService instance.
+     */
+    public function __construct(private LogService $log) {}
+
     // Index: show all daily trucking plans
     public function index()
     {
@@ -22,43 +33,61 @@ class DailyTruckingPlanController extends Controller
     }
 
     // Show: show all trucks in a shipment
-    public function show($shipment)
+    public function show(Shipment $shipment)
     {
-        $shipment = Shipment::findOrFail($shipment);
-        $dtps = DailyTruckingPlan::where('shipment_id', $shipment->id)->get()->sortBy('truck.license_plate');
+        // Get Data
+        $dtps = DailyTruckingPlan::where('shipment_id', $shipment->id)
+                ->get()
+                ->sortBy('truck.license_plate');
+
+        // Show the daily trucking plan show page
         return view('admin.dtp.show', compact('dtps', 'shipment'));
     }
 
     // Approving: change state on shipment
-    public function approving($shipment)
+    public function approving(Shipment $shipment)
     {
-        $shipment = Shipment::findOrFail($shipment);
+        // Update Shipment Status
         $shipment->status = 'Approving DTP';
         $shipment->save();
+
+        // Create log
+        $this->log->create(
+            shipment: $shipment,
+            type: LogType::SET_DTP
+        );
+
+        // Redirect to the daily trucking plan index page with a success message
         return redirect()->route('dtp.show', $shipment->id)->with('success', 'Sending approving DTP to Finance');
     }
 
     // Create: show the form to create new daily trucking plan
-    public function create($shipment)
+    public function create(Shipment $shipment)
     {
-        // Get Data
-        $shipment = Shipment::findOrFail($shipment);
-        $trucks = Truck::whereHas('state', function ($query) {
-            $query->where('type', 'good');
-        })->get()->sortBy('license_plate');
+        // Redirect if a bill is already created for the shipment
+        if ($shipment->bill_id) {
+            return redirect()->route('dtp.show', $shipment->id)
+                             ->with('error', 'Bill already created, cannot create add new truck for ' . $shipment->client->name);
+        }
+
+        // Retrieve available trucks and drivers
+        $trucks = Truck::whereHas('state', fn($query) => $query->where('type', 'good'))
+                    ->get()
+                    ->sortBy('license_plate');
         $drivers = Driver::orderBy('name')->get();
 
-        // If bill already created, cannot create new truck
-        if ($shipment->bill_id) {
-            return redirect()->route('dtp.show', $shipment->id)->with('error', 'Bill already created, cannot create add new truck');
-        } else {
-            return view('admin.dtp.create', compact('shipment', 'trucks', 'drivers'));
-        }
+        // Show the create form
+        return view('admin.dtp.create', compact('shipment', 'trucks', 'drivers'));
     }
 
     // Store: store new daily trucking plan to database
-    public function store(Request $request, $shipment)
+    public function store(Request $request, Shipment $shipment)
     {
+        // Redirect if a bill is already created for the shipment
+        if ($shipment->bill_id) {
+            return redirect()->route('dtp.show', $shipment->id)->with('error', 'Bill already created, cannot create add new truck for ' . $shipment->client->name);
+        }
+
         // Validate the form
         $request->validate([
             'driver_name' => 'required',
@@ -71,12 +100,6 @@ class DailyTruckingPlanController extends Controller
             $request->validate([
                 'truck_id' => 'required|exists:trucks,id',
             ]);
-        }
-
-        // Get shipment from database
-        $shipment = Shipment::findOrFail($shipment);
-        if ($shipment->bill_id) {
-            return redirect()->route('dtp.show', $shipment->id)->with('error', 'Bill already created, cannot create add new truck');
         }
 
         // Check `DTP` limit using `party` on `shipment`
@@ -405,6 +428,12 @@ class DailyTruckingPlanController extends Controller
         // Update Shipment Status
         $shipment->status = 'Waiting DTA';
         $shipment->save();
+
+        // Create log
+        $this->log->create(
+            shipment: $shipment,
+            type: LogType::APPROVE_DTP
+        );
 
         // Redirect to the approval index page with a success message
         return redirect()->route('dtp.approval.index', $shipment->id)
