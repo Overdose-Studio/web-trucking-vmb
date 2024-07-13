@@ -20,4 +20,12 @@
             <p>Bill</p>
         </a>
     </li>
+
+    {{-- General --}}
+    <li class="nav-item">
+        <a href="{{ route('log.index') }}" class="nav-link {{ request()->is('dashboard/log*') ? 'active' : '' }}">
+            <i class="nav-icon fas fa-cogs"></i>
+            <p>Log Shipment</p>
+        </a>
+    </li>
 </ul>
