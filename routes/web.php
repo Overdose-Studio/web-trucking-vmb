@@ -133,6 +133,8 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
             Route::get('/', [DailyTruckingPlanController::class, 'approval_index'])->name('index');
             Route::get('/{id}/show', [DailyTruckingPlanController::class, 'approval_show'])->name('show');
             Route::get('/{id}/set',  [DailyTruckingPlanController::class, 'approval_set'])->name('set');
+            Route::get('{id}/edit-truck/{truck}', [DailyTruckingPlanController::class, 'approval_edit'])->name('edit');
+            Route::post('{id}/edit-truck/{truck}', [DailyTruckingPlanController::class, 'approval_update'])->name('update');
         });
 
         // Billing: list all billing and edit billing
