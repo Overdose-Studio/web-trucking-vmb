@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\LogType;
+use App\Http\Services\LogService;
 use App\Models\DailyTruckingActually;
 use App\Models\DailyTruckingPlan;
 use App\Models\Destination;
@@ -12,6 +14,15 @@ use Illuminate\Support\Facades\Storage;
 
 class DailyTruckingActuallyController extends Controller
 {
+    /**
+     * DailyTruckingActuallyController constructor.
+     *
+     * Initializes the service with the provided LogService instance.
+     *
+     * @param LogService $service The LogService instance.
+     */
+    public function __construct(private LogService $log) {}
+
     // Index: show all daily trucking actually
     public function index()
     {
@@ -20,10 +31,14 @@ class DailyTruckingActuallyController extends Controller
     }
 
     // Show: show detail daily trucking actually
-    public function show($shipment)
+    public function show(Shipment $shipment)
     {
-        $shipment = Shipment::findOrfail($shipment);
-        $dtas = DailyTruckingActually::where('shipment_id', $shipment->id)->get()->sortBy('truck.license_plate');
+        // Get data
+        $dtas = DailyTruckingActually::where('shipment_id', $shipment->id)
+                ->get()
+                ->sortBy('truck.license_plate');
+
+        // Return view
         return view('admin.dta.show', compact('shipment', 'dtas'));
     }
 
@@ -164,11 +179,19 @@ class DailyTruckingActuallyController extends Controller
     }
 
     // Approving: change state on shipment
-    public function approving($shipment)
+    public function approving(Shipment $shipment)
     {
-        $shipment = Shipment::findOrFail($shipment);
+        // Update shipment status
         $shipment->status = 'Approving DTA';
         $shipment->save();
+
+        // Create log
+        $this->log->create(
+            shipment: $shipment,
+            type: LogType::SET_DTA
+        );
+
+        // Redirect to index
         return redirect()->route('dta.show', $shipment->id)->with('success', 'Sending approving DTA to Operation');
     }
 
@@ -183,7 +206,9 @@ class DailyTruckingActuallyController extends Controller
     public function approval_show(Shipment $shipment)
     {
         // Get Data
-        $dtas = DailyTruckingActually::where('shipment_id', $shipment->id)->get()->sortBy('truck.license_plate');
+        $dtas = DailyTruckingActually::where('shipment_id', $shipment->id)
+                ->get()
+                ->sortBy('truck.license_plate');
 
         // Show the approval show page
         return view('admin.dta.approval.show', compact('dtas', 'shipment'));
@@ -208,6 +233,12 @@ class DailyTruckingActuallyController extends Controller
         // Update Shipment Status
         $shipment->status = 'Waiting Bill';
         $shipment->save();
+
+        // Create log
+        $this->log->create(
+            shipment: $shipment,
+            type: LogType::APPROVE_DTA
+        );
 
         // Redirect to index
         return redirect()->route('dta.approval.index', $shipment->id)->with('success', 'Success approving DTA for ' . $shipment->client->name . '.');
