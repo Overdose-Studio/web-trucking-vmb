@@ -25,6 +25,61 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach ($shipments as $shipment)
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $shipment->client->name }}</td>
+                                <td>
+                                    @if ($shipment->order_type === 'import')
+                                        <span class="badge badge-primary">Import</span>
+                                    @else
+                                        <span class="badge badge-secondary">Export</span>
+                                    @endif
+                                </td>
+                                <td>
+                                    @if ($shipment->logs->where('action', 'create_shipment')->first())
+                                        {{ $shipment->logs->where('action', 'create_shipment')->first()->date }}
+                                    @else
+                                        <span class="badge badge-danger">Not Set</span>
+                                    @endif
+                                </td>
+                                <td>
+                                    @if ($shipment->logs->where('action', 'set_dtp')->first())
+                                        {{ $shipment->logs->where('action', 'set_dtp')->first()->date }}
+                                    @else
+                                        <span class="badge badge-danger">Not Set</span>
+                                    @endif
+                                </td>
+                                <td>
+                                    @if ($shipment->logs->where('action', 'approve_dtp')->first())
+                                        {{ $shipment->logs->where('action', 'approve_dtp')->first()->date }}
+                                    @else
+                                        <span class="badge badge-danger">Not Set</span>
+                                    @endif
+                                </td>
+                                <td>
+                                    @if ($shipment->logs->where('action', 'set_dta')->first())
+                                        {{ $shipment->logs->where('action', 'set_dta')->first()->date }}
+                                    @else
+                                        <span class="badge badge-danger">Not Set</span>
+                                    @endif
+                                </td>
+                                <td>
+                                    @if ($shipment->logs->where('action', 'approve_dta')->first())
+                                        {{ $shipment->logs->where('action', 'approve_dta')->first()->date }}
+                                    @else
+                                        <span class="badge badge-danger">Not Set</span>
+                                    @endif
+                                </td>
+                                <td>
+                                    @if ($shipment->logs->where('action', 'create_bill')->first())
+                                        {{ $shipment->logs->where('action', 'create_bill')->first()->date }}
+                                    @else
+                                        <span class="badge badge-danger">Not Set</span>
+                                    @endif
+                                </td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
@@ -38,13 +93,13 @@
             $('#log-table').DataTable({
                 responsive: true,
                 autoWidth: false,
-                // order: [
-                //     [0, 'asc']
-                // ],
-                // columnDefs: [{
-                //     orderable: false,
-                //     targets: 5
-                // }]
+                order: [
+                    [0, 'asc']
+                ],
+                columnDefs: [{
+                    orderable: false,
+                    targets: [3, 4, 5, 6, 7, 8]
+                }]
             });
         });
     </script>

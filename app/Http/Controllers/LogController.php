@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Log;
+use App\Models\Shipment;
 use Illuminate\Http\Request;
 
 class LogController extends Controller
@@ -11,11 +11,11 @@ class LogController extends Controller
     public function index()
     {
         // Get all logs of a shipment
-        $logs = Log::all()
-                ->groupBy('shipment_id')
-                ->load('shipment');
+        $shipments = Shipment::whereHas('logs')
+            ->latest()
+            ->get();
 
         // Return view
-        return view('admin.log.index', compact('logs'));
+        return view('admin.log.index', compact('shipments'));
     }
 }
