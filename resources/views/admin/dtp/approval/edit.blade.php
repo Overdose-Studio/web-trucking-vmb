@@ -10,7 +10,7 @@
         </div>
         <div class="card-body">
             <div class="panel-body">
-                <form action="{{ route('dtp.update', [$shipment->id, $dtp->id]) }}" method="POST"
+                <form action="{{ route('dtp.approval.update', [$shipment->id, $dtp->id]) }}" method="POST"
                     enctype="multipart/form-data">
                     {{ csrf_field() }}
                     <div class="form-group {{ $errors->has('driver_name') ? 'has-error' : '' }}">

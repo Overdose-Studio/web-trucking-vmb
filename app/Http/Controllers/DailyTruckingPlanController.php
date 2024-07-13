@@ -424,4 +424,34 @@ class DailyTruckingPlanController extends Controller
             return view('admin.dtp.approval.edit', compact('dtp', 'shipment', 'trucks', 'drivers'));
         }
     }
+
+    // Approval Update: update daily trucking plan to database
+    public function approval_update(Request $request, Shipment $shipment, DailyTruckingPlan $dtp)
+    {
+        // Validate the form
+        $request->validate([
+            'price' => 'required|numeric',
+        ]);
+
+        // Check if the shipment has a bill
+        if ($shipment->bill_id) {
+            return redirect()->route('dtp.show', $shipment->id)
+                             ->with('error', 'Bill already created, cannot update truck on DTP ' . $shipment->client->name);
+        }
+
+        // Update daily trucking plan
+        $dtp->price = $request->price;
+
+        // Save daily trucking plan with error handling
+        try {
+            $dtp->save();
+        } catch (\Exception $e) {
+            return redirect()->route('dtp.approval.show', $shipment->id)
+                             ->with('error', 'Failed to update truck on DTP: ' . $e->getMessage());
+        }
+
+        // Redirect to daily trucking plan index
+        return redirect()->route('dtp.approval.show', $shipment->id)
+                         ->with('success', 'Updated truck on DTP ' . $shipment->client->name . ' successfully');
+    }
 }
