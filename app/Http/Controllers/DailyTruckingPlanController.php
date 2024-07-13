@@ -455,6 +455,20 @@ class DailyTruckingPlanController extends Controller
                              ->with('error', 'Failed to update truck on DTP: ' . $e->getMessage());
         }
 
+        // Find DTA and update the price
+        $dta = DailyTruckingActually::where('daily_trucking_plan_id', $dtp->id)->first();
+
+        // Update the daily trucking actual with the new price
+        $dta->price = $request->price;
+
+        // Save the changes with error handling
+        try {
+            $dta->save();
+        } catch (\Exception $e) {
+            return redirect()->route('dtp.approval.show', $shipment->id)
+                             ->with('error', 'Failed to update truck on DTP: ' . $e->getMessage());
+        }
+
         // Redirect to the approval show page with a success message
         return redirect()->route('dtp.approval.show', $shipment->id)
                          ->with('success', 'Updated truck on DTP for ' . $shipment->client->name . ' successfully');

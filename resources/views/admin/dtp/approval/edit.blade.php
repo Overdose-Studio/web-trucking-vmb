@@ -10,8 +10,7 @@
         </div>
         <div class="card-body">
             <div class="panel-body">
-                <form action="{{ route('dtp.approval.update', [$shipment->id, $dtp->id]) }}" method="POST"
-                    enctype="multipart/form-data">
+                <form action="{{ route('dtp.approval.update', [$shipment->id, $dtp->id]) }}" method="POST" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     <div class="form-group {{ $errors->has('driver_name') ? 'has-error' : '' }}">
                         <label for="driver_name">Driver Name</label>
@@ -37,6 +36,7 @@
                         </select>
                         <span class="text-danger">{{ $errors->first('truck_id') }}</span>
                     </div>
+                    <hr>
                     <div class="form-group {{ $errors->has('destination_1_detail') ? 'has-error' : '' }}">
                         <label>Destination 1</label>
                         <input type="text" class="form-control" name="destination_1_detail" placeholder="Destination 1" value="{{ $dtp->destination_1_id != null ? $dtp->destination1->detail : '' }}" readonly>
@@ -52,6 +52,7 @@
                         <input type="text" class="form-control" name="destination_3_detail" placeholder="Destination 3" value="{{ $dtp->destination_3_id != null ? $dtp->destination3->detail : '' }}" readonly>
                         <span class="text-danger">{{ $errors->first('destination_3_detail') }}</span>
                     </div>
+                    <hr>
                     <div class="form-group {{ $errors->has('size') ? 'has-error' : '' }}">
                         <label>Size</label>
                         <div class="form-check">
@@ -69,7 +70,8 @@
                         <input type="number" class="form-control" name="price" placeholder="Price" value="{{ $dtp->price }}">
                         <span class="text-danger">{{ $errors->first('price') }}</span>
                     </div>
-                    <div class="form-group d-flex justify-content-end">
+                    <hr>
+                    <div class="form-group d-flex justify-content-end mb-0">
                         <button type="submit" class="btn btn-primary">
                             <i class="fas fa-save"></i>&nbsp;
                             Save Truck
