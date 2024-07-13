@@ -47,6 +47,7 @@ enum LogType: string
      *
      * @var string
      */
+    case CREATE_BILL = 'create_bill';
 
     /**
      * Unknown log type.

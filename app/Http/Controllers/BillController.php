@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\LogType;
 use App\Exports\InvoiceExport;
+use App\Http\Services\LogService;
 use App\Models\Bill;
 use App\Models\DailyTruckingActually;
 use App\Models\DailyTruckingPlan;
@@ -13,6 +15,15 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class BillController extends Controller
 {
+    /**
+     * BillController constructor.
+     *
+     * Initializes the service with the provided LogService instance.
+     *
+     * @param LogService $service The LogService instance.
+     */
+    public function __construct(private LogService $log) {}
+
     // Index: show all bills
     public function index()
     {
@@ -73,6 +84,14 @@ class BillController extends Controller
             $shipment->bill_id = $bill->id;
             $shipment->status = 'Completed';
             $shipment->save();
+        }
+
+        // Create log for each shipment
+        foreach ($shipments as $shipment) {
+            $this->log->create(
+                shipment: $shipment,
+                type: LogType::CREATE_BILL,
+            );
         }
 
         // Redirect to bill index
