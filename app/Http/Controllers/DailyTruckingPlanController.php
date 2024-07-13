@@ -390,59 +390,64 @@ class DailyTruckingPlanController extends Controller
     }
 
     // Approval Show: Display DTP by Finance
-    public function approval_show($shipment)
+    public function approval_show(Shipment $shipment)
     {
-        $shipment = Shipment::findOrFail($shipment);
+        // Get Data
         $dtps = DailyTruckingPlan::where('shipment_id', $shipment->id)->get()->sortBy('truck.license_plate');
+
+        // Show the approval show page
         return view('admin.dtp.approval.show', compact('dtps', 'shipment'));
     }
 
     // Approval Set: Approve DTP by Finance edit
-    public function approval_set($shipment)
+    public function approval_set(Shipment $shipment)
     {
-        $shipment = Shipment::findOrFail($shipment);
+        // Update Shipment Status
         $shipment->status = 'Waiting DTA';
         $shipment->save();
-        return redirect()->route('dtp.approval.index', $shipment->id)->with('success', 'Success approving DTP for ' . $shipment->client->name . '.');
+
+        // Redirect to the approval index page with a success message
+        return redirect()->route('dtp.approval.index', $shipment->id)
+                         ->with('success', 'Success approving DTP for ' . $shipment->client->name . '.');
     }
 
-    // Approval Edit: show the form to edit daily trucking plan
-    public function approval_edit($id, $truck)
+    // Approval Edit: Display the form to edit the daily trucking plan
+    public function approval_edit(Shipment $shipment, DailyTruckingPlan $dtp)
     {
-        // Get Data
-        $dtp = DailyTruckingPlan::findOrFail($truck);
-        $shipment = Shipment::findOrFail($id);
-        $trucks = Truck::whereHas('state', function ($query) {
-            $query->where('type', 'good');
-        })->get()->sortBy('license_plate');
+        // Redirect if a bill is already created for the shipment
+        if ($shipment->bill_id) {
+            return redirect()->route('dtp.approval.show', $shipment->id)
+                             ->with('error', 'Bill already created, cannot update truck on DTP for ' . $shipment->client->name);
+        }
+
+        // Retrieve available trucks and drivers
+        $trucks = Truck::whereHas('state', fn($query) => $query->where('type', 'good'))
+                    ->get()
+                    ->sortBy('license_plate');
         $drivers = Driver::orderBy('name')->get();
 
-        // Check if bill is already created
-        if ($shipment->bill_id) {
-            return redirect()->route('dtp.approval.show', $shipment->id)->with('error', 'Bill already created, cannot update truck on DTP ' . $shipment->client->name);
-        } else {
-            return view('admin.dtp.approval.edit', compact('dtp', 'shipment', 'trucks', 'drivers'));
-        }
+        // Show the edit form
+        return view('admin.dtp.approval.edit', compact('dtp', 'shipment', 'trucks', 'drivers'));
     }
 
-    // Approval Update: update daily trucking plan to database
+    // Approval Update: Update the `price` of the daily trucking plan
     public function approval_update(Request $request, Shipment $shipment, DailyTruckingPlan $dtp)
     {
-        // Validate the form
+        // Validate the input data
         $request->validate([
             'price' => 'required|numeric',
         ]);
 
-        // Check if the shipment has a bill
+        // Redirect if a bill is already created for the shipment
         if ($shipment->bill_id) {
             return redirect()->route('dtp.show', $shipment->id)
-                             ->with('error', 'Bill already created, cannot update truck on DTP ' . $shipment->client->name);
+                             ->with('error', 'Bill already created, cannot update truck on DTP for ' . $shipment->client->name);
         }
 
-        // Update daily trucking plan
+        // Update the daily trucking plan with the new price
         $dtp->price = $request->price;
 
-        // Save daily trucking plan with error handling
+        // Save the changes with error handling
         try {
             $dtp->save();
         } catch (\Exception $e) {
@@ -450,8 +455,8 @@ class DailyTruckingPlanController extends Controller
                              ->with('error', 'Failed to update truck on DTP: ' . $e->getMessage());
         }
 
-        // Redirect to daily trucking plan index
+        // Redirect to the approval show page with a success message
         return redirect()->route('dtp.approval.show', $shipment->id)
-                         ->with('success', 'Updated truck on DTP ' . $shipment->client->name . ' successfully');
+                         ->with('success', 'Updated truck on DTP for ' . $shipment->client->name . ' successfully');
     }
 }
