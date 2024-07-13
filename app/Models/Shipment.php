@@ -30,6 +30,10 @@ class Shipment extends Model
         return $this->belongsTo(Client::class);
     }
 
+    public function logs() {
+        return $this->hasMany(Log::class);
+    }
+
     public function getDiffAttribute() {
         return $this->dailyTruckingPlan->sum('price') - $this->dailyTruckingActually->sum('price');
     }
