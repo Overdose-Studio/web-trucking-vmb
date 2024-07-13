@@ -26,4 +26,16 @@ class LogService
         // Return the created log
         return $log;
     }
+
+    // Delete: deleting a log by its shipment ID and log type.
+    public function delete(Shipment $shipment, LogType $type = LogType::UNKNOWN): void
+    {
+        // Find the log
+        $log = Log::where('shipment_id', $shipment->id)
+            ->where('action', $type->value)
+            ->first();
+
+        // Delete the log
+        if ($log) $log->delete();
+    }
 }

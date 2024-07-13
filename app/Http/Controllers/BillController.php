@@ -151,6 +151,14 @@ class BillController extends Controller
             $shipment->save();
         }
 
+        // Remove log for each shipment
+        foreach ($shipments as $shipment) {
+            $this->log->delete(
+                shipment: $shipment,
+                type: LogType::CREATE_BILL,
+            );
+        }
+
         // Delete bill from database
         $bill->delete();
 
