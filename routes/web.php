@@ -7,6 +7,7 @@ use App\Http\Controllers\ClientController;
 use App\Http\Controllers\DailyTruckingPlanController;
 use App\Http\Controllers\DailyTruckingActuallyController;
 use App\Http\Controllers\DriverController;
+use App\Http\Controllers\LogController;
 use App\Http\Controllers\ShipmentController;
 use App\Http\Controllers\TruckController;
 use App\Http\Controllers\UserController;
@@ -152,6 +153,11 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
             Route::get('dta/{id}', [BillController::class, 'dta_detail'])->name('dta.detail');
             Route::get('dta/{id}/truck/{truck}', [BillController::class, 'dta_truck'])->name('dta.truck');
         });
+    });
+
+    // Log: list all logs and detail log
+    Route::group(['prefix' => 'log', 'as' => 'log.'], function () {
+        Route::get('/', [LogController::class, 'index'])->name('index');
     });
 
     // Logout: when user whant to logout

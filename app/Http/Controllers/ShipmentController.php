@@ -2,12 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\LogType;
+use App\Http\Services\LogService;
 use Illuminate\Http\Request;
 use App\Models\Client;
 use App\Models\Shipment;
 
 class ShipmentController extends Controller
 {
+    /**
+     * ShipmentController constructor.
+     *
+     * Initializes the service with the provided LogService instance.
+     *
+     * @param LogService $service The LogService instance.
+     */
+    public function __construct(private LogService $log) {}
+
     // Index: show all daily trucking plans
     public function index()
     {
@@ -39,6 +50,13 @@ class ShipmentController extends Controller
         $shipment->party = $request->party;
         $shipment->save();
 
+        // Create log
+        $this->log->create(
+            shipment: $shipment,
+            type: LogType::CREATE_SHIPMENT
+        );
+
+        // Redirect to shipment index page
         return redirect()->route('shipment.index')->with('success', 'Shipment created successfully.');
     }
 
