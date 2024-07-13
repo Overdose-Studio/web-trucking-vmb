@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Log extends Model
@@ -24,6 +25,17 @@ class Log extends Model
         'action',
         'date',
     ];
+
+    /**
+     * Get the date attribute in Indonesian format.
+     *
+     * @param  string  $value
+     * @return string
+     */
+    public function getDateAttribute($value)
+    {
+        return Carbon::parse($value)->translatedFormat('d F Y H:i');
+    }
 
     /**
      * The timestamps are not used in this model.
