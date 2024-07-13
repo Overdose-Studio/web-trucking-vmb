@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Client;
 use App\Models\DailyTruckingActually;
 use App\Models\DailyTruckingPlan;
 use App\Models\Destination;
@@ -55,7 +54,6 @@ class DailyTruckingActuallyController extends Controller
             'price' => 'required|numeric',
             'destination_3_detail' => 'required|string',
         ]);
-        // dd($request);
 
         // If truck is not vendor truck, validate truck_id
         if ($request->truck_id) {
@@ -67,7 +65,7 @@ class DailyTruckingActuallyController extends Controller
         // Get shipment from database
         $shipment = Shipment::findOrFail($shipment);
         if ($shipment->bill_id) {
-            return redirect()->route('dtp.show', $shipment->id)->with('error', 'Bill already created, cannot edit daily trucking actually.');
+            return redirect()->route('dta.show', $shipment->id)->with('error', 'Bill already created, cannot edit daily trucking actually.');
         }
 
         // Find daily trucking actually
@@ -174,48 +172,136 @@ class DailyTruckingActuallyController extends Controller
         return redirect()->route('dta.show', $shipment->id)->with('success', 'Sending approving DTA to Operation');
     }
 
-    // Approval Index: List of approval DTA by Finance
+    // Approval Index: List of approval DTA by Operation
     public function approval_index()
     {
         $shipments = Shipment::latest()->get();
         return view('admin.dta.approval.index', compact('shipments'));
     }
 
-    // Approval Show: Display DTA by Finance
-    public function approval_show($shipment)
+    // Approval Show: Display DTA by Operation
+    public function approval_show(Shipment $shipment)
     {
-        $shipment = Shipment::findOrFail($shipment);
+        // Get Data
         $dtas = DailyTruckingActually::where('shipment_id', $shipment->id)->get()->sortBy('truck.license_plate');
+
+        // Show the approval show page
         return view('admin.dta.approval.show', compact('dtas', 'shipment'));
     }
 
-    // Approval Truck: Display Truck by Finance
-    public function approval_truck($shipment, $id)
+    // Approval Truck: Display Truck by Operation
+    public function approval_truck(Shipment $shipment, DailyTruckingActually $dta)
     {
         // Get data
-        $dta = DailyTruckingActually::findOrFail($id);
-        $shipment = Shipment::findOrfail($shipment);
         $selected = DailyTruckingPlan::where('id', $dta->daily_trucking_plan_id)->first();
-        $trucks = Truck::whereHas('state', function ($query) {
-            $query->where('type', 'good');
-        })->get()->sortBy('license_plate');
+        $trucks = Truck::whereHas('state', fn($query) => $query->where('type', 'good'))
+                    ->get()
+                    ->sortBy('license_plate');
 
         // Return view
         return view('admin.dta.approval.truck', compact('dta', 'shipment', 'selected', 'trucks'));
     }
 
-    // Approval Set: Approve DTA by Finance edit
-    public function approval_set($shipment)
+    // Approval Set: Approve DTA by Operation edit
+    public function approval_set(Shipment $shipment)
     {
-        $shipment = Shipment::findOrFail($shipment);
+        // Update Shipment Status
         $shipment->status = 'Waiting Bill';
         $shipment->save();
+
+        // Redirect to index
         return redirect()->route('dta.approval.index', $shipment->id)->with('success', 'Success approving DTA for ' . $shipment->client->name . '.');
+    }
+
+    // Approval Edit: Show the form to edit DTA by Operation
+    public function approval_edit(Shipment $shipment, DailyTruckingActually $dta)
+    {
+        // Check if bill is already created
+        if ($shipment->bill_id) {
+            return redirect()->route('dta.approval.show', $shipment->id)
+                             ->with('error', 'Bill already created, cannot update truck on DTA ' . $shipment->client->name);
+        }
+
+        // Get Data
+        $trucks = Truck::whereHas('state', fn($query) => $query->where('type', 'good'))
+                       ->get()
+                       ->sortBy('license_plate');
+        $selected = DailyTruckingPlan::where('id', $dta->daily_trucking_plan_id)->first();
+
+        // Return view
+        return view('admin.dta.approval.edit', compact('dta', 'shipment', 'selected', 'trucks'));
+    }
+
+    // Approval Update: Update DTA by Operation
+    public function approval_update(Request $request, Shipment $shipment, DailyTruckingActually $dta)
+    {
+        // Validate the form
+        $request->validate([
+            'price' => 'required|numeric',
+            'destination_3_detail' => 'required|string',
+        ]);
+
+        // Check if bill is already created
+        if ($shipment->bill_id) {
+            return redirect()->route('dta.approval.show', $shipment->id)
+                             ->with('error', 'Bill already created, cannot update truck on DTA ' . $shipment->client->name);
+        }
+
+        // Update daily trucking actually
+        $dta->driver_name = $request->driver_name;
+        $dta->price = $request->price;
+
+        // Update destinations
+        $this->updateDestination($dta, 'destination_1', $request);
+        $this->updateDestination($dta, 'destination_2', $request);
+        $this->updateDestination($dta, 'destination_3', $request);
+
+        // Save daily trucking actually
+        $dta->save();
+
+        // Redirect to index
+        return redirect()->route('dta.approval.show', $shipment->id)->with('success', 'Daily trucking actually has been updated');
     }
 
     // Download: download client file
     public function downloadClientFile($file)
     {
         return response()->download($file);
+    }
+
+    // Update Destination: Function to update destination
+    private function updateDestination(DailyTruckingActually $dta, $destinationField, Request $request)
+    {
+        // Set destination fields
+        $destinationIdField = $destinationField . '_id';
+        $destinationDetailField = $destinationField . '_detail';
+        $destinationImageField = $destinationField . '_image';
+
+        // Check if destination exists
+        $destination = $dta->$destinationIdField ? Destination::find($dta->$destinationIdField) : new Destination;
+
+        // Set destination details
+        $destination->detail = $request->$destinationDetailField;
+
+        // Handle image upload
+        if ($request->hasFile($destinationImageField)) {
+            if ($destination->image) {
+                Storage::delete(str_replace('storage', 'public', $destination->image));
+            }
+            $path = $request->file($destinationImageField)->store('destinations', 'public');
+            $destination->image = 'storage/' . $path;
+        }
+
+        // Save new destination if it doesn't exist
+        if (!$dta->$destinationIdField && $request->$destinationDetailField) {
+            $destination->type = substr($destinationField, -1);
+            $destination->save();
+            $dta->$destinationIdField = $destination->id;
+        }
+
+        // Save updated destination details
+        if ($dta->$destinationIdField) {
+            $destination->save();
+        }
     }
 }

@@ -133,6 +133,12 @@
                                         <i class="fas fa-eye"></i>&nbsp;
                                         Check DTA
                                     </a>
+                                    @if ($shipment->status === 'Approving DTA')
+                                        <a href="{{ route('dta.approval.edit', [$shipment->id, $dta->id]) }}" class="btn btn-warning btn-sm">
+                                            <i class="fas fa-edit"></i>&nbsp;
+                                            Edit
+                                        </a>
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach

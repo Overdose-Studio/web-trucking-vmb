@@ -76,9 +76,11 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
         // DTA: list all DTA and edit DTA
         Route::group(['prefix' => 'approval-dta', 'as' => 'dta.approval.'], function () {
             Route::get('/', [DailyTruckingActuallyController::class, 'approval_index'])->name('index');
-            Route::get('/{id}/show', [DailyTruckingActuallyController::class, 'approval_show'])->name('show');
-            Route::get('/{id}/show/{truck}', [DailyTruckingActuallyController::class, 'approval_truck'])->name('truck');
-            Route::get('/{id}/set',  [DailyTruckingActuallyController::class, 'approval_set'])->name('set');
+            Route::get('/{shipment}/show', [DailyTruckingActuallyController::class, 'approval_show'])->name('show');
+            Route::get('/{shipment}/show/{dta}', [DailyTruckingActuallyController::class, 'approval_truck'])->name('truck');
+            Route::get('/{shipment}/set',  [DailyTruckingActuallyController::class, 'approval_set'])->name('set');
+            Route::get('{shipment}/edit/{dta}', [DailyTruckingActuallyController::class, 'approval_edit'])->name('edit');
+            Route::post('{shipment}/edit/{dta}', [DailyTruckingActuallyController::class, 'approval_update'])->name('update');
         });
     });
 
