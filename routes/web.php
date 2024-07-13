@@ -79,6 +79,8 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
             Route::get('/{id}/show', [DailyTruckingActuallyController::class, 'approval_show'])->name('show');
             Route::get('/{id}/show/{truck}', [DailyTruckingActuallyController::class, 'approval_truck'])->name('truck');
             Route::get('/{id}/set',  [DailyTruckingActuallyController::class, 'approval_set'])->name('set');
+            Route::get('{shipment}/edit/{dta}', [DailyTruckingActuallyController::class, 'approval_edit'])->name('edit');
+            Route::post('{shipment}/edit/{dta}', [DailyTruckingActuallyController::class, 'approval_update'])->name('update');
         });
     });
 

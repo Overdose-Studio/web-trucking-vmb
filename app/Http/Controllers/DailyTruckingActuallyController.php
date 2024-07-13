@@ -174,14 +174,14 @@ class DailyTruckingActuallyController extends Controller
         return redirect()->route('dta.show', $shipment->id)->with('success', 'Sending approving DTA to Operation');
     }
 
-    // Approval Index: List of approval DTA by Finance
+    // Approval Index: List of approval DTA by Operation
     public function approval_index()
     {
         $shipments = Shipment::latest()->get();
         return view('admin.dta.approval.index', compact('shipments'));
     }
 
-    // Approval Show: Display DTA by Finance
+    // Approval Show: Display DTA by Operation
     public function approval_show($shipment)
     {
         $shipment = Shipment::findOrFail($shipment);
@@ -189,7 +189,7 @@ class DailyTruckingActuallyController extends Controller
         return view('admin.dta.approval.show', compact('dtas', 'shipment'));
     }
 
-    // Approval Truck: Display Truck by Finance
+    // Approval Truck: Display Truck by Operation
     public function approval_truck($shipment, $id)
     {
         // Get data
@@ -204,13 +204,32 @@ class DailyTruckingActuallyController extends Controller
         return view('admin.dta.approval.truck', compact('dta', 'shipment', 'selected', 'trucks'));
     }
 
-    // Approval Set: Approve DTA by Finance edit
+    // Approval Set: Approve DTA by Operation edit
     public function approval_set($shipment)
     {
         $shipment = Shipment::findOrFail($shipment);
         $shipment->status = 'Waiting Bill';
         $shipment->save();
         return redirect()->route('dta.approval.index', $shipment->id)->with('success', 'Success approving DTA for ' . $shipment->client->name . '.');
+    }
+
+    // Approval Edit: Show the form to edit DTA by Operation
+    public function approval_edit(Shipment $shipment, DailyTruckingActually $dta)
+    {
+        // Check if bill is already created
+        if ($shipment->bill_id) {
+            return redirect()->route('dtp.approval.show', $shipment->id)
+                             ->with('error', 'Bill already created, cannot update truck on DTA ' . $shipment->client->name);
+        }
+
+        // Get Data
+        $trucks = Truck::whereHas('state', fn($query) => $query->where('type', 'good'))
+                       ->get()
+                       ->sortBy('license_plate');
+        $selected = DailyTruckingPlan::where('id', $dta->daily_trucking_plan_id)->first();
+
+        // Return view
+        return view('admin.dta.approval.edit', compact('dta', 'shipment', 'selected', 'trucks'));
     }
 
     // Download: download client file
