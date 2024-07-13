@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Client;
 use App\Models\DailyTruckingActually;
 use App\Models\DailyTruckingPlan;
 use App\Models\Destination;
@@ -181,34 +180,36 @@ class DailyTruckingActuallyController extends Controller
     }
 
     // Approval Show: Display DTA by Operation
-    public function approval_show($shipment)
+    public function approval_show(Shipment $shipment)
     {
-        $shipment = Shipment::findOrFail($shipment);
+        // Get Data
         $dtas = DailyTruckingActually::where('shipment_id', $shipment->id)->get()->sortBy('truck.license_plate');
+
+        // Show the approval show page
         return view('admin.dta.approval.show', compact('dtas', 'shipment'));
     }
 
     // Approval Truck: Display Truck by Operation
-    public function approval_truck($shipment, $id)
+    public function approval_truck(Shipment $shipment, DailyTruckingActually $dta)
     {
         // Get data
-        $dta = DailyTruckingActually::findOrFail($id);
-        $shipment = Shipment::findOrfail($shipment);
         $selected = DailyTruckingPlan::where('id', $dta->daily_trucking_plan_id)->first();
-        $trucks = Truck::whereHas('state', function ($query) {
-            $query->where('type', 'good');
-        })->get()->sortBy('license_plate');
+        $trucks = Truck::whereHas('state', fn($query) => $query->where('type', 'good'))
+                    ->get()
+                    ->sortBy('license_plate');
 
         // Return view
         return view('admin.dta.approval.truck', compact('dta', 'shipment', 'selected', 'trucks'));
     }
 
     // Approval Set: Approve DTA by Operation edit
-    public function approval_set($shipment)
+    public function approval_set(Shipment $shipment)
     {
-        $shipment = Shipment::findOrFail($shipment);
+        // Update Shipment Status
         $shipment->status = 'Waiting Bill';
         $shipment->save();
+
+        // Redirect to index
         return redirect()->route('dta.approval.index', $shipment->id)->with('success', 'Success approving DTA for ' . $shipment->client->name . '.');
     }
 
