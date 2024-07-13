@@ -55,18 +55,12 @@
                     <div class="form-group {{ $errors->has('size') ? 'has-error' : '' }}">
                         <label>Size</label>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="size" id="size1"
-                                value="20" {{ old('size') == 20 || $dtp->size == 20 ? 'checked' : '' }}
-                                disabled>
-                            <label class="form-check-label" for="size1"
-                                style="pointer-events: none; opacity: 0.5;">20"</label>
+                            <input class="form-check-input" type="radio" name="size" id="size1" value="20" {{ old('size') == 20 || $dtp->size == 20 ? 'checked' : '' }} disabled>
+                            <label class="form-check-label" for="size1" style="pointer-events: none; opacity: 0.5;">20"</label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="size" id="size2"
-                                value="40" {{ old('size') == 40 || $dtp->size == 40 ? 'checked' : '' }}
-                                disabled>
-                            <label class="form-check-label" for="size2"
-                                style="pointer-events: none; opacity: 0.5;">40"</label>
+                            <input class="form-check-input" type="radio" name="size" id="size2" value="40" {{ old('size') == 40 || $dtp->size == 40 ? 'checked' : '' }} disabled>
+                            <label class="form-check-label" for="size2" style="pointer-events: none; opacity: 0.5;">40"</label>
                         </div>
                         <span class="text-danger">{{ $errors->first('size') }}</span>
                     </div>
