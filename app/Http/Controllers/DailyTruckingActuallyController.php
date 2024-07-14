@@ -70,13 +70,6 @@ class DailyTruckingActuallyController extends Controller
             'destination_3_detail' => 'required|string',
         ]);
 
-        // If truck is not vendor truck, validate truck_id
-        if ($request->truck_id) {
-            $request->validate([
-                'truck_id' => 'required|exists:trucks,id',
-            ]);
-        }
-
         // Get shipment from database
         $shipment = Shipment::findOrFail($shipment);
         if ($shipment->bill_id) {
@@ -87,11 +80,7 @@ class DailyTruckingActuallyController extends Controller
         $dta = DailyTruckingActually::findOrFail($id);
 
         // Update daily trucking actually
-        $dta->driver_name = $request->driver_name;
-        $dta->size = $request->size;
         $dta->price = $request->price;
-        $dta->is_vendor_truck = $request->truck_id ? false : true;
-        $dta->truck_id = $request->truck_id;
 
         // Update destination 1
         if ($dta->destination_1_id != null) {
