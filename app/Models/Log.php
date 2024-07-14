@@ -34,7 +34,9 @@ class Log extends Model
      */
     public function getDateAttribute($value)
     {
-        return Carbon::parse($value)->translatedFormat('d F Y H:i');
+        return Carbon::parse($value)
+            ->timezone(config('app.timezone'))
+            ->translatedFormat('d F Y H:i');
     }
 
     /**
