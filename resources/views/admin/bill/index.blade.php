@@ -120,7 +120,7 @@
                         <thead>
                             <tr>
                                 <th>No.</th>
-                                <th>Shipment ID</th>
+                                <th>Order ID</th>
                                 <th>Date</th>
                                 <th>Client</th>
                                 <th>Order Type</th>

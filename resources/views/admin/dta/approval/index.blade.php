@@ -13,7 +13,7 @@
                 <table class="table table-bordered" id="dta-table">
                     <thead>
                         <tr>
-                            <th>Shipment ID</th>
+                            <th>Order ID</th>
                             <th>Date</th>
                             <th>Order Type</th>
                             <th>Party</th>
