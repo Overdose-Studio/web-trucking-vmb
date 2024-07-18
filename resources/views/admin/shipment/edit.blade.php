@@ -5,7 +5,7 @@
         <div class="card-header">
             <div class="d-flex align-items-center">
                 <i class="fas fa-edit fa-2x"></i>&nbsp;&nbsp;&nbsp;
-                <h1 class="panel-heading">Edit Shipment</h1>
+                <h1 class="panel-heading">Edit Order</h1>
             </div>
         </div>
         <div class="card-body">
@@ -35,7 +35,7 @@
                     <div class="form-group d-flex justify-content-end">
                         <button type="submit" class="btn btn-primary">
                             <i class="fas fa-save"></i>&nbsp;
-                            Save Shipment
+                            Save Order
                         </button>
                     </div>
                 </form>

@@ -18,7 +18,7 @@
     <li class="nav-item">
         <a href="{{ route('shipment.index') }}" class="nav-link {{ request()->is('dashboard/shipment*') ? 'active' : '' }}">
             <i class="nav-icon fas fa-boxes"></i>
-            <p>Shipment</p>
+            <p>Order</p>
         </a>
     </li>
     <li class="nav-item">
@@ -32,7 +32,7 @@
     <li class="nav-item">
         <a href="{{ route('log.index') }}" class="nav-link {{ request()->is('dashboard/log*') ? 'active' : '' }}">
             <i class="nav-icon fas fa-cogs"></i>
-            <p>Log Shipment</p>
+            <p>Log Order</p>
         </a>
     </li>
 </ul>

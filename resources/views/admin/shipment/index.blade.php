@@ -6,12 +6,12 @@
             <div class="d-flex justify-content-between align-items-center">
                 <div class="d-flex align-items-center">
                     <i class="fas fa-boxes fa-2x"></i>&nbsp;&nbsp;&nbsp;
-                    <h1 class="panel-heading">Shipment</h1>
+                    <h1 class="panel-heading">Order</h1>
                 </div>
                 <div>
                     <a href="{{ route('shipment.create') }}" class="btn btn-success mb-2">
                         <i class="fas fa-plus"></i>&nbsp;
-                        Create Shipment
+                        Create Order
                     </a>
                 </div>
             </div>
@@ -21,7 +21,7 @@
                 <table class="table table-bordered" id="shipment-table">
                     <thead>
                         <tr>
-                            <th>Shipment ID</th>
+                            <th>Order ID</th>
                             <th>Date</th>
                             <th>Order Type</th>
                             <th>Party</th>

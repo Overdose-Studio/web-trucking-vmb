@@ -5,7 +5,7 @@
         <div class="card-header">
             <div class="d-flex align-items-center">
                 <i class="fas fa-cogs fa-2x"></i>&nbsp;&nbsp;&nbsp;
-                <h1 class="panel-heading">Log Shipment</h1>
+                <h1 class="panel-heading">Log Order</h1>
             </div>
         </div>
         <div class="card-body">
@@ -16,7 +16,7 @@
                             <th>No.</th>
                             <th>Client</th>
                             <th>Type</th>
-                            <th>Shipment</th>
+                            <th>Order</th>
                             <th>Set DTP</th>
                             <th>Approved DTP</th>
                             <th>Set DTA</th>
