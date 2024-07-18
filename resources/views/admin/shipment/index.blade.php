@@ -43,7 +43,7 @@
                                         @case('Waiting Bill')
                                             <span class="badge badge-warning">
                                                 <i class="fas fa-coins"></i>&nbsp;
-                                                Waiting Bill
+                                                Waiting Tagihan
                                             </span>
                                         @break
 

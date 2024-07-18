@@ -6,7 +6,7 @@
             <div class="d-flex justify-content-between align-items-center">
                 <div class="d-flex align-items-center">
                     <i class="fas fa-coins fa-2x"></i>&nbsp;&nbsp;&nbsp;
-                    <h1 class="panel-heading">Bill List</h1>
+                    <h1 class="panel-heading">Tagihan List</h1>
                 </div>
                 <div>
                     <a href="{{ route('bill.create') }}" class="btn btn-success mb-2">
@@ -51,7 +51,7 @@
                                         @case('Waiting Bill')
                                             <span class="badge badge-warning">
                                                 <i class="fas fa-coins"></i>&nbsp;
-                                                Waiting Bill
+                                                Waiting Tagihan
                                             </span>
                                         @break
 
@@ -92,7 +92,7 @@
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="d-flex align-items-center">
                         <i class="fas fa-file fa-2x"></i>&nbsp;&nbsp;&nbsp;
-                        <h1 class="panel-heading mb-0">Bill: {{ $bill->number }}</h1>
+                        <h1 class="panel-heading mb-0">Tagihan: {{ $bill->number }}</h1>
                     </div>
                     <div class="d-flex">
                         <a href="{{ route('bill.download', $bill->id) }}" class="btn btn-success mb-2 mr-1">
