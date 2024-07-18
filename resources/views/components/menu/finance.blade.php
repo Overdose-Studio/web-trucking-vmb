@@ -17,7 +17,7 @@
     <li class="nav-item">
         <a href="{{ route('bill.index') }}" class="nav-link {{ request()->is('dashboard/bill*') ? 'active' : '' }}">
             <i class="nav-icon fas fa-coins"></i>
-            <p>Bill</p>
+            <p>Tagihan</p>
         </a>
     </li>
 
