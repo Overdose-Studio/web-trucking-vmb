@@ -268,7 +268,7 @@ class DailyTruckingActuallyController extends Controller
         }
 
         // Update daily trucking actually
-        $dta->driver_name = $request->driver_name;
+        // $dta->driver_name = $request->driver_name;
         $dta->price = $request->price;
 
         // Update destinations

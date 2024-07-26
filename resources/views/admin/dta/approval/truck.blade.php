@@ -16,9 +16,8 @@
                         <h3 class="mb-0">Truck</h3>
                     </div>
                     <div class="d-flex flex-column">
-                        <p class="card-text mb-0"><strong>Vehicle:</strong>
-                            {{ $dta->truck_id ? $dta->truck->license_plate : 'Vendor Truck' }}</p>
-                        <p class="card-text mb-0"><strong>Driver Name:</strong> {{ $dta->driver_name }}</p>
+                        <p class="card-text mb-0"><strong>Vehicle:</strong>{{ $dta->truck_id ? $dta->truck->license_plate : 'Vendor Truck' }}</p>
+                        {{-- <p class="card-text mb-0"><strong>Driver Name:</strong>{{ $dta->driver_name }}</p> --}}
                     </div>
                 </div>
                 <div class="card-header">
@@ -78,9 +77,8 @@
                         <h3 class="mb-0">Truck</h3>
                     </div>
                     <div class="d-flex flex-column">
-                        <p class="card-text mb-0"><strong>Vehicle:</strong>
-                            {{ $selected->truck_id ? $selected->truck->license_plate : 'Vendor Truck' }}</p>
-                        <p class="card-text mb-0"><strong>Driver Name:</strong> {{ $selected->driver_name }}</p>
+                        <p class="card-text mb-0"><strong>Vehicle:</strong>{{ $selected->truck_id ? $selected->truck->license_plate : 'Vendor Truck' }}</p>
+                        {{-- <p class="card-text mb-0"><strong>Driver Name:</strong>{{ $selected->driver_name }}</p> --}}
                     </div>
                 </div>
                 <div class="card-header">
