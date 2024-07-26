@@ -90,7 +90,7 @@ class DailyTruckingPlanController extends Controller
 
         // Validate the form
         $request->validate([
-            'driver_name' => 'required',
+            // 'driver_name' => 'required',
             'size' => 'required|numeric',
             'price' => 'required|numeric',
         ]);
@@ -111,7 +111,8 @@ class DailyTruckingPlanController extends Controller
         // Create new daily trucking plan
         $dtp = new DailyTruckingPlan;
         $dtp->shipment_id = $shipment->id;
-        $dtp->driver_name = $request->driver_name;
+        $dtp->driver_name = 'N/A';
+        // $dtp->driver_name = $request->driver_name;
         $dtp->size = $request->size;
         $dtp->price = $request->price;
         $dtp->is_vendor_truck = $request->truck_id ? false : true;
@@ -120,7 +121,8 @@ class DailyTruckingPlanController extends Controller
         // Create new daily trucking actual
         $dta = new DailyTruckingActually;
         $dta->shipment_id = $shipment->id;
-        $dta->driver_name = $request->driver_name;
+        $dtp->driver_name = 'N/A';
+        // $dta->driver_name = $request->driver_name;
         $dta->size = $request->size;
         $dta->price = $request->price;
         $dta->is_vendor_truck = $request->truck_id ? false : true;
@@ -215,7 +217,7 @@ class DailyTruckingPlanController extends Controller
     {
         // Validate the form
         $request->validate([
-            'driver_name' => 'required',
+            // 'driver_name' => 'required',
             'size' => 'required|numeric',
             'price' => 'required|numeric',
         ]);
@@ -237,7 +239,7 @@ class DailyTruckingPlanController extends Controller
         $dtp = DailyTruckingPlan::findOrFail($id);
 
         // Update daily trucking plan
-        $dtp->driver_name = $request->driver_name;
+        // $dtp->driver_name = $request->driver_name;
         $dtp->size = $request->size;
         $dtp->price = $request->price;
         $dtp->is_vendor_truck = $request->truck_id ? false : true;

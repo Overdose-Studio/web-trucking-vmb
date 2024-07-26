@@ -66,7 +66,7 @@
                         <tr>
                             <th>No.</th>
                             <th>Truck</th>
-                            <th>Driver Name</th>
+                            {{-- <th>Driver Name</th> --}}
                             <th>Destination 1</th>
                             <th>Destination 2</th>
                             <th>Destination 3</th>
@@ -86,7 +86,7 @@
                                         <span>Vendor Truck</span>
                                     @endif
                                 </td>
-                                <td>{{ $dtp->driver_name }}</td>
+                                {{-- <td>{{ $dtp->driver_name }}</td> --}}
                                 <td>{{ $dtp->destination1 ? $dtp->destination1->detail : '-' }}</td>
                                 <td>{{ $dtp->destination2 ? $dtp->destination2->detail : '-' }}</td>
                                 <td>{{ $dtp->destination3 ? $dtp->destination3->detail : '-' }}</td>
@@ -133,7 +133,7 @@
                 ],
                 columnDefs: [{
                     orderable: false,
-                    targets: 8
+                    targets: 7
                 }]
             });
         });

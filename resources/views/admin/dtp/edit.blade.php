@@ -12,7 +12,7 @@
             <div class="panel-body">
                 <form action="{{ route('dtp.update', [$shipment->id, $dtp->id]) }}" method="POST" enctype="multipart/form-data">
                     {{ csrf_field() }}
-                    <div class="form-group {{ $errors->has('driver_name') ? 'has-error' : '' }}">
+                    {{-- <div class="form-group {{ $errors->has('driver_name') ? 'has-error' : '' }}">
                         <label for="driver_name">Driver Name</label>
                         <select name="driver_name" class="form-control">
                             <option value="" disabled selected>Driver Name</option>
@@ -24,7 +24,7 @@
                             @endforeach
                         </select>
                         <span class="text-danger">{{ $errors->first('driver_name') }}</span>
-                    </div>
+                    </div> --}}
                     <div class="form-group {{ $errors->has('truck_id') ? 'has-error' : '' }}">
                         <label>Truck</label>
                         <select name="truck_id" class="form-control">

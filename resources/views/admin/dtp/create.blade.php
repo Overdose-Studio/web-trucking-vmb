@@ -12,7 +12,7 @@
             <div class="panel-body">
                 <form action="{{ route('dtp.store', $shipment->id) }}" method="POST" enctype="multipart/form-data">
                     {{ csrf_field() }}
-                    <div class="form-group">
+                    {{-- <div class="form-group">
                         <label for="driver_name">Driver Name</label>
                         <select name="driver_name" class="form-control">
                             <option value="" disabled selected>Driver Name</option>
@@ -22,7 +22,7 @@
                                 </option>
                             @endforeach
                         </select>
-                    </div>
+                    </div> --}}
                     <div class="form-group">
                         <label for="truck_id">Truck</label>
                         <select name="truck_id" class="form-control">
