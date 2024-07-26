@@ -65,7 +65,7 @@
                         <tr>
                             <th>No.</th>
                             <th>Truck</th>
-                            <th>Driver Name</th>
+                            {{-- <th>Driver Name</th> --}}
                             <th>Destination 1</th>
                             <th>Destination 2</th>
                             <th>Destination 3</th>
@@ -87,7 +87,7 @@
                                         <span>Vendor Truck</span>
                                     @endif
                                 </td>
-                                <td>{{ $dta->driver_name }}</td>
+                                {{-- <td>{{ $dta->driver_name }}</td> --}}
                                 <td>
                                     @if ($dta->destination1)
                                         @if ($dta->destination1->image)
@@ -160,7 +160,7 @@
                 ],
                 columnDefs: [{
                     orderable: false,
-                    targets: 10
+                    targets: 9
                 }]
             });
         });
