@@ -118,26 +118,23 @@
                     </div>
                     <div class="d-flex flex-column mb-2">
                         <p class="mb-1"><strong>Destination 1:</strong>
-                            {{ $selected->destination_1_id != null ? $selected->destination1->detail : '' }}</p>
-                        @if ($selected->destination1->image)
-                            <img src="{{ $selected->destination_1_id != null ? $selected->destination1->image : '' }}"
-                                alt="Destination 1 Image" class="img-fluid">
+                            {{ $selected->destination_1_id ? $selected->destination1->detail : '' }}</p>
+                        @if ($selected->destination_2_id && $selected->destination1->image)
+                            <img src="{{ $selected->destination1->image }}" alt="Destination 1 Image" class="img-fluid">
                         @endif
                     </div>
                     <div class="d-flex flex-column mb-2">
                         <p class="mb-1"><strong>Destination 2:</strong>
-                            {{ $selected->destination_2_id != null ? $selected->destination2->detail : '' }}</p>
-                        @if ($selected->destination2->image)
-                            <img src="{{ $selected->destination_2_id != null ? $selected->destination2->image : '' }}"
-                                alt="Destination 2 Image" class="img-fluid">
+                            {{ $selected->destination_2_id ? $selected->destination2->detail : '' }}</p>
+                        @if ($selected->destination_2_id && $selected->destination2->image)
+                            <img src="{{ $selected->destination2->image }}" alt="Destination 2 Image" class="img-fluid">
                         @endif
                     </div>
                     <div class="d-flex flex-column">
                         <p class="mb-1"><strong>Destination 3:</strong>
-                            {{ $selected->destination_3_id != null ? $selected->destination3->detail : '' }}</p>
-                        @if ($selected->destination3->image)
-                            <img src="{{ $selected->destination_3_id != null ? $selected->destination3->image : '' }}"
-                                alt="Destination 3 Image" class="img-fluid">
+                            {{ $selected->destination_3_id ? $selected->destination3->detail : '' }}</p>
+                        @if ($selected->destination_3_id && $selected->destination3->image)
+                            <img src="{{ $selected->destination3->image }}" alt="Destination 3 Image" class="img-fluid">
                         @endif
                     </div>
                 </div>
