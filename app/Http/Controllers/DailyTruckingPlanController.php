@@ -121,7 +121,7 @@ class DailyTruckingPlanController extends Controller
         // Create new daily trucking actual
         $dta = new DailyTruckingActually;
         $dta->shipment_id = $shipment->id;
-        $dtp->driver_name = 'N/A';
+        $dta->driver_name = 'N/A';
         // $dta->driver_name = $request->driver_name;
         $dta->size = $request->size;
         $dta->price = $request->price;
