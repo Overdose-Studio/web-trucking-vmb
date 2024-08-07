@@ -39,7 +39,7 @@
                     <div class="d-flex flex-column mb-2">
                         <p class="mb-1"><strong>Destination 1:</strong>
                             {{ $dta->destination_1_id != null ? $dta->destination1->detail : '' }}</p>
-                        @if ($dta->destination1->image)
+                        @if ($dta->destination1 && $dta->destination1->image)
                             <img src="{{ asset($dta->destination_1_id != null ? $dta->destination1->image : '') }}"
                                 alt="Destination 1 Image" class="img-fluid">
                         @endif
@@ -47,7 +47,7 @@
                     <div class="d-flex flex-column mb-2">
                         <p class="mb-1"><strong>Destination 2:</strong>
                             {{ $dta->destination_2_id != null ? $dta->destination2->detail : '' }}</p>
-                        @if ($dta->destination2->image)
+                        @if ($dta->destination2 && $dta->destination2->image)
                             <img src="{{ asset($dta->destination_2_id != null ? $dta->destination2->image : '') }}"
                                 alt="Destination 2 Image" class="img-fluid">
                         @endif
@@ -55,7 +55,7 @@
                     <div class="d-flex flex-column">
                         <p class="mb-1"><strong>Destination 3:</strong>
                             {{ $dta->destination_3_id != null ? $dta->destination3->detail : '' }}</p>
-                        @if ($dta->destination3->image)
+                        @if ($dta->destination3 && $dta->destination3->image)
                             <img src="{{ asset($dta->destination_3_id != null ? $dta->destination3->image : '') }}"
                                 alt="Destination 3 Image" class="img-fluid">
                         @endif
@@ -100,7 +100,7 @@
                     <div class="d-flex flex-column mb-2">
                         <p class="mb-1"><strong>Destination 1:</strong>
                             {{ $selected->destination_1_id != null ? $selected->destination1->detail : '' }}</p>
-                        @if ($selected->destination1->image)
+                        @if ($dta->destination1 && $selected->destination1->image)
                             <img src="{{ $selected->destination_1_id != null ? $selected->destination1->image : '' }}"
                                 alt="Destination 1 Image" class="img-fluid">
                         @endif
@@ -108,7 +108,7 @@
                     <div class="d-flex flex-column mb-2">
                         <p class="mb-1"><strong>Destination 2:</strong>
                             {{ $selected->destination_2_id != null ? $selected->destination2->detail : '' }}</p>
-                        @if ($selected->destination2->image)
+                        @if ($dta->destination2 && $selected->destination2->image)
                             <img src="{{ $selected->destination_2_id != null ? $selected->destination2->image : '' }}"
                                 alt="Destination 2 Image" class="img-fluid">
                         @endif
@@ -116,7 +116,7 @@
                     <div class="d-flex flex-column">
                         <p class="mb-1"><strong>Destination 3:</strong>
                             {{ $selected->destination_3_id != null ? $selected->destination3->detail : '' }}</p>
-                        @if ($selected->destination3->image)
+                        @if ($dta->destination3 && $selected->destination3->image)
                             <img src="{{ $selected->destination_3_id != null ? $selected->destination3->image : '' }}"
                                 alt="Destination 3 Image" class="img-fluid">
                         @endif
