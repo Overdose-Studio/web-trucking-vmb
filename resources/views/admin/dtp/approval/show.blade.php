@@ -63,7 +63,7 @@
                             <th>Destination 2</th>
                             <th>Destination 3</th>
                             <th>Size</th>
-                            <th>Price</th>
+                            <th>Trip Fee</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -82,15 +82,17 @@
                                 <td>{{ $dtp->destination3 ? $dtp->destination3->detail : '-' }}</td>
                                 <td>{{ $dtp->size }}</td>
                                 <td>Rp {{ number_format($dtp->price, 0, ',', '.') }}</td>
-                                @if ($shipment->status === 'Approving DTP')
-                                    <td>
+                                <td>
+                                    @if ($shipment->status === 'Approving DTP')
                                         <a href="{{ route('dtp.approval.edit', [$shipment->id, $dtp->id]) }}"
                                             class="btn btn-warning">
                                             <i class="fas fa-edit"></i>&nbsp;
                                             Edit
                                         </a>
-                                    </td>
-                                @endif
+                                    @else
+                                        <span>-</span>
+                                    @endif
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>
