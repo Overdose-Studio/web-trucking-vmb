@@ -20,12 +20,12 @@
                         <tr>
                             <th>No.</th>
                             <th>Truck</th>
-                            <th>Driver Name</th>
+                            {{-- <th>Driver Name</th> --}}
                             <th>Destination 1</th>
                             <th>Destination 2</th>
                             <th>Destination 3</th>
                             <th>Size</th>
-                            <th>Price</th>
+                            <th>Trip Fee</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -37,10 +37,10 @@
                                 @else
                                     <td>Vendor Truck</td>
                                 @endif
-                                <td>{{ $dtp->driver_name }}</td>
-                                <td>{{ $dtp->destination1->detail }}</td>
-                                <td>{{ $dtp->destination2->detail }}</td>
-                                <td>{{ $dtp->destination3->detail }}</td>
+                                {{-- <td>{{ $dtp->driver_name }}</td> --}}
+                                <td>{{ $dtp->destination1 ? $dtp->destination1->detail : '-' }}</td>
+                                <td>{{ $dtp->destination2 ? $dtp->destination2->detail : '-' }}</td>
+                                <td>{{ $dtp->destination3 ? $dtp->destination3->detail : '-' }}</td>
                                 <td>{{ $dtp->size }}</td>
                                 <td>Rp {{ number_format($dtp->price, 0, ',', '.') }}</td>
                             </tr>
