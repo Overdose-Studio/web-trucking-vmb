@@ -63,7 +63,7 @@
                                     @endswitch
                                 </td>
                                 <td>
-                                    @if (!$shipment->bill_id)
+                                    @if ($shipment->status === 'Waiting DTP')
                                         <a href="{{ route('shipment.edit', $shipment->id) }}" class="btn btn-warning">
                                             <i class="fas fa-edit"></i>&nbsp;
                                             Edit
@@ -79,11 +79,7 @@
                                             </button>
                                         </form>
                                     @else
-                                        {{-- TODO  --}}
-                                        {{-- <a href="{{ route('shipment.show', $shipment->id) }}" class="btn btn-primary">
-                                            <i class="fas fa-eye"></i>&nbsp;
-                                            View
-                                        </a> --}}
+                                        <span>-</span>
                                     @endif
                                 </td>
                             </tr>
