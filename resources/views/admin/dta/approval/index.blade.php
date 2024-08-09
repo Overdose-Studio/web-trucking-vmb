@@ -72,11 +72,11 @@
                                         @break
 
                                         @default
-                                            <span class="badge badge-danger">
-                                                <i class="fas fa-ban"></i>&nbsp;
-                                                Closed
+                                            <span class="badge badge-success">
+                                                <i class="fas fa-check"></i>&nbsp;
+                                                {{ $shipment->status }}
                                             </span>
-                                            @break
+                                        @break
                                     @endswitch
                                 </td>
                                 <td>
