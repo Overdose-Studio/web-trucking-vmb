@@ -50,7 +50,7 @@
                                         @default
                                             <span class="badge badge-danger">
                                                 <i class="fas fa-ban"></i>&nbsp;
-                                                Closed
+                                                {{ $shipment->status }}
                                             </span>
                                         @break
                                     @endswitch
