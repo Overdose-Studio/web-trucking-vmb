@@ -27,7 +27,7 @@
                     </div>
                     <div class="d-flex flex-column">
                         <p class="card-text mb-0"><strong>Size:</strong> {{ $dta->size }}</p>
-                        <p class="card-text mb-0"><strong>Price:</strong> Rp {{ number_format($dta->price, 0, ',', '.') }}
+                        <p class="card-text mb-0"><strong>Trip Fee:</strong> Rp {{ number_format($dta->price, 0, ',', '.') }}
                         </p>
                     </div>
                 </div>
@@ -88,7 +88,7 @@
                     </div>
                     <div class="d-flex flex-column">
                         <p class="card-text mb-0"><strong>Size:</strong> {{ $selected->size }}</p>
-                        <p class="card-text mb-0"><strong>Price:</strong> Rp
+                        <p class="card-text mb-0"><strong>Trip Fee:</strong> Rp
                             {{ number_format($selected->price, 0, ',', '.') }}</p>
                     </div>
                 </div>
