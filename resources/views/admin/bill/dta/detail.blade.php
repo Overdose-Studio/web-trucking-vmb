@@ -20,7 +20,7 @@
                         <tr>
                             <th>No.</th>
                             <th>Truck</th>
-                            <th>Driver Name</th>
+                            {{-- <th>Driver Name</th> --}}
                             <th>Destination 1</th>
                             <th>Destination 2</th>
                             <th>Destination 3</th>
@@ -42,30 +42,42 @@
                                         <span>Vendor Truck</span>
                                     @endif
                                 </td>
-                                <td>{{ $dta->driver_name }}</td>
+                                {{-- <td>{{ $dta->driver_name }}</td> --}}
                                 <td>
-                                    @if ($dta->destination1->image)
-                                        <a class="border p-1 mb-1"
-                                            href="{{ route('dta.download', ['file' => $dta->destination1->image]) }}">Download</a>
-                                        <br>
+                                    @if ($dta->destination1)
+                                        @if ($dta->destination1->image)
+                                            <a class="border p-1 mb-1"
+                                                href="{{ route('dta.download', ['file' => $dta->destination1->image]) }}">Download</a>
+                                            <br>
+                                        @endif
+                                        {{ $dta->destination1->detail }}
+                                    @else
+                                        <span>-</span>
                                     @endif
-                                    {{ $dta->destination1->detail }}
                                 </td>
                                 <td>
-                                    @if ($dta->destination2->image)
-                                        <a class="border p-1 mb-1"
-                                            href="{{ route('dta.download', ['file' => $dta->destination2->image]) }}">Download</a>
-                                        <br>
+                                    @if ($dta->destination2)
+                                        @if ($dta->destination2->image)
+                                            <a class="border p-1 mb-1"
+                                                href="{{ route('dta.download', ['file' => $dta->destination2->image]) }}">Download</a>
+                                            <br>
+                                        @endif
+                                        {{ $dta->destination2->detail }}
+                                    @else
+                                        <span>-</span>
                                     @endif
-                                    {{ $dta->destination2->detail }}
                                 </td>
                                 <td>
-                                    @if ($dta->destination3->image)
-                                        <a class="border p-1 mb-1"
-                                            href="{{ route('dta.download', ['file' => $dta->destination3->image]) }}">Download</a>
-                                        <br>
+                                    @if ($dta->destination3)
+                                        @if ($dta->destination3->image)
+                                            <a class="border p-1 mb-1"
+                                                href="{{ route('dta.download', ['file' => $dta->destination3->image]) }}">Download</a>
+                                            <br>
+                                        @endif
+                                        {{ $dta->destination3->detail }}
+                                    @else
+                                        <span>-</span>
                                     @endif
-                                    {{ $dta->destination3->detail }}
                                 </td>
                                 <td>{{ $dta->size }}</td>
                                 <td>Rp {{ number_format($dta->dailyTruckingPlan->price, 0, ',', '.') }}</td>
@@ -97,7 +109,8 @@
                 ],
                 columnDefs: [{
                     orderable: false,
-                    targets: 10
+                    // targets: 10
+                    targets: 9
                 }]
             });
         });
