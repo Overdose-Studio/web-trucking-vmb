@@ -41,6 +41,7 @@ class ShipmentController extends Controller
             'order_type' => 'required|in:import,export',
             'client_id' => 'required|exists:clients,id',
             'party' => 'required|numeric|min:0',
+            'photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         // Store shipment to database
@@ -48,6 +49,7 @@ class ShipmentController extends Controller
         $shipment->order_type = $request->order_type;
         $shipment->client_id = $request->client_id;
         $shipment->party = $request->party;
+        $shipment->photo = 'storage/' . $request->file('photo')->store('shipments', 'public');
         $shipment->save();
 
         // Create log
@@ -79,6 +81,7 @@ class ShipmentController extends Controller
             'order_type' => 'required|in:import,export',
             'client_id' => 'required|exists:clients,id',
             'party' => 'required|numeric|min:0',
+            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         // Get shipment from database
@@ -91,8 +94,20 @@ class ShipmentController extends Controller
         $shipment->order_type = $request->order_type;
         $shipment->client_id = $request->client_id;
         $shipment->party = $request->party;
+
+        // Update photo if new photo uploaded
+        if ($request->hasFile('photo')) {
+            // Delete old photo
+            unlink(public_path($shipment->photo));
+
+            // Store new photo
+            $shipment->photo = 'storage/' . $request->file('photo')->store('shipments', 'public');
+        }
+
+        // Save shipment to database
         $shipment->save();
 
+        // Redirect to shipment index page
         return redirect()->route('shipment.index')->with('success', 'Shipment updated successfully.');
     }
 
