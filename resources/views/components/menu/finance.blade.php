@@ -9,15 +9,15 @@
 
     {{-- Finance --}}
     <li class="nav-item">
-        <a href="{{ route('dtp.approval.index') }}" class="nav-link {{ request()->is('dashboard/approval-dtp*') ? 'active' : '' }}">
-            <i class="nav-icon fas fa-check"></i>
-            <p>Approval DTP</p>
+        <a href="{{ route('dtp.approval.index') }}" class="nav-link d-flex align-items-center {{ request()->is('dashboard/approval-dtp*') ? 'active' : '' }}">
+            <i class="nav-icon fas fa-check mr-2 ml-1"></i>
+            <p>Approve and Update DTP</p>
         </a>
     </li>
     <li class="nav-item">
-        <a href="{{ route('bill.index') }}" class="nav-link {{ request()->is('dashboard/bill*') ? 'active' : '' }}">
-            <i class="nav-icon fas fa-coins"></i>
-            <p>Tagihan</p>
+        <a href="{{ route('bill.index') }}" class="nav-link d-flex align-items-center {{ request()->is('dashboard/bill*') ? 'active' : '' }}">
+            <i class="nav-icon fas fa-coins mr-2 ml-1"></i>
+            <p>Read Selisih Uang Jalan</p>
         </a>
     </li>
 

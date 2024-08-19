@@ -5,7 +5,7 @@
         <div class="card-header">
             <div class="d-flex align-items-center">
                 <i class="fas fa-list fa-2x"></i>&nbsp;&nbsp;&nbsp;
-                <h1 class="panel-heading">Approval Daily Trucking Plan List</h1>
+                <h1 class="panel-heading">Approve and Update DTP</h1>
             </div>
         </div>
         <div class="card-body">

@@ -6,7 +6,7 @@
             <div class="d-flex justify-content-between align-items-center">
                 <div class="d-flex align-items-center">
                     <i class="fas fa-coins fa-2x"></i>&nbsp;&nbsp;&nbsp;
-                    <h1 class="panel-heading">Tagihan List</h1>
+                    <h1 class="panel-heading">Read Selisih Uang Jalan</h1>
                 </div>
                 <div>
                     <a href="{{ route('bill.create') }}" class="btn btn-success mb-2">
