@@ -6,7 +6,7 @@
             <div class="d-flex justify-content-between align-items-center">
                 <div class="d-flex align-items-center">
                     <i class="fas fa-truck fa-2x"></i>&nbsp;&nbsp;&nbsp;
-                    <h1 class="panel-heading">Truck</h1>
+                    <h1 class="panel-heading">CRUD Truck</h1>
                 </div>
                 <div>
                     <a href="{{ route('truck.create') }}" class="btn btn-success mb-2">

@@ -12,25 +12,25 @@
     <li class="nav-item">
         <a href="{{ route('driver.index') }}" class="nav-link {{ request()->is('dashboard/driver*') ? 'active' : '' }}">
             <i class="nav-icon fas fa-screwdriver-wrench"></i>
-            <p>Driver</p>
+            <p>CRUD Driver</p>
         </a>
     </li>
     <li class="nav-item">
         <a href="{{ route('truck.index') }}" class="nav-link {{ request()->is('dashboard/truck*') ? 'active' : '' }}">
             <i class="nav-icon fas fa-truck"></i>
-            <p>Truck</p>
+            <p>CRUD Truck</p>
         </a>
     </li>
     <li class="nav-item">
         <a href="{{ route('dtp.index') }}" class="nav-link {{ request()->is('dashboard/dtp*') ? 'active' : '' }}">
             <i class="nav-icon fas fa-p"></i>
-            <p>DTP</p>
+            <p>CRUD DTP</p>
         </a>
     </li>
     <li class="nav-item">
         <a href="{{ route('dta.index') }}" class="nav-link {{ request()->is('dashboard/dta*') ? 'active' : '' }}">
             <i class="nav-icon fas fa-a"></i>
-            <p>DTA</p>
+            <p>CRU DTA</p>
         </a>
     </li>
 

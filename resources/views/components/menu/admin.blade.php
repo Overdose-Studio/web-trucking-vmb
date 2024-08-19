@@ -19,7 +19,7 @@
                 <a href="{{ route('user.index') }}" class="nav-link {{ request()->is('dashboard/user*') ? 'active' : '' }}">
                     &nbsp;&nbsp;&nbsp;&nbsp;
                     <i class="nav-icon fas fa-users"></i>
-                    <p>User Account</p>
+                    <p>CRUD User</p>
                 </a>
             </li>
         </ul>
@@ -38,21 +38,21 @@
                 <a href="{{ route('client.index') }}" class="nav-link {{ request()->is('dashboard/client*') ? 'active' : '' }}">
                     &nbsp;&nbsp;&nbsp;&nbsp;
                     <i class="nav-icon fas fa-person"></i>
-                    <p>Client</p>
+                    <p>CRUD Client</p>
                 </a>
             </li>
             <li class="nav-item">
                 <a href="{{ route('shipment.index') }}" class="nav-link {{ request()->is('dashboard/shipment*') ? 'active' : '' }}">
                     &nbsp;&nbsp;&nbsp;&nbsp;
                     <i class="nav-icon fas fa-boxes"></i>
-                    <p>Order</p>
+                    <p>CRUD Order</p>
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ route('dta.approval.index') }}" class="nav-link {{ request()->is('dashboard/approval-dta*') ? 'active' : '' }}">
+                <a href="{{ route('dta.approval.index') }}" class="nav-link d-flex align-items-center {{ request()->is('dashboard/approval-dta*') ? 'active' : '' }}">
                     &nbsp;&nbsp;&nbsp;&nbsp;
-                    <i class="nav-icon fas fa-check"></i>
-                    <p>Approval DTA</p>
+                    <i class="nav-icon fas fa-check mr-2 ml-1"></i>
+                    <p>Approve and Update DTA</p>
                 </a>
             </li>
         </ul>
@@ -70,28 +70,28 @@
                 <a href="{{ route('driver.index') }}" class="nav-link {{ request()->is('dashboard/driver*') ? 'active' : '' }}">
                     &nbsp;&nbsp;&nbsp;&nbsp;
                     <i class="nav-icon fas fa-screwdriver-wrench"></i>
-                    <p>Driver</p>
+                    <p>CRUD Driver</p>
                 </a>
             </li>
             <li class="nav-item">
                 <a href="{{ route('truck.index') }}" class="nav-link {{ request()->is('dashboard/truck*') ? 'active' : '' }}">
                     &nbsp;&nbsp;&nbsp;&nbsp;
                     <i class="nav-icon fas fa-truck"></i>
-                    <p>Truck</p>
+                    <p>CRUD Truck</p>
                 </a>
             </li>
             <li class="nav-item">
                 <a href="{{ route('dtp.index') }}" class="nav-link {{ request()->is('dashboard/dtp*') ? 'active' : '' }}">
                     &nbsp;&nbsp;&nbsp;&nbsp;
                     <i class="nav-icon fas fa-p"></i>
-                    <p>DTP</p>
+                    <p>CRUD DTP</p>
                 </a>
             </li>
             <li class="nav-item">
                 <a href="{{ route('dta.index') }}" class="nav-link {{ request()->is('dashboard/dta*') ? 'active' : '' }}">
                     &nbsp;&nbsp;&nbsp;&nbsp;
                     <i class="nav-icon fas fa-a"></i>
-                    <p>DTA</p>
+                    <p>CRU DTA</p>
                 </a>
             </li>
         </ul>
@@ -106,17 +106,17 @@
         </a>
         <ul class="nav nav-treeview">
             <li class="nav-item">
-                <a href="{{ route('dtp.approval.index') }}" class="nav-link {{ request()->is('dashboard/approval-dtp*') ? 'active' : '' }}">
+                <a href="{{ route('dtp.approval.index') }}" class="nav-link d-flex align-items-center {{ request()->is('dashboard/approval-dtp*') ? 'active' : '' }}">
                     &nbsp;&nbsp;&nbsp;&nbsp;
-                    <i class="nav-icon fas fa-check"></i>
-                    <p>Approval DTP</p>
+                    <i class="nav-icon fas fa-check mr-2 ml-1"></i>
+                    <p>Approve and Update DTP</p>
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ route('bill.index') }}" class="nav-link {{ request()->is('dashboard/bill*') ? 'active' : '' }}">
+                <a href="{{ route('bill.index') }}" class="nav-link d-flex align-items-center {{ request()->is('dashboard/bill*') ? 'active' : '' }}">
                     &nbsp;&nbsp;&nbsp;&nbsp;
-                    <i class="nav-icon fas fa-coins"></i>
-                    <p>Tagihan</p>
+                    <i class="nav-icon fas fa-coins mr-2 ml-1"></i>
+                    <p>Read Selisih Uang Jalan</p>
                 </a>
             </li>
         </ul>
