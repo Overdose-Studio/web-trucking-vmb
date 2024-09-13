@@ -14,22 +14,22 @@ services:
     ports:
       - "8001:9000"
 
-  db:
-    image: mysql:lts
-    container_name: vmb-prototype-db
-    restart: unless-stopped
-    environment:
-      MYSQL_DATABASE: laravel
-      MYSQL_ROOT_PASSWORD: secret
-      MYSQL_USER: laravel
-      MYSQL_PASSWORD: secret
-    volumes:
-      - dbdata:/var/lib/mysql
-    networks:
-      - vmb-prototype
+  # db:
+  #   image: mysql:lts
+  #   container_name: vmb-prototype-db
+  #   restart: unless-stopped
+  #   environment:
+  #     MYSQL_DATABASE: laravel
+  #     MYSQL_ROOT_PASSWORD: secret
+  #     MYSQL_USER: laravel
+  #     MYSQL_PASSWORD: secret
+  #   volumes:
+  #     - dbdata:/var/lib/mysql
+  #   networks:
+  #     - vmb-prototype
 
 networks:
   vmb-prototype:
 
-volumes:
-  dbdata:
+# volumes:
+#   dbdata:
